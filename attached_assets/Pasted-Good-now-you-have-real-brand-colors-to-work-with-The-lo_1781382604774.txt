@@ -1,0 +1,36 @@
+Good — now you have real brand colors to work with. The logo tells you exactly what the palette should be.
+
+Logo colors extracted:
+
+Navy blue: #1B3A6B (left half of shield)
+Red: #CC2929 (right half of shield)
+White: #FFFFFF
+
+
+My honest assessment of the current white + gold theme vs logo colors:
+The gold theme looks good in isolation but creates a brand conflict — your logo has zero gold in it. When someone sees the logo and then sees a gold-accented page, it feels disconnected. Government clients especially notice inconsistency.
+
+Recommended: Align website to logo colors
+--bg:          #FFFFFF   clean white base
+--bg-alt:      #F2F4F8   very light blue-gray for alternating sections
+--ink:         #0F1E36   near-black navy — headlines, primary text
+--ink-soft:    #4A5E78   secondary text
+--accent:      #CC2929   red — primary CTAs, active states, violation tags
+--accent-navy: #1B3A6B   deep navy — secondary buttons, icons, dark sections
+--line:        #DDE3ED   borders on light
+--signal:      #2A7A5A   green — "LIVE", "ACTIVE" status only
+Why this works:
+The navy + red + white is actually a powerful government palette — it's what police departments, national highway authorities, and civic bodies already use. It reads as authority instantly. Red for "alert/action" (violations, CTAs), navy for "trust/institution" (structure, dark panels), white for clarity.
+
+What to update in the site:
+
+Replace all gold (#C9A24A) → red (#CC2929) for buttons, active states, highlighted stats
+Command Center panel background → navy (#1B3A6B) instead of near-black
+"NO HELMET" violation tag → red, which now matches brand perfectly
+ANPR plate box border → red
+Trust badge borders → navy
+Section eyebrows ("SMART CITY INITIATIVE") → navy text, red bottom border instead of gold pill
+Footer dark section → navy #0F1E36 background
+
+
+The command center panel will look dramatically better — dark navy panel with red violation alerts is exactly how a real police dashboard looks. The color story becomes: white page → navy structure → red alerts. That's coherent, institutional, and matches your logo exactly.
