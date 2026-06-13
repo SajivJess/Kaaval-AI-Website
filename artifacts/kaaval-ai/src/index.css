@@ -66,21 +66,21 @@
 }
 
 :root {
-  /* Kaaval brand colors — updated to white-first palette */
-  --ink:        #14213D;   /* primary dark / section backgrounds */
-  --ink-2:      #0F2138;   /* command center panel bg */
-  --ink-3:      #16304F;   /* elevated surfaces inside dark panels */
-  --ink-line:   #2A3F5F;   /* borders on dark */
-  --paper:      #F4F6F9;   /* alternating section bg */
+  /* Kaaval brand colors — aligned to logo palette (navy + red + white) */
+  --ink:        #0F1E36;   /* primary dark / section backgrounds */
+  --ink-2:      #1B3A6B;   /* command center panel bg — logo navy */
+  --ink-3:      #152E56;   /* elevated surfaces inside dark panels */
+  --ink-line:   #243D6E;   /* borders on dark */
+  --paper:      #F2F4F8;   /* alternating section bg */
   --paper-2:    #FFFFFF;   /* card / primary section bg */
-  --gold:       #C9A24A;   /* primary accent */
-  --gold-soft:  #E6D2A0;   /* secondary gold */
+  --gold:       #CC2929;   /* primary accent — red (matches logo) */
+  --gold-soft:  #E03333;   /* hover state — slightly lighter red */
   --text-light: #E7ECF2;   /* body text on dark */
   --text-muted: #8FA3B8;   /* secondary text on dark */
-  --steel:      #5A6B85;   /* secondary text on light */
-  --signal:     #2E8B6F;   /* LIVE / ACTIVE status */
-  --accent-2:   #1B4F72;   /* deep blue — icons, badges, secondary emphasis */
-  --line:       #DCE3EC;   /* borders on light backgrounds */
+  --steel:      #4A5E78;   /* secondary text on light */
+  --signal:     #2A7A5A;   /* LIVE / ACTIVE status — green only */
+  --accent-2:   #1B3A6B;   /* deep navy — icons, badges on light */
+  --line:       #DDE3ED;   /* borders on light backgrounds */
 
   --background: 0 0% 100%;
   --foreground: 222 51% 16%;
@@ -133,8 +133,8 @@
 .bg-grid-dark {
   background-size: 44px 44px;
   background-image:
-    linear-gradient(to right, rgba(42, 63, 95, 0.45) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(42, 63, 95, 0.45) 1px, transparent 1px);
+    linear-gradient(to right, rgba(36, 61, 110, 0.55) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(36, 61, 110, 0.55) 1px, transparent 1px);
   position: relative;
 }
 
@@ -142,8 +142,8 @@
 .bg-grid-light {
   background-size: 60px 60px;
   background-image:
-    linear-gradient(to right, rgba(27, 79, 114, 0.055) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(27, 79, 114, 0.055) 1px, transparent 1px);
+    linear-gradient(to right, rgba(27, 58, 107, 0.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(27, 58, 107, 0.055) 1px, transparent 1px);
 }
 
 /* ─── Radar sweep — one gold-tinted line sweeps across dark grids ── */
@@ -177,7 +177,7 @@
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(to right, transparent 5%, rgba(201, 162, 74, 0.55) 40%, rgba(46, 139, 111, 0.45) 60%, transparent 95%);
+  background: linear-gradient(to right, transparent 5%, rgba(204, 41, 41, 0.6) 40%, rgba(204, 41, 41, 0.35) 65%, transparent 95%);
   animation: scan-down 4s linear infinite;
   pointer-events: none;
   z-index: 10;
