@@ -1,0 +1,81 @@
+ Kaaval AI — Government/Smart City Website
+Brand & Visual Identity
+Build a premium, trustworthy website for Kaaval AI, an AI-based traffic enforcement platform (helmet violation detection + ANPR) that upgrades existing CCTV/ANPR cameras for police departments and smart city authorities. The tone is "Smart City master plan meets government annual report" — confident, institutional, calm. Not a startup demo.
+Color System
+--ink:        #0A1628   primary dark background (deep navy, never pure black)
+--ink-2:      #0F2138   panel/card background
+--ink-3:      #16304F   elevated card surfaces
+--ink-line:   #1F3A5C   borders / grid lines on dark
+--paper:      #F7F8FA   light section background
+--paper-2:    #FFFFFF   card background on light sections
+--gold:       #C9A24A   primary accent — buttons, highlights, key numbers
+--gold-soft:  #E6D2A0   secondary gold — icons, labels on dark
+--text-light: #E7ECF2   body text on dark navy (not pure white)
+--text-muted: #8FA3B8   secondary text on dark
+--steel:      #5C7187   secondary text on light
+--signal:     #3FA796   status indicators ("LIVE", "ACTIVE") — muted teal-green
+Gold is the only accent color for interactive elements. No neon, no electric blue/cyan, no glowing borders.
+Typography
+
+Display/headings: Fraunces (serif, weights 500–900) — gives gravitas, used for all headlines
+Body: Inter — clean, modern, highly legible
+Labels/data/eyebrows: IBM Plex Mono — small caps, wide letter-spacing, used for section labels, stats, timestamps
+
+Signature Background Pattern
+A subtle animated grid covers dark sections: thin lines in --ink-line at 8–12% opacity over --ink, with intersection points that softly pulse on a 60–90s loop (like a live monitoring grid breathing). Never distracting — ambient only.
+
+Page Structure
+1. Navigation
+
+Transparent/dark sticky bar. Left: shield icon + "KAAVAL AI" wordmark in gold. Right: "Our Impact" link + gold "Request Pilot Deployment" button.
+2. Hero (full viewport height)
+
+Grid-pattern background as above
+Gold-bordered pill badge: "SMART CITY INITIATIVE" (mono font, wide letter-spacing)
+Large serif headline with rotating text (600ms crossfade every 4s): "The Zero Accident Initiative" → "The Safe City Initiative" → "The Intelligent Enforcement Initiative"
+Supporting paragraph: aiming for accident-free roads by transforming existing infrastructure into proactive safety networks
+Stat callout card with gold left border: large gold serif number + supporting line (use a real, sourced road-safety statistic — e.g. helmet-related fatality data — framed as why this matters, not as Kaaval's own results)
+Two CTAs: gold "Request Pilot Deployment" (filled) + "View Case Study" (ghost/outline)
+Right side: Kaaval Command Center panel — dark card with teal "LIVE" indicator, header "KAAVAL COMMAND CENTER", 2×2 grid of camera feed tiles labeled with junction names (e.g. "Junction 01 – Market St"). Each tile shows a faint line-art road/junction illustration in steel-blue. Footer row: "AI PROCESSING: 4 FEEDS · DETECTION RATE: 99.2% · LAST ALERT: 2s AGO"
+
+3. Trust Bar
+
+Horizontal row of institutional badges (gold-bordered pills): "Police Department Pilot" · "Smart City Ready" · "Existing CCTV Compatible" · "Rapid Deployment"
+4. How It Works / Live Detection Demo
+
+Light section. Title: "From Camera Feed to Enforcement Action." Show 4–5 camera feed cards (line-art junction illustrations). On hover, overlay AI detection elements appear: bounding boxes around a motorcycle, a "No Helmet" tag, and a number plate crop with extracted text — demonstrating the pipeline visually without needing real footage.
+5. Camera Modernization (Comparison)
+
+Two-column comparison, dark section: "Traditional Approach" (replace cameras, high capital cost, long deployment, limited scale) vs "Kaaval AI" (reuse existing cameras, lower investment, fast activation, easily scalable). Gold border highlights the Kaaval column.
+6. Product Tiers
+
+Light section. Title: "Choose the Right Tier for Your Junction." 3–4 cards side by side, each representing a deployment tier (e.g. Essential — helmet detection only; Standard — helmet + ANPR; Advanced — full violation suite + analytics dashboard; Enterprise — multi-junction district rollout with centralized command center). Each card: tier name, 3–4 capability bullets, and a cost framed as "Starting from ₹X / camera / month" (placeholder values) — emphasize that Kaaval significantly reduces cost versus traditional camera replacement, without specific calculator math. One tier (Standard) visually highlighted as "Most Deployed."
+7. Case Study
+
+Dark section. "First Live Deployment — Ramanputhur Junction, Kanyakumari District." Left: line-art illustration of the junction with camera markers. Right: status ("Pilot Operational") + horizontal timeline: Concept → Prototype → Pilot → District Expansion (current stage highlighted in gold).
+8. Live Violation Flow
+
+Light section. Interactive 5-step horizontal stepper users can click through: (1) Motorcycle Detected → (2) Violation Identified → (3) Evidence Captured → (4) Alert Logged → (5) Officer Review. Each step shows a simple illustration + short description, with the active step highlighted in gold.
+9. Built For
+
+Dark section, title "Built for Public Safety Institutions." 5 cards: Police Departments, District Administrations, Smart Cities, Highway Authorities, Municipal Corporations — each with an icon and one-line description.
+10. By the Numbers
+
+Light section. 3–4 large animated counters on scroll (mono font, gold numbers): contextual road-safety stats (sourced, e.g. helmet non-use fatality rates), "24/7 Monitoring Capability", "1 Unified Platform" — framed as context/motivation, not unverified claims about Kaaval's results.
+11. Footer CTA
+
+Full-width dark section with grid pattern. Large serif headline: "Imagine a District With Zero Preventable Road Fatalities." Single gold CTA: "Request Pilot Deployment."
+12. Footer
+
+Minimal: logo, contact email, location, links to Privacy/Contact.
+
+Motion & Interaction
+
+Scroll-triggered fade/slide-up reveals, staggered for grouped cards
+Hover elevation on cards (subtle shadow lift, no glow)
+Hero text rotation (described above)
+Animated counters trigger once on scroll into view
+Respect prefers-reduced-motion
+
+Avoid
+Neon/cyberpunk effects, pure black/white, glowing borders, AI buzzword soup, cost calculators, fabricated performance percentages attributed to Kaaval itself.
