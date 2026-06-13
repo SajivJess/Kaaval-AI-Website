@@ -1,0 +1,20 @@
+Here's a clean white + contrast palette that keeps the institutional, trustworthy feel:
+Updated Color System
+--bg:         #FFFFFF   primary background
+--bg-alt:     #F4F6F9   alternating section background (very light blue-gray)
+--ink:        #14213D   primary text & dark sections (deep navy, not black)
+--ink-soft:   #5A6B85   secondary/muted text
+--accent:     #C9A24A   gold — buttons, highlights, key numbers (kept from before)
+--accent-2:   #1B4F72   deep blue — used for icons, borders, secondary emphasis
+--signal:     #2E8B6F   status indicators ("LIVE", "ACTIVE")
+--line:       #DCE3EC   borders/dividers on light backgrounds
+--line-dark:  #2A3F5F   grid lines on dark sections (used sparingly now)
+What Changes
+Hero & most sections → white/--bg-alt background. Headline and body text in --ink (deep navy) instead of light-on-dark. The serif headline now reads as confident dark navy on white — very "official letterhead" feel.
+Grid pattern background → now rendered in --line (very light gray-blue) on white, barely-there texture rather than a dark monitoring-screen look. Keep the radar-sweep animation, but make it a soft gold or navy line that sweeps subtly — like a single highlighted grid line drifting across, not a glowing effect.
+Command Center panel → this becomes the one dark section on the page (deep navy --ink background) — a deliberate "screen within a page" moment, like looking into an actual monitor embedded in a bright office. This contrast (white page, one dark "live screen" panel) is much more striking than all-dark.
+Gold accent stays as-is — works great on white (buttons, key stats, active states).
+Comparison section / "Built For" cards / stats → light backgrounds, navy text, gold or deep-blue icons in circular badges.
+Footer CTA → could stay dark navy for contrast at the end, or go full white with a bold navy headline — your call depending on how dramatic you want the close to feel.
+
+This gives you: clean white pages (trustworthy, readable, "official"), with the Command Center panel as the single dramatic dark element — which actually makes it feel more like a real embedded live system rather than a themed dashboard. Gold ties everything together as the one accent.

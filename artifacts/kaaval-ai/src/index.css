@@ -52,6 +52,8 @@
   --color-text-muted: var(--text-muted);
   --color-steel: var(--steel);
   --color-signal: var(--signal);
+  --color-accent-2: var(--accent-2);
+  --color-line: var(--line);
 
   --font-sans: var(--app-font-sans);
   --font-serif: var(--app-font-serif);
@@ -64,43 +66,46 @@
 }
 
 :root {
-  --ink: #0A1628;
-  --ink-2: #0F2138;
-  --ink-3: #16304F;
-  --ink-line: #1F3A5C;
-  --paper: #F7F8FA;
-  --paper-2: #FFFFFF;
-  --gold: #C9A24A;
-  --gold-soft: #E6D2A0;
-  --text-light: #E7ECF2;
-  --text-muted: #8FA3B8;
-  --steel: #5C7187;
-  --signal: #3FA796;
+  /* Kaaval brand colors — updated to white-first palette */
+  --ink:        #14213D;   /* primary dark / section backgrounds */
+  --ink-2:      #0F2138;   /* command center panel bg */
+  --ink-3:      #16304F;   /* elevated surfaces inside dark panels */
+  --ink-line:   #2A3F5F;   /* borders on dark */
+  --paper:      #F4F6F9;   /* alternating section bg */
+  --paper-2:    #FFFFFF;   /* card / primary section bg */
+  --gold:       #C9A24A;   /* primary accent */
+  --gold-soft:  #E6D2A0;   /* secondary gold */
+  --text-light: #E7ECF2;   /* body text on dark */
+  --text-muted: #8FA3B8;   /* secondary text on dark */
+  --steel:      #5A6B85;   /* secondary text on light */
+  --signal:     #2E8B6F;   /* LIVE / ACTIVE status */
+  --accent-2:   #1B4F72;   /* deep blue — icons, badges, secondary emphasis */
+  --line:       #DCE3EC;   /* borders on light backgrounds */
 
-  --background: 220 20% 97%; /* paper */
-  --foreground: 216 60% 10%; /* ink */
-  
-  --border: 211 25% 64%; /* text-muted ish */
-  --input: 211 25% 64%;
-  --ring: 41 55% 54%; /* gold */
+  --background: 0 0% 100%;
+  --foreground: 222 51% 16%;
 
-  --card: 0 0% 100%; /* paper-2 */
-  --card-foreground: 216 60% 10%;
-  --card-border: 211 25% 64%;
+  --border: 214 30% 87%;
+  --input: 214 30% 87%;
+  --ring: 41 55% 54%;
 
-  --primary: 41 55% 54%; /* gold */
-  --primary-foreground: 216 60% 10%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 51% 16%;
+  --card-border: 214 30% 87%;
+
+  --primary: 41 55% 54%;
+  --primary-foreground: 222 51% 16%;
   --primary-border: 41 55% 54%;
 
-  --secondary: 216 60% 10%; /* ink */
-  --secondary-foreground: 213 31% 93%; /* text-light */
-  --secondary-border: 216 60% 10%;
+  --secondary: 222 51% 16%;
+  --secondary-foreground: 213 31% 93%;
+  --secondary-border: 222 51% 16%;
 
-  --muted: 220 20% 97%;
-  --muted-foreground: 211 19% 45%;
+  --muted: 214 20% 96%;
+  --muted-foreground: 215 20% 47%;
 
   --accent: 41 55% 54%;
-  --accent-foreground: 216 60% 10%;
+  --accent-foreground: 222 51% 16%;
   --accent-border: 41 55% 54%;
 
   --destructive: 0 84% 60%;
@@ -109,32 +114,7 @@
   --app-font-sans: 'Inter', sans-serif;
   --app-font-serif: 'Fraunces', serif;
   --app-font-mono: 'IBM Plex Mono', monospace;
-  --radius: .5rem; 
-}
-
-.dark {
-  --background: 216 60% 10%; /* ink */
-  --foreground: 213 31% 93%; /* text-light */
-
-  --border: 213 49% 24%; /* ink-line */
-  --input: 213 49% 24%;
-  --ring: 41 55% 54%; /* gold */
-
-  --card: 214 58% 14%; /* ink-2 */
-  --card-foreground: 213 31% 93%; /* text-light */
-  --card-border: 213 49% 24%; /* ink-line */
-
-  --primary: 41 55% 54%; /* gold */
-  --primary-foreground: 216 60% 10%; /* ink */
-
-  --secondary: 213 56% 20%; /* ink-3 */
-  --secondary-foreground: 213 31% 93%; /* text-light */
-  
-  --muted: 214 58% 14%;
-  --muted-foreground: 211 25% 64%; /* text-muted */
-
-  --accent: 41 55% 54%;
-  --accent-foreground: 216 60% 10%;
+  --radius: .5rem;
 }
 
 @layer base {
@@ -143,101 +123,131 @@
   }
 
   body {
-    @apply font-sans antialiased bg-ink text-text-light;
+    @apply font-sans antialiased bg-white text-[#14213D];
   }
 }
 
-.bg-grid-pattern {
-  background-size: 40px 40px;
-  background-image: linear-gradient(to right, rgba(31, 58, 92, 0.1) 1px, transparent 1px),
-                    linear-gradient(to bottom, rgba(31, 58, 92, 0.1) 1px, transparent 1px);
+/* ─── Grid patterns ────────────────────────────────── */
+
+/* Used on dark sections — more visible, radar-sweep feel */
+.bg-grid-dark {
+  background-size: 44px 44px;
+  background-image:
+    linear-gradient(to right, rgba(42, 63, 95, 0.45) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(42, 63, 95, 0.45) 1px, transparent 1px);
+  position: relative;
 }
 
-.pulse-dot {
+/* Used on light sections — barely-there texture */
+.bg-grid-light {
+  background-size: 60px 60px;
+  background-image:
+    linear-gradient(to right, rgba(27, 79, 114, 0.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(27, 79, 114, 0.055) 1px, transparent 1px);
+}
+
+/* ─── Radar sweep — one gold-tinted line sweeps across dark grids ── */
+@keyframes radar-sweep {
+  0%   { opacity: 0; transform: translateX(-100%); }
+  5%   { opacity: 1; }
+  80%  { opacity: 0.6; }
+  100% { opacity: 0; transform: translateX(200%); }
+}
+
+.radar-sweep-line {
   position: absolute;
-  width: 4px;
-  height: 4px;
-  background: var(--ink-line);
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, rgba(201, 162, 74, 0.07), transparent);
+  pointer-events: none;
+  animation: radar-sweep 8s ease-in-out infinite;
+}
+
+/* ─── Camera tile scan line ─────────────────────────── */
+@keyframes scan-down {
+  0%   { top: 0%; opacity: 0.9; }
+  90%  { top: 100%; opacity: 0.3; }
+  100% { top: 100%; opacity: 0; }
+}
+
+.scan-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent 5%, rgba(201, 162, 74, 0.55) 40%, rgba(46, 139, 111, 0.45) 60%, transparent 95%);
+  animation: scan-down 4s linear infinite;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Stagger each tile's scan so they don't sync */
+.scan-line-1 { animation-delay: 0s; }
+.scan-line-2 { animation-delay: 1s; }
+.scan-line-3 { animation-delay: 2s; }
+.scan-line-4 { animation-delay: 3s; }
+
+/* ─── Detection overlay box ─────────────────────────── */
+@keyframes box-appear {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.detection-box {
+  animation: box-appear 0.3s ease-out forwards;
+}
+
+/* ─── Pulse dot for intersection nodes ──────────────── */
+@keyframes node-pulse {
+  0%   { transform: scale(1); opacity: 0.3; }
+  50%  { transform: scale(2.2); opacity: 0.9; }
+  100% { transform: scale(1); opacity: 0.3; }
+}
+
+.pulse-node {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: var(--gold);
   border-radius: 50%;
-  animation: pulse 4s infinite;
+  animation: node-pulse 3s ease-in-out infinite;
 }
 
-@keyframes pulse {
-  0% { transform: scale(1); opacity: 0.2; }
-  50% { transform: scale(1.5); opacity: 0.8; }
-  100% { transform: scale(1); opacity: 0.2; }
-}
-
-/**
- * Using the elevate system.
- * Automatic contrast adjustment.
- *
- * <element className="hover-elevate" />
- * <element className="active-elevate-2" />
- *
- * // Using the tailwind utility when a data attribute is "on"
- * <element className="toggle-elevate data-[state=on]:toggle-elevated" />
- * // Or manually controlling the toggle state
- * <element className="toggle-elevate toggle-elevated" />
- *
- * Elevation systems have to handle many states.
- * - not-hovered, vs. hovered vs. active  (three mutually exclusive states)
- * - toggled or not
- * - focused or not (this is not handled with these utilities)
- *
- * Even without handling focused or not, this is six possible combinations that
- * need to be distinguished from eachother visually.
- */
+/* ─── Elevation utilities (unchanged) ───────────────── */
 @layer utilities {
-
-  /* Hide ugly search cancel button in Chrome until we can style it properly */
   input[type="search"]::-webkit-search-cancel-button {
     @apply hidden;
   }
 
-  /* Placeholder styling for contentEditable div */
   [contenteditable][data-placeholder]:empty::before {
     content: attr(data-placeholder);
     color: hsl(var(--muted-foreground));
     pointer-events: none;
   }
 
-  /* .no-default-hover-elevate/no-default-active-elevate is an escape hatch so consumers of
-   * buttons/badges can remove the automatic brightness adjustment on interactions
-   * and program their own. */
   .no-default-hover-elevate {}
-
   .no-default-active-elevate {}
 
-
-  /**
-   * Toggleable backgrounds go behind the content. Hoverable/active goes on top.
-   * This way they can stack/compound. Both will overlap the parent's borders!
-   * So borders will be automatically adjusted both on toggle, and hover/active,
-   * and they will be compounded.
-   */
   .toggle-elevate::before,
   .toggle-elevate-2::before {
     content: "";
     pointer-events: none;
     position: absolute;
     inset: 0px;
-    /*border-radius: inherit;   match rounded corners */
     border-radius: inherit;
     z-index: -1;
-    /* sits behind content but above backdrop */
   }
 
   .toggle-elevate.toggle-elevated::before {
     background-color: var(--elevate-2);
   }
 
-  /* If there's a 1px border, adjust the inset so that it covers that parent's border */
   .border.toggle-elevate::before {
     inset: -1px;
   }
 
-  /* Does not work on elements with overflow:hidden! */
   .hover-elevate:not(.no-default-hover-elevate),
   .active-elevate:not(.no-default-active-elevate),
   .hover-elevate-2:not(.no-default-hover-elevate),
@@ -254,10 +264,8 @@
     pointer-events: none;
     position: absolute;
     inset: 0px;
-    /*border-radius: inherit;   match rounded corners */
     border-radius: inherit;
     z-index: 999;
-    /* sits in front of content */
   }
 
   .hover-elevate:hover:not(.no-default-hover-elevate)::after,
@@ -270,7 +278,6 @@
     background-color: var(--elevate-2);
   }
 
-  /* If there's a 1px border, adjust the inset so that it covers that parent's border */
   .border.hover-elevate:not(.no-hover-interaction-elevate)::after,
   .border.active-elevate:not(.no-active-interaction-elevate)::after,
   .border.hover-elevate-2:not(.no-hover-interaction-elevate)::after,
