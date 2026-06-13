@@ -1,0 +1,295 @@
+Remove Entire Pricing Section
+
+Delete:
+
+Essential
+Standard
+Advanced
+Enterprise
+₹2999 / ₹4999 / ₹7999
+
+Reason:
+
+Government officials don't buy SaaS plans.
+Pricing varies per deployment.
+Seeing public pricing makes it look like a commercial product instead of a district-level public safety solution.
+
+Replace with:
+
+Deployment Models
+Pilot Deployment
+Ideal for single junctions
+Fast evaluation
+Subdivision Deployment
+Multiple junction integration
+Centralized monitoring
+District Deployment
+Command center integration
+Multi-subdivision rollout
+Statewide Deployment
+Large-scale enforcement network
+Unified analytics
+Fix Hero Section
+
+Current:
+
+The Zero Accident
+Initiative.The Safe City
+Initiative.The Intelligent
+Enforcement Initiative.
+
+Looks broken.
+
+Instead make it rotate every 3 seconds:
+
+The Zero Accident Initiative
+
+↓
+
+The Safe City Initiative
+
+↓
+
+The Intelligent Enforcement Initiative
+
+↓
+
+The Road Safety Initiative
+
+Only show one at a time.
+
+Add "Media & Recognition" Section
+
+This is extremely important.
+
+After Live Deployment section add:
+
+Media & Recognition
+
+Grid layout.
+
+Cards:
+
+Newspaper Coverage
+
+Upload:
+
+Dinamalar
+Dinathanthi
+The Hindu
+Times of India
+
+etc.
+
+Button:
+
+View Article
+Television Coverage
+
+Cards:
+
+News7 Tamil
+Polimer
+Thanthi TV
+Puthiya Thalaimurai
+Digital News Coverage
+
+Cards:
+
+IndiaInLast24Hr
+
+StartupTN
+
+District Police Pages
+
+Tech Communities
+Instagram Reels & Social Media
+
+Embed reels.
+
+Show:
+
+Views
+Likes
+Shares
+
+This creates huge trust.
+
+Add Dedicated Social Presence Section
+
+Near footer.
+
+Connect With KAAVAL AI
+
+Keep placeholders now:
+
+Instagram
+
+@your_instagram
+
+Facebook
+
+facebook.com/placeholder
+
+LinkedIn
+
+linkedin.com/company/placeholder
+
+WhatsApp
+
++91 XXXXX XXXXX
+
+Mobile
+
++91 XXXXX XXXXX
+
+Email
+
+contact@kaaval.ai
+
+Address
+
+Kanyakumari District
+Tamil Nadu
+India
+
+Add "Project Journey" Section
+
+Before Media section.
+
+Timeline:
+
+Research Started
+
+↓
+
+Prototype Developed
+
+↓
+
+AI Validation
+
+↓
+
+Police Discussions
+
+↓
+
+Pilot Deployment
+
+↓
+
+Live Operations
+
+↓
+
+District Expansion
+
+Government officials love seeing progress.
+
+Replace Footer
+
+Current footer is weak.
+
+Add:
+
+Quick Links
+Home
+Deployment
+Impact
+Media
+Contact
+Contact Information
+Mobile
+WhatsApp
+Email
+Address
+Social Links
+Instagram
+Facebook
+LinkedIn
+Deployment Status
+
+🟢 Pilot Operational
+
+Kanyakumari District
+
+Add Real Dashboard Screenshots
+
+Add section:
+
+Inside KAAVAL AI Command Center
+
+Show screenshots of:
+
+Dashboard
+Violations Page
+Evidence Archive
+Analytics
+Mobile App
+
+This will massively increase credibility.
+
+Add Police Testimonials Section
+
+Later when available.
+
+Example:
+
+"The system helps officers identify violations faster."
+
+- Police Officer
+"An innovative low-cost alternative for traffic enforcement."
+
+- District Official
+Most Important Missing Section
+
+Add this right below the hero:
+
+Why KAAVAL AI?
+
+Four large cards:
+
+Save Lives
+
+Focus on accident prevention.
+
+Works With Existing CCTV
+
+No replacement required.
+
+Faster Enforcement
+
+Violations reach officers instantly.
+
+District-Wide Scalability
+
+One platform for all junctions.
+
+This section will communicate the value proposition within 10 seconds of landing on the website.
+
+Overall, for a police/government audience, the final flow should be:
+
+Hero
+
+Why KAAVAL AI
+
+How It Works
+
+Traditional vs KAAVAL AI
+
+Live Deployment
+
+Project Journey
+
+Media & Recognition
+
+Dashboard Screenshots
+
+Social Proof
+
+Contact & Social Handles
+
+Footer
+
+This structure feels far more like a government-grade initiative and less like a startup product landing page.
