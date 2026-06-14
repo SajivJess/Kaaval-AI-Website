@@ -270,7 +270,7 @@ export default function Home() {
       }}>
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <img src="/kaaval-logo.png" alt="Kaaval AI Logo" className="h-8 w-auto" />
+            <img src="/kaaval-logo.png" alt="Kaaval AI Logo" className="h-16 md:h-20 w-auto" />
           </div>
           <div className="flex items-center gap-6">
             {[["#platform","Platform"],["#deployment","Deployment"],["#our-impact","Impact"],["#media","Media"],["#contact","Contact"]].map(([href,label])=>(
@@ -1249,7 +1249,7 @@ export default function Home() {
             {/* Brand */}
             <div>
               <div className="flex items-center gap-2.5 mb-4">
-                <img src="/kaaval-logo.png" alt="Kaaval AI Logo" className="h-8 w-auto" />
+                <img src="/kaaval-logo.png" alt="Kaaval AI Logo" className="h-20 md:h-24 w-auto" />
               </div>
               <p className="text-sm leading-relaxed mb-4" style={{color:M}}>AI-powered traffic enforcement for police departments and smart city authorities across India.</p>
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded" style={{background:"rgba(42,122,90,0.12)",border:"1px solid rgba(42,122,90,0.25)"}}>
