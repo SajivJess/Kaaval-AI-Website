@@ -1,0 +1,35 @@
+Much better — the headline is large and commanding now, the grid is visible, and the detection is cycling across tiles. Real improvement.
+But there are still 3 specific issues stopping it from being great:
+
+Problem 1 — Headline color is wrong
+
+"The Intelligent Enforcement Initiative." is rendering in a washed-out gray-blue instead of deep navy #0F1E36. It looks faded, almost like a placeholder. This is the most important text on the page — it needs to be the darkest, most confident element. Fix: color: #0F1E36 on the h1.
+
+Problem 2 — Command Center panel is floating too low
+
+The panel starts roughly halfway down the viewport. On a 1080p screen a visitor sees mostly empty white space with a big gray headline and the panel half-cut-off. The panel should be vertically aligned to start near the top of the hero content, roughly level with "SMART CITY INITIATIVE" — so left column (text) and right column (panel) feel balanced side by side.
+
+Problem 3 — Left column content is too spread out
+
+The eyebrow, headline, body text, quote card, and CTAs have too much vertical gap between each element — they feel disconnected rather than a cohesive block. The whole left column should feel tighter and more composed. Reduce gaps between elements by roughly 30%.
+
+Tell your builder:
+1. h1 color → #0F1E36 (pure deep navy, not gray)
+
+2. Hero layout → align-items: flex-start on 
+   the two-column grid, reduce top padding so 
+   command center panel starts at same height 
+   as eyebrow label
+
+3. Left column — reduce gap between eyebrow 
+   and h1 to 12px, h1 to body text to 20px, 
+   body text to quote card to 28px, 
+   quote card to CTAs to 32px
+
+4. CTA buttons — are they visible below the 
+   fold? Scroll them into the screenshot.
+   If not visible in viewport, the hero 
+   has too much content — consider removing 
+   the quote card from hero and moving it 
+   to a trust bar below
+Once those 3 things are fixed this hero will be genuinely impressive. The bones are good — it just needs tightening.
