@@ -628,101 +628,108 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Media & Recognition ── */}
+      {/* ── Media & Recognition — Press Wall ── */}
       <section id="media" className="py-24" style={{background:AL}}>
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-14">
-            <p className="font-mono text-xs uppercase tracking-widest mb-3" style={{fontFamily:"'IBM Plex Mono',monospace",color:R,letterSpacing:"0.18em"}}>Press & Media</p>
-            <h2 className="font-serif text-4xl lg:text-5xl font-bold" style={{fontFamily:"'Fraunces',serif",color:INK}}>Media & Recognition</h2>
-            <p className="mt-3 text-base" style={{color:S}}>Kaaval AI's pilot deployment has been covered across print, television, and digital media.</p>
+
+          {/* Header */}
+          <div className="text-center mb-4">
+            <p className="font-mono text-xs uppercase tracking-widest mb-4" style={{fontFamily:"'IBM Plex Mono',monospace",color:R,letterSpacing:"0.18em"}}>Public Recognition</p>
+            <h2 className="font-serif text-4xl lg:text-5xl font-bold mb-6" style={{fontFamily:"'Fraunces',serif",color:INK}}>As Seen In</h2>
+            <div className="w-full h-px" style={{background:`linear-gradient(to right, transparent, ${LN} 20%, ${LN} 80%, transparent)`}}/>
           </div>
 
-          {/* Print */}
-          <div className="mb-12">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-8 h-8 rounded flex items-center justify-center" style={{background:"rgba(27,58,107,0.08)"}}>
-                <Newspaper className="w-4 h-4" style={{color:N}}/>
-              </div>
-              <h3 className="font-serif text-xl font-bold" style={{fontFamily:"'Fraunces',serif",color:INK}}>Newspaper Coverage</h3>
-            </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {/* ── Print: horizontal logo strip ── */}
+          <div className="py-10 mb-4">
+            <p className="font-mono text-[10px] uppercase tracking-widest mb-7 text-center" style={{fontFamily:"'IBM Plex Mono',monospace",color:S,letterSpacing:"0.2em"}}>Print Media</p>
+            <div className="flex flex-wrap items-center justify-center gap-0">
               {mediaPrint.map((item,i)=>(
-                <div key={i} className="rounded-lg p-5 flex flex-col gap-3" style={{background:"#fff",border:`1px solid ${LN}`}}>
-                  <div className="flex items-center gap-2 mb-1">
-                    <div className="w-8 h-8 rounded flex items-center justify-center" style={{background:"rgba(204,41,41,0.07)"}}>
-                      <Newspaper className="w-4 h-4" style={{color:R}}/>
+                <React.Fragment key={i}>
+                  {i>0 && <div className="hidden sm:block h-10 w-px mx-6" style={{background:LN}}/>}
+                  <a href="#" className="group flex flex-col items-center gap-2 px-4 sm:px-0 py-3 transition-all"
+                    onMouseEnter={e=>e.currentTarget.style.opacity="1"}
+                    onMouseLeave={e=>e.currentTarget.style.opacity="1"}>
+                    <div className="flex items-center gap-1.5">
+                      <span className="font-serif font-bold text-xl lg:text-2xl transition-all group-hover:text-[#CC2929]"
+                        style={{fontFamily:"'Fraunces',serif",color:INK,transition:"color 0.2s"}}>
+                        {item.name}
+                      </span>
+                      <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity -translate-x-1 group-hover:translate-x-0 duration-200" style={{color:R}}/>
                     </div>
-                    <div>
-                      <p className="font-semibold text-sm" style={{color:INK}}>{item.name}</p>
-                      <p className="text-xs" style={{color:S}}>{item.lang}</p>
-                    </div>
-                  </div>
-                  <p className="text-xs leading-relaxed flex-grow" style={{color:S}}>Coverage of Kaaval AI's pilot deployment at Ramanputhur Junction, Kanyakumari District.</p>
-                  <button className="w-full py-2 rounded-sm text-xs font-semibold border transition-all" style={{borderColor:N,color:N}}
-                    onMouseEnter={e=>{e.currentTarget.style.background=N;e.currentTarget.style.color="#fff"}}
-                    onMouseLeave={e=>{e.currentTarget.style.background="transparent";e.currentTarget.style.color=N}}>View Article</button>
-                </div>
+                    <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-semibold uppercase"
+                      style={{fontFamily:"'IBM Plex Mono',monospace",background:"rgba(204,41,41,0.1)",color:R,letterSpacing:"0.1em"}}>
+                      {item.lang}
+                    </span>
+                  </a>
+                </React.Fragment>
               ))}
             </div>
           </div>
 
-          {/* TV */}
+          <div className="w-full h-px mb-12" style={{background:`linear-gradient(to right, transparent, ${LN} 20%, ${LN} 80%, transparent)`}}/>
+
+          {/* ── TV: 2×2 dark navy featured tiles ── */}
           <div className="mb-12">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-8 h-8 rounded flex items-center justify-center" style={{background:"rgba(27,58,107,0.08)"}}>
-                <Tv2 className="w-4 h-4" style={{color:N}}/>
-              </div>
-              <h3 className="font-serif text-xl font-bold" style={{fontFamily:"'Fraunces',serif",color:INK}}>Television Coverage</h3>
-            </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <p className="font-mono text-[10px] uppercase tracking-widest mb-7 text-center" style={{fontFamily:"'IBM Plex Mono',monospace",color:S,letterSpacing:"0.2em"}}>Television</p>
+            <div className="grid sm:grid-cols-2 gap-4">
               {mediaTV.map((item,i)=>(
-                <div key={i} className="rounded-lg p-5 flex flex-col gap-3" style={{background:"#fff",border:`1px solid ${LN}`}}>
-                  <div className="flex items-center gap-2 mb-1">
-                    <div className="w-8 h-8 rounded flex items-center justify-center" style={{background:"rgba(204,41,41,0.07)"}}>
-                      <Tv2 className="w-4 h-4" style={{color:R}}/>
-                    </div>
+                <div key={i} className="group relative rounded-lg overflow-hidden cursor-pointer transition-all duration-250"
+                  style={{background:N,border:"1px solid transparent",minHeight:"180px"}}
+                  onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-3px)";e.currentTarget.style.boxShadow="0 12px 36px rgba(15,30,54,0.22)";e.currentTarget.style.borderLeft=`4px solid ${R}`;}}
+                  onMouseLeave={e=>{e.currentTarget.style.transform="none";e.currentTarget.style.boxShadow="none";e.currentTarget.style.borderLeft="4px solid transparent";}}>
+                  {/* grid texture inside tile */}
+                  <div className="absolute inset-0 opacity-20" style={{backgroundSize:"24px 24px",backgroundImage:`linear-gradient(to right,rgba(36,61,110,0.8) 1px,transparent 1px),linear-gradient(to bottom,rgba(36,61,110,0.8) 1px,transparent 1px)`}}/>
+                  {/* TV badge */}
+                  <div className="absolute top-4 right-4 z-10">
+                    <span className="font-mono text-[9px] font-bold px-2 py-0.5 rounded-sm uppercase"
+                      style={{fontFamily:"'IBM Plex Mono',monospace",background:R,color:"#fff",letterSpacing:"0.1em"}}>TV</span>
+                  </div>
+                  {/* content */}
+                  <div className="relative z-10 p-7 flex flex-col justify-between h-full" style={{minHeight:"180px"}}>
                     <div>
-                      <p className="font-semibold text-sm" style={{color:INK}}>{item.name}</p>
-                      <p className="text-xs" style={{color:S}}>{item.ch}</p>
+                      <p className="font-mono text-[10px] uppercase tracking-widest mb-3" style={{fontFamily:"'IBM Plex Mono',monospace",color:M,letterSpacing:"0.16em"}}>{item.ch}</p>
+                      <h3 className="font-serif text-2xl lg:text-3xl font-bold leading-tight" style={{fontFamily:"'Fraunces',serif",color:"#fff"}}>{item.name}</h3>
+                    </div>
+                    <div className="mt-6">
+                      <button className="flex items-center gap-2 font-mono text-xs font-bold px-4 py-2.5 rounded-sm transition-all"
+                        style={{fontFamily:"'IBM Plex Mono',monospace",background:R,color:"#fff",letterSpacing:"0.08em"}}
+                        onMouseEnter={e=>(e.currentTarget.style.background="#E03333")}
+                        onMouseLeave={e=>(e.currentTarget.style.background=R)}>
+                        ▶ Watch Coverage
+                      </button>
                     </div>
                   </div>
-                  <p className="text-xs leading-relaxed flex-grow" style={{color:S}}>Television feature on AI-powered traffic enforcement at Kanyakumari District.</p>
-                  <button className="w-full py-2 rounded-sm text-xs font-semibold border transition-all" style={{borderColor:R,color:R}}
-                    onMouseEnter={e=>{e.currentTarget.style.background=R;e.currentTarget.style.color="#fff"}}
-                    onMouseLeave={e=>{e.currentTarget.style.background="transparent";e.currentTarget.style.color=R}}>Watch Coverage</button>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Digital */}
-          <div>
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-8 h-8 rounded flex items-center justify-center" style={{background:"rgba(27,58,107,0.08)"}}>
-                <Globe className="w-4 h-4" style={{color:N}}/>
-              </div>
-              <h3 className="font-serif text-xl font-bold" style={{fontFamily:"'Fraunces',serif",color:INK}}>Digital Coverage</h3>
-            </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="w-full h-px mb-12" style={{background:`linear-gradient(to right, transparent, ${LN} 20%, ${LN} 80%, transparent)`}}/>
+
+          {/* ── Digital: editorial link list ── */}
+          <div className="mb-10">
+            <p className="font-mono text-[10px] uppercase tracking-widest mb-7 text-center" style={{fontFamily:"'IBM Plex Mono',monospace",color:S,letterSpacing:"0.2em"}}>Digital & Online</p>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-3 max-w-3xl mx-auto">
               {mediaDigital.map((item,i)=>(
-                <div key={i} className="rounded-lg p-5 flex flex-col gap-3" style={{background:"#fff",border:`1px solid ${LN}`}}>
-                  <div className="flex items-center gap-2 mb-1">
-                    <div className="w-8 h-8 rounded flex items-center justify-center" style={{background:"rgba(27,58,107,0.07)"}}>
-                      <Globe className="w-4 h-4" style={{color:N}}/>
-                    </div>
-                    <div>
-                      <p className="font-semibold text-sm" style={{color:INK}}>{item.name}</p>
-                      <p className="text-xs" style={{color:S}}>{item.type}</p>
-                    </div>
+                <a key={i} href="#" className="group flex items-center gap-3 py-3 border-b transition-all"
+                  style={{borderColor:LN}}
+                  onMouseEnter={e=>{e.currentTarget.style.borderColor=R;}}
+                  onMouseLeave={e=>{e.currentTarget.style.borderColor=LN;}}>
+                  <Globe className="w-4 h-4 shrink-0" style={{color:S}}/>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-semibold text-sm truncate group-hover:text-[#CC2929] transition-colors" style={{color:INK}}>{item.name}</p>
+                    <p className="text-xs" style={{color:S}}>{item.type}</p>
                   </div>
-                  <p className="text-xs leading-relaxed flex-grow" style={{color:S}}>Digital feature on Kaaval AI's smart city initiative and road safety mission.</p>
-                  <button className="w-full py-2 rounded-sm text-xs font-semibold border transition-all" style={{borderColor:N,color:N}}
-                    onMouseEnter={e=>{e.currentTarget.style.background=N;e.currentTarget.style.color="#fff"}}
-                    onMouseLeave={e=>{e.currentTarget.style.background="transparent";e.currentTarget.style.color=N}}>Read More</button>
-                </div>
+                  <ArrowRight className="w-4 h-4 shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" style={{color:R}}/>
+                </a>
               ))}
             </div>
           </div>
+
+          {/* Legitimacy note */}
+          <p className="text-center text-xs" style={{color:M,fontFamily:"'IBM Plex Mono',monospace",letterSpacing:"0.05em"}}>
+            Coverage archived from public sources. All rights reserved to respective publications.
+          </p>
         </div>
       </section>
 

@@ -1,0 +1,40 @@
+I want this to be more attractive...
+
+08:38
+This section has the right content but looks like a default card layout. Here's exactly what to tell your builder:
+
+The core problem: Every card looks identical — same size, same structure, same gray border. There's no visual hierarchy between Dinamalar vs The Hindu vs Times of India. It reads like a data table, not a credibility showcase.
+
+Prompt: Redesign the Media Coverage Section
+Overall direction: Make this feel like a "Press Wall" in a premium startup's office — publications as logos/mastheads, not list items. The section should communicate "this is already validated by major institutions" at a glance.
+
+Section header:
+
+Change title to: "As Seen In" or "Media Coverage" — one clean line, centered, mono eyebrow above it: "PUBLIC RECOGNITION"
+Add a thin horizontal rule spanning full width below the title
+Newspaper / Print section:
+
+Remove the 4-card grid entirely
+Replace with a horizontal scrolling logo strip — just the publication name in bold serif, separated by thin vertical dividers: Dinamalar · Dinathanthi · The Hindu · Times of India
+Below each name, a tiny red pill tag: "Tamil Daily" / "English Daily"
+On hover, each publication name gets a red underline and a small external link icon appears
+This is cleaner, more prestigious, takes less space — like how Apple shows partner logos
+Television section — make this the hero of the page:
+
+Instead of cards, use a 2×2 featured grid with large tiles
+Each tile: dark navy background (
+#1B3A6B), channel name in large white serif, subtitle in muted text, red "▶ Watch Coverage" button bottom-left
+Top-right corner: small red "TV" badge
+On hover: tile lifts with shadow, red left border appears (4px), button brightens
+This mimics how a news broadcast looks — dark screen, white text, red accent
+Digital / Online section:
+
+Simple 3-column link list with a small globe icon left, publication name, and an arrow → right
+No cards, no borders — just clean editorial links like a newspaper's "In the Press" page
+Full section background: Switch from white to 
+#F2F4F8 (very light blue-gray) — makes the navy TV tiles pop dramatically
+
+Add at the bottom:
+A single centered line in muted text: "Coverage archived from public sources. All rights reserved to respective publications." — this adds legitimacy
+
+This restructuring takes the same content and makes the TV coverage feel like a real broadcast achievement, the print coverage feel like institutional recognition, and the digital links feel editorial rather than filler cards.
