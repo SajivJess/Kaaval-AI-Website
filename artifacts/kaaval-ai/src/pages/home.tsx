@@ -124,12 +124,56 @@ function CameraFeedTile({ label, roadType, scanClass, isActive, onClick }: { lab
   );
 }
 
+/* ── modal component ─────────────────────────────── */
+const PilotModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
+  if (!isOpen) return null;
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#0F1E36]/80 backdrop-blur-sm p-4">
+      <div className="bg-white rounded-xl shadow-2xl max-w-lg w-full p-8 relative">
+         <button onClick={onClose} className="absolute top-5 right-5 text-[#8FA3B8] hover:text-[#0F1E36] transition-colors">
+           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+         </button>
+         <h2 className="font-serif text-3xl font-bold mb-2 text-[#0F1E36]" style={{fontFamily:"'Fraunces',serif"}}>Request Pilot Deployment</h2>
+         <p className="text-sm text-[#4A5E78] mb-6">Leave your details and our deployment team will contact you to arrange a demonstration and infrastructure assessment.</p>
+         
+         <form action="https://formsubmit.co/sajiv2580@gmail.com" method="POST" className="space-y-4">
+            <input type="text" name="_honey" style={{display:"none"}} />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_next" value={typeof window !== "undefined" ? window.location.href : ""} />
+            <input type="hidden" name="_subject" value="New Kaaval AI Pilot Request!" />
+            
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold uppercase tracking-wider text-[#1B3A6B]" style={{fontFamily:"'IBM Plex Mono',monospace"}}>Full Name</label>
+              <input type="text" name="name" required placeholder="Officer / Representative Name" className="w-full px-4 py-3 rounded border border-[#DDE3ED] focus:border-[#CC2929] focus:outline-none transition-colors text-sm" />
+            </div>
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold uppercase tracking-wider text-[#1B3A6B]" style={{fontFamily:"'IBM Plex Mono',monospace"}}>Official Email</label>
+              <input type="email" name="email" required placeholder="gov.in or official email" className="w-full px-4 py-3 rounded border border-[#DDE3ED] focus:border-[#CC2929] focus:outline-none transition-colors text-sm" />
+            </div>
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold uppercase tracking-wider text-[#1B3A6B]" style={{fontFamily:"'IBM Plex Mono',monospace"}}>Organization</label>
+              <input type="text" name="organization" required placeholder="Police Department / City Administration" className="w-full px-4 py-3 rounded border border-[#DDE3ED] focus:border-[#CC2929] focus:outline-none transition-colors text-sm" />
+            </div>
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold uppercase tracking-wider text-[#1B3A6B]" style={{fontFamily:"'IBM Plex Mono',monospace"}}>Requirements</label>
+              <textarea name="message" required placeholder="Briefly describe your current CCTV setup or enforcement goals..." rows={3} className="w-full px-4 py-3 rounded border border-[#DDE3ED] focus:border-[#CC2929] focus:outline-none transition-colors text-sm resize-none"></textarea>
+            </div>
+            
+            <button type="submit" className="w-full font-bold text-white py-4 rounded transition-colors mt-2" style={{background:"#CC2929"}} onMouseEnter={e=>e.currentTarget.style.background="#E03333"} onMouseLeave={e=>e.currentTarget.style.background="#CC2929"}>Submit Request</button>
+            <p className="text-[10px] text-center text-[#8FA3B8] mt-4 font-mono">Or contact us directly at <a href="mailto:kaaval.ai.kanyakumari@gmail.com" className="text-[#CC2929] hover:underline">kaaval.ai.kanyakumari@gmail.com</a></p>
+         </form>
+      </div>
+    </div>
+  );
+};
+
 /* ── main component ──────────────────────────────── */
 export default function Home() {
   const [heroIdx, setHeroIdx]                         = useState(0);
   const [activeStep, setActiveStep]                   = useState(0);
   const [activeDetectionTile, setActiveDetectionTile] = useState(0);
   const [scrolled, setScrolled]                       = useState(false);
+  const [isModalOpen, setIsModalOpen]                 = useState(false);
 
   const heroTexts = [
     "The Zero Accident Initiative",
@@ -181,7 +225,7 @@ export default function Home() {
     {label:"Prototype Developed", desc:"First working model tested on recorded CCTV footage"},
     {label:"AI Validation",       desc:"Model accuracy validated across diverse lighting and angle conditions"},
     {label:"Police Discussions",  desc:"Initial consultations with traffic police and district administration"},
-    {label:"Pilot Deployment",    desc:"Live deployment at Ramanputhur Junction, Kanyakumari"},
+    {label:"Pilot Deployment",    desc:"Live deployment at Collectorate Roundabout, Kanyakumari"},
     {label:"Live Operations",     desc:"Real-time violation detection running 24/7"},
     {label:"District Expansion",  desc:"Active discussions for multi-junction district rollout"},
   ];
@@ -206,11 +250,12 @@ export default function Home() {
   ];
 
   const dashScreens = [
-    {title:"Command Dashboard",  icon:LayoutDashboard, desc:"Live overview of all active junctions with violation counters and camera status"},
-    {title:"Violations Log",     icon:AlertTriangle,   desc:"Timestamped violation records with frame captures and ANPR plate extraction"},
-    {title:"Evidence Archive",   icon:Archive,         desc:"Secure storage of violation frames, video clips, and enforcement records"},
-    {title:"Analytics & Reports",icon:BarChart2,       desc:"Daily, weekly, and monthly summaries for command review and policy decisions"},
-    {title:"Mobile Officer App", icon:Smartphone,      desc:"Push alerts to field officers for immediate action on logged violations"},
+    {title:"Command Dashboard",             icon:LayoutDashboard, desc:"Live overview of all active junctions with violation counters and camera status"},
+    {title:"Violations Log",                icon:AlertTriangle,   desc:"Timestamped violation records with frame captures and ANPR plate extraction"},
+    {title:"Habitual Offender Tracking",    icon:Users,           desc:"Automated identification and ranking of repeat traffic violators based on risk level and offense frequency"},
+    {title:"Automated Evidence Processing", icon:Cpu,             desc:"AI-driven confidence scoring with an integrated dual-view interface for verifying vehicle plates and scene context"},
+    {title:"Role-Based Access Control",     icon:Shield,          desc:"Hierarchical permission system restricting subdivision officers to their specific jurisdictions while granting command centers global oversight"},
+    {title:"Advanced Analytics & Reporting",icon:BarChart2,       desc:"Real-time statistical breakdowns by violation type and location, featuring one-click daily PDF report generation"},
   ];
 
   return (
@@ -229,11 +274,11 @@ export default function Home() {
             <span className="font-serif font-bold text-xl tracking-tight" style={{color:N,fontFamily:"'Fraunces',serif"}}>KAAVAL AI</span>
           </div>
           <div className="flex items-center gap-6">
-            {[["#our-impact","Impact"],["#media","Media"],["#contact","Contact"]].map(([href,label])=>(
+            {[["#platform","Platform"],["#deployment","Deployment"],["#our-impact","Impact"],["#media","Media"],["#contact","Contact"]].map(([href,label])=>(
               <a key={label} href={href} className="text-sm font-medium transition-colors hidden md:block" style={{color:S}}
                 onMouseEnter={e=>(e.currentTarget.style.color=INK)} onMouseLeave={e=>(e.currentTarget.style.color=S)}>{label}</a>
             ))}
-            <button className="font-semibold px-5 py-2.5 rounded-sm transition-all text-sm text-white" style={{background:R}}
+            <button onClick={() => setIsModalOpen(true)} className="font-semibold px-5 py-2.5 rounded-sm transition-all text-sm text-white" style={{background:R}}
               onMouseEnter={e=>(e.currentTarget.style.background="#E03333")} onMouseLeave={e=>(e.currentTarget.style.background=R)}
               data-testid="button-nav-pilot">Request Pilot Deployment</button>
           </div>
@@ -251,7 +296,7 @@ export default function Home() {
             </div>
 
             {/* Fixed rotating headline — one line at a time */}
-            <div className="relative overflow-hidden w-full" style={{height:"clamp(160px,22vw,310px)"}}>
+            <div className="relative overflow-hidden w-full min-h-[140px] md:min-h-[160px]">
               <AnimatePresence mode="wait">
                 <motion.h1
                   key={heroIdx}
@@ -271,14 +316,8 @@ export default function Home() {
               Transforming existing CCTV infrastructure into proactive safety networks — institutional-grade helmet detection and ANPR for police departments aiming for accident-free roads.
             </p>
 
-            <div className="pl-5 py-2 border-l-[3px]" style={{borderColor:R}}>
-              <p className="text-xs font-mono uppercase tracking-widest mb-2" style={{fontFamily:"'IBM Plex Mono',monospace",color:R,letterSpacing:"0.15em"}}>Contextual Mandate</p>
-              <p className="font-medium italic text-base leading-snug" style={{color:INK}}>"56% of road fatalities in India involve two-wheelers — the majority not wearing helmets."</p>
-              <p className="text-xs mt-1 not-italic" style={{color:S}}>— Ministry of Road Transport & Highways, 2022</p>
-            </div>
-
             <div className="flex flex-wrap items-center gap-4">
-              <button className="font-semibold px-8 py-4 rounded-sm transition-all text-base text-white" style={{background:R}}
+              <button onClick={() => setIsModalOpen(true)} className="font-semibold px-8 py-4 rounded-sm transition-all text-base text-white" style={{background:R}}
                 onMouseEnter={e=>(e.currentTarget.style.background="#E03333")} onMouseLeave={e=>(e.currentTarget.style.background=R)}
                 data-testid="button-hero-pilot">Request Pilot Deployment</button>
               <a href="#deployment" className="font-medium px-8 py-4 rounded-sm transition-all text-base border" style={{borderColor:LN,color:INK}}
@@ -292,6 +331,12 @@ export default function Home() {
               <span className="font-mono text-xs font-semibold" style={{fontFamily:"'IBM Plex Mono',monospace",color:GR,letterSpacing:"0.08em"}}>Pilot Operational</span>
               <span style={{color:"rgba(74,94,120,0.4)"}}>·</span>
               <span className="font-mono text-xs" style={{fontFamily:"'IBM Plex Mono',monospace",color:S,letterSpacing:"0.05em"}}>Nagercoil, TN</span>
+            </div>
+
+            <div className="pl-5 py-2 border-l-[3px] mt-2" style={{borderColor:R}}>
+              <p className="text-xs font-mono uppercase tracking-widest mb-2" style={{fontFamily:"'IBM Plex Mono',monospace",color:R,letterSpacing:"0.15em"}}>Contextual Mandate</p>
+              <p className="font-medium italic text-base leading-snug" style={{color:INK}}>"56% of road fatalities in India involve two-wheelers — the majority not wearing helmets."</p>
+              <p className="text-xs mt-1 not-italic" style={{color:S}}>— Ministry of Road Transport & Highways, 2022</p>
             </div>
           </div>
 
@@ -535,7 +580,7 @@ export default function Home() {
             <p className="font-mono text-xs uppercase tracking-widest mb-2" style={{fontFamily:"'IBM Plex Mono',monospace",color:R,letterSpacing:"0.18em"}}>Live Deployment</p>
             <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-1" style={{fontFamily:"'Fraunces',serif",color:L}}>First Live Deployment</h2>
             <p className="font-mono text-sm flex items-center gap-2" style={{fontFamily:"'IBM Plex Mono',monospace",color:M}}>
-              <MapPin className="w-4 h-4" style={{color:R}}/> Ramanputhur Junction, Kanyakumari District, Tamil Nadu
+              <MapPin className="w-4 h-4" style={{color:R}}/> Collectorate Roundabout, Kanyakumari District, Tamil Nadu
             </p>
           </div>
           <div className="grid lg:grid-cols-2 gap-0 rounded-lg overflow-hidden" style={{border:`1px solid ${DN}`}}>
@@ -586,47 +631,48 @@ export default function Home() {
       </section>
 
       {/* ── Project Journey ── */}
-      <section className="py-24 bg-white">
+      <section className="py-16 bg-white">
         <div className="max-w-5xl mx-auto px-6">
           <div className="text-center mb-16">
             <p className="font-mono text-xs uppercase tracking-widest mb-3" style={{fontFamily:"'IBM Plex Mono',monospace",color:R,letterSpacing:"0.18em"}}>Progress</p>
             <h2 className="font-serif text-4xl lg:text-5xl font-bold" style={{fontFamily:"'Fraunces',serif",color:INK}}>The Project Journey</h2>
           </div>
-          <div className="relative">
-            {/* vertical spine */}
-            <div className="absolute left-6 top-0 bottom-0 w-0.5" style={{background:LN,marginLeft:"1px"}}/>
-            <div className="space-y-2">
+          <div className="relative w-full pb-4">
+            <div className="flex items-start justify-between pt-2 px-2">
               {journeySteps.map((step, i) => {
                 const isLive = step.label === "Live Operations";
                 const isCurrent = step.label === "Pilot Deployment" || step.label === "Live Operations";
                 const isFuture = step.label === "District Expansion";
                 return (
-                  <div key={i} className="relative pl-16 pb-8 last:pb-0">
+                  <div key={i} className="relative flex-1 px-1 flex flex-col items-center text-center">
+                    {/* horizontal spine */}
+                    {i !== journeySteps.length - 1 && (
+                      <div className="absolute top-[11px] left-[50%] right-[-50%] h-0.5" style={{background:LN, zIndex:0}}/>
+                    )}
+                    
                     {/* dot */}
-                    <div className="absolute left-0 top-0 w-[26px] h-[26px] rounded-full flex items-center justify-center border-2"
+                    <div className="relative z-10 w-[24px] h-[24px] rounded-full flex items-center justify-center border-2 mb-3"
                       style={{
                         background: isFuture?"#fff":isCurrent?R:N,
                         borderColor: isFuture?LN:isCurrent?R:N,
-                        zIndex:10,
                         boxShadow: isCurrent?"0 0 0 4px rgba(204,41,41,0.15)":"none",
                       }}>
-                      {isCurrent && <div className="w-2 h-2 rounded-full bg-white"/>}
-                      {isFuture && <div className="w-2 h-2 rounded-full" style={{background:LN}}/>}
+                      {isCurrent && <div className="w-1.5 h-1.5 rounded-full bg-white"/>}
+                      {isFuture && <div className="w-1.5 h-1.5 rounded-full" style={{background:LN}}/>}
                     </div>
-                    <div className="pt-0.5">
-                      <div className="flex items-center gap-3 mb-1">
-                        <h3 className="font-semibold text-base" style={{color: isFuture?S:INK}}>{step.label}</h3>
-                        {isLive && (
-                          <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-xs font-mono font-bold"
-                            style={{background:"rgba(42,122,90,0.1)",color:GR,border:"1px solid rgba(42,122,90,0.25)",fontFamily:"'IBM Plex Mono',monospace",letterSpacing:"0.1em"}}>
-                            <span className="w-1.5 h-1.5 rounded-full animate-pulse inline-block" style={{background:GR}}/> ACTIVE
-                          </span>
-                        )}
-                        {isFuture && (
-                          <span className="text-xs font-mono" style={{fontFamily:"'IBM Plex Mono',monospace",color:S,letterSpacing:"0.1em"}}>UPCOMING</span>
-                        )}
-                      </div>
-                      <p className="text-sm" style={{color:S}}>{step.desc}</p>
+
+                    <div className="flex flex-col items-center">
+                      <h3 className="font-semibold text-[12px] lg:text-[13px] mb-1" style={{color: isFuture?S:INK, lineHeight: 1.2}}>{step.label}</h3>
+                      {isLive && (
+                        <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-mono font-bold mb-1"
+                          style={{background:"rgba(42,122,90,0.1)",color:GR,border:"1px solid rgba(42,122,90,0.25)",fontFamily:"'IBM Plex Mono',monospace",letterSpacing:"0.05em"}}>
+                          <span className="w-1 h-1 rounded-full animate-pulse inline-block" style={{background:GR}}/> ACTIVE
+                        </span>
+                      )}
+                      {isFuture && (
+                        <span className="text-[9px] font-mono mb-1" style={{fontFamily:"'IBM Plex Mono',monospace",color:S,letterSpacing:"0.05em"}}>UPCOMING</span>
+                      )}
+                      <p className="text-[10px] lg:text-[11px] leading-tight hidden md:block" style={{color:S}}>{step.desc}</p>
                     </div>
                   </div>
                 );
@@ -700,8 +746,8 @@ export default function Home() {
             <div className="flex flex-wrap justify-center gap-6 mb-6">
               <p className="w-full text-center font-mono text-[10px] uppercase tracking-widest mb-2" style={{fontFamily:"'IBM Plex Mono',monospace",color:S,letterSpacing:"0.2em"}}>Mentors</p>
               {[
-                {name:"Dr. K. Vijay", role:"Associate Professor, Computer Science", inst:"Rajalakshmi Engineering College, Chennai", focus:"Academic research · Model validation · AI architecture"},
-                {name:"Binu J",       role:"Founder, Excel Technologies",           inst:"Builder of Kadal Map · Nagercoil",        focus:"Industry deployment · Real-world logistics"},
+                {name:"Dr. K. Vijay", role:"Associate Professor, AIML",           inst:"Rajalakshmi Engineering College, Chennai", focus:""},
+                {name:"Binu J",       role:"Founder, Excel Technologies",           inst:"Builder of Kadal Map · Nagercoil",        focus:""},
               ].map((m,i)=>(
                 <div key={i} className="bg-white rounded-xl p-7 flex flex-col items-center text-center transition-all duration-200 cursor-default"
                   style={{width:"260px",border:"1px solid #E2E8F0",boxShadow:"0 2px 8px rgba(27,58,107,0.06)"}}
@@ -717,7 +763,7 @@ export default function Home() {
                   <p className="font-serif font-bold text-lg mb-1" style={{fontFamily:"'Fraunces',serif",color:INK}}>{m.name}</p>
                   <p className="font-mono text-[10px] uppercase font-semibold mb-1" style={{fontFamily:"'IBM Plex Mono',monospace",color:R,letterSpacing:"0.08em"}}>{m.role}</p>
                   <p className="text-xs mb-3" style={{color:S}}>{m.inst}</p>
-                  <p className="text-[11px] leading-relaxed" style={{color:M}}>{m.focus}</p>
+                  {m.focus && <p className="text-[11px] leading-relaxed" style={{color:M}}>{m.focus}</p>}
                 </div>
               ))}
             </div>
@@ -726,10 +772,10 @@ export default function Home() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
               <p className="col-span-full text-center font-mono text-[10px] uppercase tracking-widest mb-2" style={{fontFamily:"'IBM Plex Mono',monospace",color:S,letterSpacing:"0.2em"}}>Student Developers</p>
               {[
-                {name:"Sajiv Jess B I", role:"Full-Stack & AI/ML Engineer",       inst:"Rajalakshmi Engineering College", focus:"Core platform · Flask · React · System architecture", lead:true,  winner:true},
-                {name:"Team Member",    role:"AI/ML Engineer",                     inst:"Rajalakshmi Engineering College", focus:"ANPR pipeline · Plate recognition",                 lead:false, winner:false},
-                {name:"Team Member",    role:"AI/ML Engineer",                     inst:"Rajalakshmi Engineering College", focus:"Helmet detection · Model training",                 lead:false, winner:false},
-                {name:"Team Member",    role:"Frontend Engineer",                  inst:"Rajalakshmi Engineering College", focus:"Dashboard UI · Video pipeline",                     lead:false, winner:false},
+                {name:"Sajiv Jess B I",   role:"AIML 3rd year", inst:"Rajalakshmi Engineering College", focus:"", lead:true,  winner:true},
+                {name:"Harish T",         role:"AIML 3rd year", inst:"Rajalakshmi Engineering College", focus:"", lead:false, winner:true},
+                {name:"Santhosh Kumar S", role:"AIML 3rd year", inst:"Rajalakshmi Engineering College", focus:"", lead:false, winner:true},
+                {name:"Sakthivel R",      role:"CSE 2nd year",  inst:"Rajalakshmi Engineering College", focus:"", lead:false, winner:false},
               ].map((s,i)=>(
                 <div key={i} className="bg-white rounded-xl p-5 flex flex-col items-center text-center transition-all duration-200 cursor-default"
                   style={{border:"1px solid #E2E8F0",boxShadow:"0 2px 8px rgba(27,58,107,0.06)"}}
@@ -753,7 +799,7 @@ export default function Home() {
                   {s.winner && (
                     <p className="text-[10px] font-semibold mb-2" style={{color:"#B8962E"}}>★ SIH 2024 National Winner</p>
                   )}
-                  <p className="text-[10px] leading-relaxed" style={{color:M}}>{s.focus}</p>
+                  {s.focus && <p className="text-[10px] leading-relaxed" style={{color:M}}>{s.focus}</p>}
                 </div>
               ))}
             </div>
@@ -766,14 +812,14 @@ export default function Home() {
             <p className="text-center font-mono text-[10px] uppercase tracking-widest mb-8" style={{fontFamily:"'IBM Plex Mono',monospace",color:S,letterSpacing:"0.2em"}}>Built With the Support Of</p>
             <div className="flex flex-col sm:flex-row items-center justify-center divide-y sm:divide-y-0 sm:divide-x gap-0" style={{divideColor:"#DCE3EC"}}>
               {[
-                {icon:"🏛", title:"Rajalakshmi Engineering College", sub:"Hardware sponsor · First deployment unit"},
-                {icon:"👮", title:"Dr. R. Stalin IPS", sub:"SP, Kanyakumari District · Field deployment · Official inauguration"},
+                {icon:"🏛", title:"Rajalakshmi Engineering College, Chennai", sub:""},
+                {icon:"👮", title:"Dr. R. Stalin IPS", sub:"Superintendent of Police, Kanyakumari District"},
                 {icon:"🚀", title:"StartupTN × Kanyakumari District Police", sub:"Kaaval Hackathon — January 2026"},
               ].map((p,i)=>(
                 <div key={i} className="flex flex-col items-center text-center px-8 py-4 sm:py-0 w-full sm:w-auto" style={{borderColor:"#DCE3EC"}}>
                   <span className="text-2xl mb-2">{p.icon}</span>
                   <p className="font-semibold text-sm mb-0.5" style={{color:INK}}>{p.title}</p>
-                  <p className="text-xs" style={{color:S}}>{p.sub}</p>
+                  {p.sub && <p className="text-xs" style={{color:S}}>{p.sub}</p>}
                 </div>
               ))}
             </div>
@@ -782,7 +828,6 @@ export default function Home() {
               <p className="italic text-sm leading-relaxed" style={{fontFamily:"'Fraunces',serif",color:S}}>
                 "Kaaval AI was conceived at the Kaaval Hackathon in January 2026, organized by Kanyakumari District Police and StartupTN. The pilot was officially inaugurated by Dr. R. Stalin IPS, Superintendent of Police, Kanyakumari, at the Nagercoil District Collectorate Roundabout on June 9, 2026."
               </p>
-              <p className="mt-3 font-mono text-[10px]" style={{fontFamily:"'IBM Plex Mono',monospace",color:M,letterSpacing:"0.08em"}}>— Rajalakshmi Engineering College, Chennai</p>
             </div>
           </div>
         </div>
@@ -813,7 +858,7 @@ export default function Home() {
               {/* 4-per-row newspaper clipping cards */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {[
-                  {name:"Dinamalar",      lang:"Tamil Daily",   sub:"தமிழ் நாளிதழ்", headline:"AI கேமராக்கள் ஹெல்மட் இல்லாத சவாரிகளை கண்டுபிடிக்கின்றன",   body:"Kaaval AI pilot at Ramanputhur Junction flags violations in real time."},
+                  {name:"Dinamalar",      lang:"Tamil Daily",   sub:"தமிழ் நாளிதழ்", headline:"AI கேமராக்கள் ஹெல்மட் இல்லாத சவாரிகளை கண்டுபிடிக்கின்றன",   body:"Kaaval AI pilot at Collectorate Roundabout flags violations in real time."},
                   {name:"Dinathanthi",    lang:"Tamil Daily",   sub:"தினத்தந்தி",      headline:"கன்னியாகுமரியில் AI வாகன கண்காணிப்பு தொடங்கியது",            body:"AI surveillance launched at key junction in Kanyakumari District."},
                   {name:"The Hindu",      lang:"English Daily", sub:"Est. 1878",       headline:"Smart Cameras Monitor Helmet Compliance at Kanyakumari Junction",body:"AI detects two-wheeler violations and extracts number plates automatically."},
                   {name:"Times of India", lang:"English Daily", sub:"Est. 1838",       headline:"AI-Powered Enforcement System Deployed by Kanyakumari Police",   body:"Kaaval AI connects to existing CCTV feeds to flag helmet violations."},
@@ -1026,7 +1071,7 @@ export default function Home() {
       </section>
 
       {/* ── Dashboard Screenshots ── */}
-      <section className="py-24 bg-grid-dark relative overflow-hidden" style={{background:INK}}>
+      <section id="platform" className="py-24 bg-grid-dark relative overflow-hidden" style={{background:INK}}>
         <div className="radar-sweep-line" style={{background:"linear-gradient(to right,transparent,rgba(204,41,41,0.05),transparent)"}}/>
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center mb-14">
@@ -1034,7 +1079,7 @@ export default function Home() {
             <h2 className="font-serif text-4xl lg:text-5xl font-bold" style={{fontFamily:"'Fraunces',serif",color:L}}>Inside the Kaaval AI Command Center</h2>
             <p className="mt-3 text-base" style={{color:M}}>Every module built for the rhythm of traffic enforcement — from live detection to officer review.</p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 xl:grid-cols-5">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {dashScreens.map(({title,icon:Icon,desc},i)=>(
               <div key={i} className="rounded-lg overflow-hidden flex flex-col" style={{background:PNL,border:`1px solid ${DN}`}}>
                 {/* Mockup screen */}
@@ -1092,6 +1137,14 @@ export default function Home() {
                         </div>
                       </div>
                     </>}
+                    {i===5&&<>
+                      <div className="flex items-end gap-1.5 justify-center h-12 pt-2 px-2">
+                        {[30,50,40,70,85].map((h,j)=>(
+                          <div key={j} className="w-3 rounded-t" style={{height:`${h}%`,background:j===4?R:`rgba(27,58,107,0.6)`}}/>
+                        ))}
+                      </div>
+                      <div className="h-px" style={{background:DN}}/>
+                    </>}
                   </div>
                 </div>
                 <div className="p-4 flex-1">
@@ -1140,8 +1193,8 @@ export default function Home() {
             {/* Contact details */}
             <div className="lg:col-span-2 grid sm:grid-cols-2 gap-4">
               {[
-                {Icon:Phone,       label:"Mobile",   value:"+91 XXXXX XXXXX",    sub:"Call us directly"},
-                {Icon:MessageCircle,label:"WhatsApp", value:"+91 XXXXX XXXXX",   sub:"Chat on WhatsApp"},
+                {Icon:Phone,       label:"Mobile",   value:"+91 7200599700",    sub:"Call us directly"},
+                {Icon:MessageCircle,label:"WhatsApp", value:"+91 7200599700",   sub:"Chat on WhatsApp"},
                 {Icon:Mail,        label:"Email",    value:"contact@kaaval.ai",  sub:"Official correspondence"},
                 {Icon:MapPin,      label:"Address",  value:"Kanyakumari District",sub:"Tamil Nadu, India"},
               ].map(({Icon,label,value,sub},i)=>(
@@ -1163,11 +1216,11 @@ export default function Home() {
               <h3 className="font-serif text-xl font-bold mb-5" style={{fontFamily:"'Fraunces',serif",color:INK}}>Follow Our Work</h3>
               <div className="space-y-3">
                 {[
-                  {Icon:Instagram,label:"Instagram",  handle:"@your_instagram",   color:"#E1306C"},
-                  {Icon:Facebook, label:"Facebook",   handle:"facebook.com/kaavalai",color:N},
-                  {Icon:Linkedin, label:"LinkedIn",   handle:"linkedin.com/company/kaavalai",color:N},
-                ].map(({Icon,label,handle,color},i)=>(
-                  <a key={i} href="#" className="flex items-center gap-4 rounded-lg p-4 transition-all duration-200" style={{background:"#fff",border:`1px solid ${LN}`}}
+                  {Icon:Instagram,label:"Instagram",  handle:"@kaaval.ai",   color:"#E1306C", href:"https://www.instagram.com/kaaval.ai/"},
+                  {Icon:Facebook, label:"Facebook",   handle:"Coming Soon",  color:N, href:"#"},
+                  {Icon:Linkedin, label:"LinkedIn",   handle:"Kaaval AI",    color:N, href:"https://www.linkedin.com/in/kaaval-ai-98952a415/"},
+                ].map(({Icon,label,handle,color,href},i)=>(
+                  <a key={i} href={href} target="_blank" rel="noreferrer" className="flex items-center gap-4 rounded-lg p-4 transition-all duration-200" style={{background:"#fff",border:`1px solid ${LN}`}}
                     onMouseEnter={e=>{e.currentTarget.style.borderColor=LN;e.currentTarget.style.boxShadow="0 2px 8px rgba(15,30,54,0.07)"}}
                     onMouseLeave={e=>{e.currentTarget.style.boxShadow="none"}}>
                     <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{background:"rgba(27,58,107,0.06)"}}>
@@ -1203,7 +1256,7 @@ export default function Home() {
           <h2 className="font-serif font-black leading-tight" style={{fontFamily:"'Fraunces',serif",color:L,fontSize:"clamp(2rem,5vw,3.5rem)"}}>
             Imagine a District With Zero Preventable Road Fatalities.
           </h2>
-          <button className="font-bold text-lg px-10 py-5 rounded-sm transition-all text-white" style={{background:R}}
+          <button onClick={() => setIsModalOpen(true)} className="font-bold text-lg px-10 py-5 rounded-sm transition-all text-white" style={{background:R}}
             onMouseEnter={e=>{e.currentTarget.style.background="#E03333";e.currentTarget.style.transform="scale(1.03)"}}
             onMouseLeave={e=>{e.currentTarget.style.background=R;e.currentTarget.style.transform="scale(1)"}}
             data-testid="button-footer-pilot">Request Pilot Deployment</button>
@@ -1231,7 +1284,7 @@ export default function Home() {
             <div>
               <h4 className="font-mono text-xs font-bold uppercase tracking-widest mb-4" style={{fontFamily:"'IBM Plex Mono',monospace",color:M,letterSpacing:"0.16em"}}>Quick Links</h4>
               <ul className="space-y-2.5">
-                {[["#","Home"],["#deployment","Deployment"],["#our-impact","Impact"],["#media","Media"],["#contact","Contact"]].map(([href,label])=>(
+                {[["#","Home"],["#platform","Platform"],["#deployment","Deployment"],["#our-impact","Impact"],["#media","Media"],["#contact","Contact"]].map(([href,label])=>(
                   <li key={label}><a href={href} className="text-sm transition-colors" style={{color:M}} onMouseEnter={e=>(e.currentTarget.style.color=L)} onMouseLeave={e=>(e.currentTarget.style.color=M)}>{label}</a></li>
                 ))}
               </ul>
@@ -1241,7 +1294,7 @@ export default function Home() {
             <div>
               <h4 className="font-mono text-xs font-bold uppercase tracking-widest mb-4" style={{fontFamily:"'IBM Plex Mono',monospace",color:M,letterSpacing:"0.16em"}}>Contact</h4>
               <ul className="space-y-2.5">
-                {[{Icon:Mail,v:"contact@kaaval.ai"},{Icon:Phone,v:"+91 XXXXX XXXXX"},{Icon:MapPin,v:"Kanyakumari District\nTamil Nadu, India"}].map(({Icon,v},i)=>(
+                {[{Icon:Mail,v:"contact@kaaval.ai"},{Icon:Phone,v:"+91 7200599700"},{Icon:MapPin,v:"Kanyakumari District\nTamil Nadu, India"}].map(({Icon,v},i)=>(
                   <li key={i} className="flex items-start gap-2">
                     <Icon className="w-3.5 h-3.5 mt-0.5 shrink-0" style={{color:M}}/>
                     <span className="text-sm" style={{color:M,whiteSpace:"pre-line"}}>{v}</span>
@@ -1254,8 +1307,8 @@ export default function Home() {
             <div>
               <h4 className="font-mono text-xs font-bold uppercase tracking-widest mb-4" style={{fontFamily:"'IBM Plex Mono',monospace",color:M,letterSpacing:"0.16em"}}>Social</h4>
               <div className="flex gap-3">
-                {[{Icon:Instagram,href:"#"},{Icon:Facebook,href:"#"},{Icon:Linkedin,href:"#"}].map(({Icon,href},i)=>(
-                  <a key={i} href={href} className="w-9 h-9 rounded-lg flex items-center justify-center transition-all" style={{border:`1px solid ${DN}`}}
+                {[{Icon:Instagram,href:"https://www.instagram.com/kaaval.ai/"},{Icon:Facebook,href:"#"},{Icon:Linkedin,href:"https://www.linkedin.com/in/kaaval-ai-98952a415/"}].map(({Icon,href},i)=>(
+                  <a key={i} href={href} target="_blank" rel="noreferrer" className="w-9 h-9 rounded-lg flex items-center justify-center transition-all" style={{border:`1px solid ${DN}`}}
                     onMouseEnter={e=>{e.currentTarget.style.borderColor=M;e.currentTarget.style.background="rgba(255,255,255,0.05)"}}
                     onMouseLeave={e=>{e.currentTarget.style.borderColor=DN;e.currentTarget.style.background="transparent"}}>
                     <Icon className="w-4 h-4" style={{color:M}}/>
@@ -1277,7 +1330,7 @@ export default function Home() {
           </div>
         </div>
       </footer>
-
+      <PilotModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 }
