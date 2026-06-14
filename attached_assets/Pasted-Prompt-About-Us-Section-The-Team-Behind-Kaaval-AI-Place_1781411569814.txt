@@ -1,0 +1,90 @@
+Prompt: About Us Section — "The Team Behind Kaaval AI"
+Placement: Between "Project Journey" and "Media Coverage"
+
+Origin Banner (full width, dark navy #0F1E36)
+Three-node timeline, gold connecting line, white text:
+January 2026                   →                    June 9, 2026
+Kaaval Hackathon                                    Live Deployment at
+Kanyakumari District                                Nagercoil District
+Police × StartupTN                                  Collectorate Roundabout
+Centered italic serif below in muted gold:
+
+"What started as a hackathon idea became a live enforcement system inaugurated by the Superintendent of Police."
+
+Section Header
+Background: #F4F6F9
+
+Eyebrow (red mono): OUR TEAM
+
+Title (navy Fraunces serif): "Built by Students. Deployed on Real Roads."
+
+Subtitle (muted steel): "A team of four engineers and two mentors from Rajalakshmi Engineering College, Chennai — building public safety technology that works."
+
+Mentors Row — 2 cards, centered
+Card 1 — Academic Mentor
+[Photo placeholder]
+MENTOR  ← red pill badge
+Dr. K. Vijay
+Associate Professor, Computer Science
+Rajalakshmi Engineering College, Chennai
+Academic research · Model validation · AI architecture
+[LinkedIn icon]
+Card 2 — Industry Mentor
+[Photo placeholder]
+MENTOR  ← red pill badge
+Binu J
+Founder, Excel Technologies
+Builder of Kadal Map · Nagercoil
+Industry deployment · Real-world logistics
+[LinkedIn icon]
+Card styling: white background, 4px red top border on hover, circular photo placeholder 90px, name in bold navy Fraunces, role in red mono small caps, institution in muted gray Inter, card lifts 4px on hover with shadow.
+
+Students Row — 4 cards
+Card 1 — Project Lead
+[Photo placeholder]
+PROJECT LEAD  ← navy pill (slightly larger than other badges)
+Sajiv Jess B I
+Full-Stack & AI/ML Engineer
+Rajalakshmi Engineering College, Chennai
+Core platform · Flask · React · System architecture
+SIH 2024 National Winner
+[LinkedIn icon]
+Cards 2, 3, 4 — Development Team
+[Photo placeholder]
+STUDENT DEVELOPER  ← navy pill
+[Name — fill in]
+AI/ML Engineer
+Rajalakshmi Engineering College, Chennai
+[Specific role — fill in: e.g. "ANPR pipeline · Plate recognition"]
+[LinkedIn icon]
+Same card styling as mentors. On Sajiv's card specifically: add a small gold star or ★ SIH National Winner line in gold below institution — subtle but visible.
+
+Support & Partners Strip
+Full-width light strip below team cards, #FFFFFF background, centered:
+Eyebrow: BUILT WITH THE SUPPORT OF
+Three items in a horizontal row with dividers:
+🏛  Rajalakshmi Engineering College
+     Hardware sponsor · First deployment unit
+
+👮  Dr. R. Stalin IPS
+     SP, Kanyakumari District
+     Field deployment · Official inauguration
+
+🚀  StartupTN × Kanyakumari District Police
+     Kaaval Hackathon — January 2026
+Each item: institution name in bold navy, subtitle in muted gray, separated by thin vertical #DCE3EC lines. No cards, no borders — clean editorial layout.
+
+Bottom Quote
+Centered, max 640px, italic Fraunces, muted steel color:
+"Kaaval AI was conceived at the Kaaval Hackathon in January 2026, organized by Kanyakumari District Police and StartupTN. The pilot was officially inaugurated by Dr. R. Stalin IPS, Superintendent of Police, Kanyakumari, at the Nagercoil District Collectorate Roundabout on June 9, 2026."
+Small attribution below in mono: — Rajalakshmi Engineering College, Chennai
+
+What you need to fill in before building
+Send your 3 other student teammates':
+
+Full names
+Their specific roles in the project (e.g. "ANPR model training", "Dashboard frontend", "Video pipeline")
+LinkedIn URLs for all 6 members
+Photos for all 6 (circular crop, professional or decent photo)
+
+That's literally the only gap. Everything else is ready to build directly from this prompt.

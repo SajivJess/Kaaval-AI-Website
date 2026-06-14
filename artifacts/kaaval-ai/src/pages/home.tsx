@@ -628,6 +628,159 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── Team — About Us ── */}
+      <section id="team">
+
+        {/* Origin Story Banner */}
+        <div className="py-16 relative overflow-hidden" style={{background:"#0F1E36"}}>
+          <div className="max-w-5xl mx-auto px-6">
+            {/* Three-node timeline */}
+            <div className="flex items-start justify-between gap-4 mb-10 relative">
+              {/* Gold connecting line */}
+              <div className="absolute top-5 left-[16%] right-[16%] h-px" style={{background:"linear-gradient(to right,#C9A84C,rgba(201,168,76,0.3))"}}/>
+
+              {/* Node 1 */}
+              <div className="flex flex-col items-center text-center flex-1 relative z-10">
+                <div className="w-10 h-10 rounded-full border-2 flex items-center justify-center mb-4" style={{background:"#0F1E36",borderColor:"#C9A84C"}}>
+                  <div className="w-2.5 h-2.5 rounded-full" style={{background:"#C9A84C"}}/>
+                </div>
+                <p className="font-mono text-[10px] mb-2" style={{fontFamily:"'IBM Plex Mono',monospace",color:"rgba(201,168,76,0.7)",letterSpacing:"0.15em"}}>JANUARY 2026</p>
+                <p className="font-serif font-bold text-base text-white leading-snug" style={{fontFamily:"'Fraunces',serif"}}>Kaaval Hackathon</p>
+                <p className="text-xs mt-1 leading-relaxed" style={{color:"rgba(255,255,255,0.5)"}}>Kanyakumari District Police<br/>× StartupTN</p>
+              </div>
+
+              {/* Node 2 — midpoint */}
+              <div className="flex flex-col items-center text-center flex-1 relative z-10">
+                <div className="w-10 h-10 rounded-full border-2 flex items-center justify-center mb-4" style={{background:"#0F1E36",borderColor:"rgba(201,168,76,0.5)"}}>
+                  <div className="w-2.5 h-2.5 rounded-full" style={{background:"rgba(201,168,76,0.5)"}}/>
+                </div>
+                <p className="font-mono text-[10px] mb-2" style={{fontFamily:"'IBM Plex Mono',monospace",color:"rgba(201,168,76,0.5)",letterSpacing:"0.15em"}}>APRIL 2026</p>
+                <p className="font-serif font-bold text-base text-white leading-snug" style={{fontFamily:"'Fraunces',serif"}}>Pilot Testing</p>
+                <p className="text-xs mt-1 leading-relaxed" style={{color:"rgba(255,255,255,0.4)"}}>Ramanputhur Junction<br/>Kanyakumari District</p>
+              </div>
+
+              {/* Node 3 */}
+              <div className="flex flex-col items-center text-center flex-1 relative z-10">
+                <div className="w-10 h-10 rounded-full border-2 flex items-center justify-center mb-4" style={{background:R,borderColor:R,boxShadow:"0 0 0 4px rgba(204,41,41,0.2)"}}>
+                  <div className="w-2.5 h-2.5 rounded-full bg-white"/>
+                </div>
+                <p className="font-mono text-[10px] mb-2" style={{fontFamily:"'IBM Plex Mono',monospace",color:"rgba(201,168,76,0.7)",letterSpacing:"0.15em"}}>JUNE 9, 2026</p>
+                <p className="font-serif font-bold text-base text-white leading-snug" style={{fontFamily:"'Fraunces',serif"}}>Live Deployment</p>
+                <p className="text-xs mt-1 leading-relaxed" style={{color:"rgba(255,255,255,0.5)"}}>Nagercoil Collectorate<br/>Roundabout</p>
+              </div>
+            </div>
+
+            {/* Italic quote */}
+            <p className="text-center max-w-2xl mx-auto italic" style={{fontFamily:"'Fraunces',serif",color:"rgba(201,168,76,0.75)",fontSize:"1.05rem",lineHeight:"1.7"}}>
+              "What started as a hackathon idea became a live enforcement system inaugurated by the Superintendent of Police."
+            </p>
+          </div>
+        </div>
+
+        {/* Team cards section */}
+        <div className="py-20" style={{background:"#F4F6F9"}}>
+          <div className="max-w-5xl mx-auto px-6">
+
+            {/* Header */}
+            <div className="text-center mb-14">
+              <p className="font-mono text-xs uppercase tracking-widest mb-4" style={{fontFamily:"'IBM Plex Mono',monospace",color:R,letterSpacing:"0.18em"}}>Our Team</p>
+              <h2 className="font-serif text-4xl lg:text-5xl font-bold mb-4" style={{fontFamily:"'Fraunces',serif",color:INK}}>Built by Students.<br/>Deployed on Real Roads.</h2>
+              <p className="text-base max-w-xl mx-auto" style={{color:S}}>A team of four engineers and two mentors from Rajalakshmi Engineering College, Chennai — building public safety technology that works.</p>
+            </div>
+
+            {/* Mentors row — 2 cards centered */}
+            <div className="flex flex-wrap justify-center gap-6 mb-6">
+              <p className="w-full text-center font-mono text-[10px] uppercase tracking-widest mb-2" style={{fontFamily:"'IBM Plex Mono',monospace",color:S,letterSpacing:"0.2em"}}>Mentors</p>
+              {[
+                {name:"Dr. K. Vijay", role:"Associate Professor, Computer Science", inst:"Rajalakshmi Engineering College, Chennai", focus:"Academic research · Model validation · AI architecture"},
+                {name:"Binu J",       role:"Founder, Excel Technologies",           inst:"Builder of Kadal Map · Nagercoil",        focus:"Industry deployment · Real-world logistics"},
+              ].map((m,i)=>(
+                <div key={i} className="bg-white rounded-xl p-7 flex flex-col items-center text-center transition-all duration-200 cursor-default"
+                  style={{width:"260px",border:"1px solid #E2E8F0",boxShadow:"0 2px 8px rgba(27,58,107,0.06)"}}
+                  onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-4px)";e.currentTarget.style.boxShadow="0 12px 32px rgba(27,58,107,0.14)";e.currentTarget.style.borderTop=`4px solid ${R}`;}}
+                  onMouseLeave={e=>{e.currentTarget.style.transform="none";e.currentTarget.style.boxShadow="0 2px 8px rgba(27,58,107,0.06)";e.currentTarget.style.borderTop="1px solid #E2E8F0";}}>
+                  {/* Photo placeholder */}
+                  <div className="w-20 h-20 rounded-full mb-4 flex items-center justify-center text-2xl" style={{background:`linear-gradient(135deg,${N},${DN})`,color:"rgba(255,255,255,0.4)"}}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-9 h-9"><path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd"/></svg>
+                  </div>
+                  {/* MENTOR badge */}
+                  <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase mb-3"
+                    style={{fontFamily:"'IBM Plex Mono',monospace",background:"rgba(204,41,41,0.1)",color:R,letterSpacing:"0.1em",border:`1px solid rgba(204,41,41,0.2)`}}>Mentor</span>
+                  <p className="font-serif font-bold text-lg mb-1" style={{fontFamily:"'Fraunces',serif",color:INK}}>{m.name}</p>
+                  <p className="font-mono text-[10px] uppercase font-semibold mb-1" style={{fontFamily:"'IBM Plex Mono',monospace",color:R,letterSpacing:"0.08em"}}>{m.role}</p>
+                  <p className="text-xs mb-3" style={{color:S}}>{m.inst}</p>
+                  <p className="text-[11px] leading-relaxed" style={{color:M}}>{m.focus}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Students row — 4 cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              <p className="col-span-full text-center font-mono text-[10px] uppercase tracking-widest mb-2" style={{fontFamily:"'IBM Plex Mono',monospace",color:S,letterSpacing:"0.2em"}}>Student Developers</p>
+              {[
+                {name:"Sajiv Jess B I", role:"Full-Stack & AI/ML Engineer",       inst:"Rajalakshmi Engineering College", focus:"Core platform · Flask · React · System architecture", lead:true,  winner:true},
+                {name:"Team Member",    role:"AI/ML Engineer",                     inst:"Rajalakshmi Engineering College", focus:"ANPR pipeline · Plate recognition",                 lead:false, winner:false},
+                {name:"Team Member",    role:"AI/ML Engineer",                     inst:"Rajalakshmi Engineering College", focus:"Helmet detection · Model training",                 lead:false, winner:false},
+                {name:"Team Member",    role:"Frontend Engineer",                  inst:"Rajalakshmi Engineering College", focus:"Dashboard UI · Video pipeline",                     lead:false, winner:false},
+              ].map((s,i)=>(
+                <div key={i} className="bg-white rounded-xl p-5 flex flex-col items-center text-center transition-all duration-200 cursor-default"
+                  style={{border:"1px solid #E2E8F0",boxShadow:"0 2px 8px rgba(27,58,107,0.06)"}}
+                  onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-4px)";e.currentTarget.style.boxShadow="0 12px 32px rgba(27,58,107,0.14)";e.currentTarget.style.borderTop=`4px solid ${R}`;}}
+                  onMouseLeave={e=>{e.currentTarget.style.transform="none";e.currentTarget.style.boxShadow="0 2px 8px rgba(27,58,107,0.06)";e.currentTarget.style.borderTop="1px solid #E2E8F0";}}>
+                  {/* Photo placeholder */}
+                  <div className="w-16 h-16 rounded-full mb-3 flex items-center justify-center" style={{background:`linear-gradient(135deg,${N},${DN})`,color:"rgba(255,255,255,0.4)"}}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7"><path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd"/></svg>
+                  </div>
+                  {/* Badge */}
+                  <span className="inline-block px-2 py-0.5 rounded-full text-[9px] font-mono font-bold uppercase mb-2.5"
+                    style={{fontFamily:"'IBM Plex Mono',monospace",
+                      background: s.lead ? "rgba(27,58,107,0.12)" : "rgba(27,58,107,0.08)",
+                      color: N, letterSpacing:"0.08em",
+                      border:`1px solid rgba(27,58,107,0.2)`}}>
+                    {s.lead ? "Project Lead" : "Student Developer"}
+                  </span>
+                  <p className="font-serif font-bold text-sm mb-0.5" style={{fontFamily:"'Fraunces',serif",color:INK}}>{s.name}</p>
+                  <p className="font-mono text-[9px] uppercase font-semibold mb-0.5" style={{fontFamily:"'IBM Plex Mono',monospace",color:R,letterSpacing:"0.07em"}}>{s.role}</p>
+                  <p className="text-[10px] mb-2" style={{color:S}}>{s.inst}</p>
+                  {s.winner && (
+                    <p className="text-[10px] font-semibold mb-2" style={{color:"#B8962E"}}>★ SIH 2024 National Winner</p>
+                  )}
+                  <p className="text-[10px] leading-relaxed" style={{color:M}}>{s.focus}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Support & Partners Strip */}
+        <div className="py-12 bg-white">
+          <div className="max-w-5xl mx-auto px-6">
+            <p className="text-center font-mono text-[10px] uppercase tracking-widest mb-8" style={{fontFamily:"'IBM Plex Mono',monospace",color:S,letterSpacing:"0.2em"}}>Built With the Support Of</p>
+            <div className="flex flex-col sm:flex-row items-center justify-center divide-y sm:divide-y-0 sm:divide-x gap-0" style={{divideColor:"#DCE3EC"}}>
+              {[
+                {icon:"🏛", title:"Rajalakshmi Engineering College", sub:"Hardware sponsor · First deployment unit"},
+                {icon:"👮", title:"Dr. R. Stalin IPS", sub:"SP, Kanyakumari District · Field deployment · Official inauguration"},
+                {icon:"🚀", title:"StartupTN × Kanyakumari District Police", sub:"Kaaval Hackathon — January 2026"},
+              ].map((p,i)=>(
+                <div key={i} className="flex flex-col items-center text-center px-8 py-4 sm:py-0 w-full sm:w-auto" style={{borderColor:"#DCE3EC"}}>
+                  <span className="text-2xl mb-2">{p.icon}</span>
+                  <p className="font-semibold text-sm mb-0.5" style={{color:INK}}>{p.title}</p>
+                  <p className="text-xs" style={{color:S}}>{p.sub}</p>
+                </div>
+              ))}
+            </div>
+            {/* Bottom attribution quote */}
+            <div className="mt-10 max-w-2xl mx-auto text-center">
+              <p className="italic text-sm leading-relaxed" style={{fontFamily:"'Fraunces',serif",color:S}}>
+                "Kaaval AI was conceived at the Kaaval Hackathon in January 2026, organized by Kanyakumari District Police and StartupTN. The pilot was officially inaugurated by Dr. R. Stalin IPS, Superintendent of Police, Kanyakumari, at the Nagercoil District Collectorate Roundabout on June 9, 2026."
+              </p>
+              <p className="mt-3 font-mono text-[10px]" style={{fontFamily:"'IBM Plex Mono',monospace",color:M,letterSpacing:"0.08em"}}>— Rajalakshmi Engineering College, Chennai</p>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
       {/* ── Media & Recognition — Press Wall ── */}
       <section id="media">
 
