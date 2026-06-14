@@ -268,7 +268,7 @@ export default function Home() {
         borderBottom: scrolled?`1px solid ${LN}`:"1px solid transparent",
         boxShadow: scrolled?"0 1px 14px rgba(15,30,54,0.07)":"none",
       }}>
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 py-2 md:py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <img src="/kaaval-logo.png" alt="Kaaval AI Logo" className="h-16 md:h-20 w-auto" />
           </div>
@@ -285,7 +285,7 @@ export default function Home() {
       </nav>
 
       {/* ── Hero ── */}
-      <section className="relative min-h-screen flex items-center bg-grid-light bg-white" style={{paddingTop:"72px"}}>
+      <section className="relative min-h-screen flex items-center bg-grid-light bg-white" style={{paddingTop:"140px"}}>
         <div className="radar-sweep-line" style={{background:"linear-gradient(to right,transparent,rgba(27,58,107,0.05),transparent)"}}/>
         <div className="max-w-7xl mx-auto w-full px-6 py-8 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div ref={hFade.ref} style={hFade.style} className="flex flex-col items-start gap-7">
