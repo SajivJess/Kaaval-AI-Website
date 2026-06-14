@@ -1,0 +1,47 @@
+Prompt: Redesign Print Media Section as Newspaper Front Pages
+Replace the current horizontal publication name strip with actual newspaper front-page style cards.
+
+Each print card should look like a miniature newspaper front page:
+┌─────────────────────────────────┐
+│  DINAMALAR          [DATE]      │  ← masthead bar, dark navy bg
+│  தமிழ் நாளிதழ்                  │  ← subtitle in small serif
+├─────────────────────────────────┤
+│                                 │
+│   [Faint newspaper column       │  ← decorative: 3 thin vertical 
+│    lines as texture —           │    divider lines + horizontal
+│    like printed text blocks]    │    rule lines suggesting columns
+│                                 │
+├─────────────────────────────────┤
+│  ████████████████████           │  ← "headline" placeholder — bold
+│  ██████████████                 │    dark serif text, 2 lines
+│                                 │
+│  Kaaval AI pilot deployment     │  ← actual coverage description
+│  covered at Ramanputhur         │    in small body text
+│  Junction, Kanyakumari.         │
+├─────────────────────────────────┤
+│  TAMIL DAILY    [View Article →]│  ← tag left, red link right
+└─────────────────────────────────┘
+Specific styling details:
+
+Card background: #FFFDF7 — warm off-white, like actual newsprint
+Top masthead bar: #1B3A6B (navy) with publication name in white serif, date right-aligned in mono font (e.g. "June 2026")
+The "column texture" in the middle: 3 thin vertical gray lines + multiple short horizontal gray lines at varying widths (40%, 90%, 65%, 80% width) stacked, simulating printed text — purely decorative CSS, no real text
+Bold "headline" block: 2 lines of dark navy bold serif text, slightly larger — write realistic fake headline text like "AI Camera System Flags Helmet Violations in Real Time"
+Body description: 2–3 lines of small gray text
+Bottom strip: red TAMIL DAILY pill left, View Article → in red right — red underline appears on hover
+Card has a very subtle drop shadow and a 1px #DDD border — like a physical clipping
+On hover: card lifts 4px, shadow deepens, left border becomes 4px solid red
+
+Layout: 2×2 grid (not 4 in a row) — gives each card more height to feel like a real front page, not a thumbnail. Desktop: 2 columns. Mobile: 1 column.
+Add a small decorative element: top-right corner of each card has a small folded-corner effect (CSS triangle, gray) — like a physical newspaper clipping pinned to a board.
+
+Section container:
+Change background of the entire print media section to #F0EDE6 — a warm parchment tone that makes the newsprint cards feel at home and contrasts beautifully with the navy TV tiles below.
+Add a faint horizontal watermark text behind the section: PRESS in very large light gray serif at 4% opacity — purely atmospheric.
+
+After implementing, the full media section flow will be:
+
+#F0EDE6 parchment section → newspaper clipping cards → feels like a physical press wall
+#F2F4F8 light section → dark navy TV broadcast tiles → feels like a TV screen grid
+
+The contrast between warm parchment above and cool gray below, with the navy TV tiles, will make the whole section feel designed rather than assembled.

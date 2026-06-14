@@ -629,43 +629,88 @@ export default function Home() {
       </section>
 
       {/* ── Media & Recognition — Press Wall ── */}
-      <section id="media" className="py-24" style={{background:AL}}>
-        <div className="max-w-7xl mx-auto px-6">
+      <section id="media">
 
-          {/* Header */}
-          <div className="text-center mb-4">
-            <p className="font-mono text-xs uppercase tracking-widest mb-4" style={{fontFamily:"'IBM Plex Mono',monospace",color:R,letterSpacing:"0.18em"}}>Public Recognition</p>
-            <h2 className="font-serif text-4xl lg:text-5xl font-bold mb-6" style={{fontFamily:"'Fraunces',serif",color:INK}}>As Seen In</h2>
-            <div className="w-full h-px" style={{background:`linear-gradient(to right, transparent, ${LN} 20%, ${LN} 80%, transparent)`}}/>
+        {/* ── PRINT — parchment zone ── */}
+        <div className="py-24 relative overflow-hidden" style={{background:"#F0EDE6"}}>
+          {/* "PRESS" watermark */}
+          <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden select-none">
+            <span className="font-serif font-black" style={{fontFamily:"'Fraunces',serif",fontSize:"clamp(8rem,20vw,22rem)",color:"rgba(100,80,60,0.04)",letterSpacing:"-0.05em",whiteSpace:"nowrap",userSelect:"none"}}>PRESS</span>
           </div>
 
-          {/* ── Print: horizontal logo strip ── */}
-          <div className="py-10 mb-4">
-            <p className="font-mono text-[10px] uppercase tracking-widest mb-7 text-center" style={{fontFamily:"'IBM Plex Mono',monospace",color:S,letterSpacing:"0.2em"}}>Print Media</p>
-            <div className="flex flex-wrap items-center justify-center gap-0">
-              {mediaPrint.map((item,i)=>(
-                <React.Fragment key={i}>
-                  {i>0 && <div className="hidden sm:block h-10 w-px mx-6" style={{background:LN}}/>}
-                  <a href="#" className="group flex flex-col items-center gap-2 px-4 sm:px-0 py-3 transition-all"
-                    onMouseEnter={e=>e.currentTarget.style.opacity="1"}
-                    onMouseLeave={e=>e.currentTarget.style.opacity="1"}>
-                    <div className="flex items-center gap-1.5">
-                      <span className="font-serif font-bold text-xl lg:text-2xl transition-all group-hover:text-[#CC2929]"
-                        style={{fontFamily:"'Fraunces',serif",color:INK,transition:"color 0.2s"}}>
-                        {item.name}
-                      </span>
-                      <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity -translate-x-1 group-hover:translate-x-0 duration-200" style={{color:R}}/>
+          <div className="max-w-7xl mx-auto px-6 relative z-10">
+            {/* Header */}
+            <div className="text-center mb-4">
+              <p className="font-mono text-xs uppercase tracking-widest mb-4" style={{fontFamily:"'IBM Plex Mono',monospace",color:R,letterSpacing:"0.18em"}}>Public Recognition</p>
+              <h2 className="font-serif text-4xl lg:text-5xl font-bold mb-6" style={{fontFamily:"'Fraunces',serif",color:INK}}>As Seen In</h2>
+              <div className="w-full h-px" style={{background:`linear-gradient(to right, transparent, rgba(160,140,120,0.4) 20%, rgba(160,140,120,0.4) 80%, transparent)`}}/>
+            </div>
+
+            <div className="py-10">
+              <p className="font-mono text-[10px] uppercase tracking-widest mb-8 text-center" style={{fontFamily:"'IBM Plex Mono',monospace",color:"#8C7B68",letterSpacing:"0.2em"}}>Print Media</p>
+
+              {/* 2×2 newspaper clipping cards */}
+              <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                {[
+                  {name:"Dinamalar",     lang:"Tamil Daily",   sub:"தமிழ் நாளிதழ்",  headline:"AI கேமராக்கள் ஹெல்மட் இல்லாத சவாரிகளை கண்டுபிடிக்கின்றன",  body:"Kaaval AI's pilot at Ramanputhur Junction, Kanyakumari uses CCTV-based AI to flag helmet violations in real time."},
+                  {name:"Dinathanthi",   lang:"Tamil Daily",   sub:"தினத்தந்தி",       headline:"கன்னியாகுமரியில் AI வாகன கண்காணிப்பு தொடங்கியது",           body:"AI-powered surveillance system launched at a key junction in Kanyakumari District to enforce helmet compliance."},
+                  {name:"The Hindu",     lang:"English Daily", sub:"Est. 1878",        headline:"Smart Cameras Monitor Helmet Compliance at Kanyakumari Junction",body:"An AI system deployed at Ramanputhur Junction detects two-wheeler violations and extracts number plates automatically."},
+                  {name:"Times of India",lang:"English Daily", sub:"Est. 1838",        headline:"AI-Powered Enforcement System Deployed by Kanyakumari Police",   body:"Kaaval AI connects to existing CCTV feeds to flag helmet violations, storing evidence for officer action."},
+                ].map((paper,i)=>(
+                  <div key={i} className="relative cursor-pointer transition-all duration-200"
+                    style={{background:"#FFFDF7",border:"1px solid #DDD",borderRadius:"4px",boxShadow:"0 2px 8px rgba(80,60,40,0.08)",overflow:"hidden"}}
+                    onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-4px)";e.currentTarget.style.boxShadow="0 10px 28px rgba(80,60,40,0.14)";e.currentTarget.style.borderLeft=`4px solid ${R}`;}}
+                    onMouseLeave={e=>{e.currentTarget.style.transform="none";e.currentTarget.style.boxShadow="0 2px 8px rgba(80,60,40,0.08)";e.currentTarget.style.borderLeft="1px solid #DDD";}}>
+                    {/* Folded corner — top right */}
+                    <div className="absolute top-0 right-0 z-20" style={{width:0,height:0,borderStyle:"solid",borderWidth:"0 22px 22px 0",borderColor:`transparent #D0CBC0 transparent transparent`}}/>
+                    <div className="absolute top-0 right-0 z-10" style={{width:0,height:0,borderStyle:"solid",borderWidth:"0 20px 20px 0",borderColor:`transparent #FFFDF7 transparent transparent`}}/>
+
+                    {/* Masthead */}
+                    <div className="px-5 py-3 flex items-center justify-between" style={{background:N}}>
+                      <div>
+                        <p className="font-serif font-bold text-base leading-tight" style={{fontFamily:"'Fraunces',serif",color:"#fff"}}>{paper.name}</p>
+                        <p className="text-[10px] opacity-60" style={{color:"#E7ECF2",fontFamily:"'IBM Plex Mono',monospace"}}>{paper.sub}</p>
+                      </div>
+                      <span style={{fontFamily:"'IBM Plex Mono',monospace",fontSize:"9px",color:"rgba(231,236,242,0.55)",letterSpacing:"0.08em"}}>June 2026</span>
                     </div>
-                    <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-semibold uppercase"
-                      style={{fontFamily:"'IBM Plex Mono',monospace",background:"rgba(204,41,41,0.1)",color:R,letterSpacing:"0.1em"}}>
-                      {item.lang}
-                    </span>
-                  </a>
-                </React.Fragment>
-              ))}
+
+                    {/* Column texture */}
+                    <div className="px-5 py-4 relative" style={{borderBottom:"1px solid #E8E4DC"}}>
+                      <div className="flex gap-3 h-16">
+                        {[0,1,2].map(col=>(
+                          <div key={col} className="flex-1 flex flex-col gap-1" style={{borderRight:col<2?"1px solid #DDD":"none",paddingRight:col<2?"12px":"0"}}>
+                            {[90,65,80,45,70,55].map((w,j)=>(
+                              <div key={j} className="rounded-full" style={{height:"3px",width:`${w}%`,background:"rgba(100,80,60,0.12)"}}/>
+                            ))}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Headline */}
+                    <div className="px-5 pt-4 pb-2">
+                      <p className="font-serif font-bold text-base leading-snug mb-2" style={{fontFamily:"'Fraunces',serif",color:INK}}>{paper.headline}</p>
+                      <p className="text-xs leading-relaxed" style={{color:"#7A6B5A"}}>{paper.body}</p>
+                    </div>
+
+                    {/* Footer strip */}
+                    <div className="px-5 py-3 flex items-center justify-between" style={{borderTop:"1px solid #E8E4DC"}}>
+                      <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-semibold uppercase"
+                        style={{fontFamily:"'IBM Plex Mono',monospace",background:"rgba(204,41,41,0.1)",color:R,letterSpacing:"0.08em"}}>{paper.lang}</span>
+                      <a href="#" className="group flex items-center gap-1 text-xs font-semibold transition-all" style={{color:R}}>
+                        View Article <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform"/>
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
+        </div>
 
+        {/* ── TV + DIGITAL — cool gray zone ── */}
+        <div className="py-24" style={{background:AL}}>
+          <div className="max-w-7xl mx-auto px-6">
           <div className="w-full h-px mb-12" style={{background:`linear-gradient(to right, transparent, ${LN} 20%, ${LN} 80%, transparent)`}}/>
 
           {/* ── TV: 2×2 dark navy featured tiles ── */}
@@ -730,7 +775,8 @@ export default function Home() {
           <p className="text-center text-xs" style={{color:M,fontFamily:"'IBM Plex Mono',monospace",letterSpacing:"0.05em"}}>
             Coverage archived from public sources. All rights reserved to respective publications.
           </p>
-        </div>
+          </div>{/* closes max-w-7xl */}
+        </div>{/* closes py-24 TV+Digital gray zone */}
       </section>
 
       {/* ── Dashboard Screenshots ── */}
