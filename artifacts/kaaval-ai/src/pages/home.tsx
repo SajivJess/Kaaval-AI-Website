@@ -649,56 +649,50 @@ export default function Home() {
             <div className="py-10">
               <p className="font-mono text-[10px] uppercase tracking-widest mb-8 text-center" style={{fontFamily:"'IBM Plex Mono',monospace",color:"#8C7B68",letterSpacing:"0.2em"}}>Print Media</p>
 
-              {/* 2×2 newspaper clipping cards */}
-              <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+              {/* 4-per-row newspaper clipping cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {[
-                  {name:"Dinamalar",     lang:"Tamil Daily",   sub:"தமிழ் நாளிதழ்",  headline:"AI கேமராக்கள் ஹெல்மட் இல்லாத சவாரிகளை கண்டுபிடிக்கின்றன",  body:"Kaaval AI's pilot at Ramanputhur Junction, Kanyakumari uses CCTV-based AI to flag helmet violations in real time."},
-                  {name:"Dinathanthi",   lang:"Tamil Daily",   sub:"தினத்தந்தி",       headline:"கன்னியாகுமரியில் AI வாகன கண்காணிப்பு தொடங்கியது",           body:"AI-powered surveillance system launched at a key junction in Kanyakumari District to enforce helmet compliance."},
-                  {name:"The Hindu",     lang:"English Daily", sub:"Est. 1878",        headline:"Smart Cameras Monitor Helmet Compliance at Kanyakumari Junction",body:"An AI system deployed at Ramanputhur Junction detects two-wheeler violations and extracts number plates automatically."},
-                  {name:"Times of India",lang:"English Daily", sub:"Est. 1838",        headline:"AI-Powered Enforcement System Deployed by Kanyakumari Police",   body:"Kaaval AI connects to existing CCTV feeds to flag helmet violations, storing evidence for officer action."},
+                  {name:"Dinamalar",      lang:"Tamil Daily",   sub:"தமிழ் நாளிதழ்", headline:"AI கேமராக்கள் ஹெல்மட் இல்லாத சவாரிகளை கண்டுபிடிக்கின்றன",   body:"Kaaval AI pilot at Ramanputhur Junction flags violations in real time."},
+                  {name:"Dinathanthi",    lang:"Tamil Daily",   sub:"தினத்தந்தி",      headline:"கன்னியாகுமரியில் AI வாகன கண்காணிப்பு தொடங்கியது",            body:"AI surveillance launched at key junction in Kanyakumari District."},
+                  {name:"The Hindu",      lang:"English Daily", sub:"Est. 1878",       headline:"Smart Cameras Monitor Helmet Compliance at Kanyakumari Junction",body:"AI detects two-wheeler violations and extracts number plates automatically."},
+                  {name:"Times of India", lang:"English Daily", sub:"Est. 1838",       headline:"AI-Powered Enforcement System Deployed by Kanyakumari Police",   body:"Kaaval AI connects to existing CCTV feeds to flag helmet violations."},
+                  {name:"Vikatan",        lang:"Tamil Weekly",  sub:"விகடன்",          headline:"சாலை பாதுகாப்பு: AI தொழில்நுட்பம் புதிய வழிகாட்டியாக",        body:"AI-driven helmet detection marks a new era in road safety enforcement."},
+                  {name:"Kumudam",        lang:"Tamil Weekly",  sub:"குமுதம்",          headline:"ஹெல்மட் கட்டாயம் — AI இப்போது கண்காணிக்கிறது",               body:"Smart cameras now monitor two-wheeler compliance at major junctions."},
+                  {name:"Indian Express", lang:"English Daily", sub:"Est. 1932",       headline:"Kanyakumari District Leads State in AI-Based Traffic Enforcement", body:"Police deploy Kaaval AI to automate detection of helmet violations."},
+                  {name:"Deccan Chronicle",lang:"English Daily",sub:"Est. 1938",       headline:"AI System Detects Helmetless Riders Within Seconds of Passing",   body:"CCTV-fed neural network identifies violations with 99.2% accuracy."},
                 ].map((paper,i)=>(
                   <div key={i} className="relative cursor-pointer transition-all duration-200"
                     style={{background:"#FFFDF7",border:"1px solid #DDD",borderRadius:"4px",boxShadow:"0 2px 8px rgba(80,60,40,0.08)",overflow:"hidden"}}
                     onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-4px)";e.currentTarget.style.boxShadow="0 10px 28px rgba(80,60,40,0.14)";e.currentTarget.style.borderLeft=`4px solid ${R}`;}}
                     onMouseLeave={e=>{e.currentTarget.style.transform="none";e.currentTarget.style.boxShadow="0 2px 8px rgba(80,60,40,0.08)";e.currentTarget.style.borderLeft="1px solid #DDD";}}>
                     {/* Folded corner — top right */}
-                    <div className="absolute top-0 right-0 z-20" style={{width:0,height:0,borderStyle:"solid",borderWidth:"0 22px 22px 0",borderColor:`transparent #D0CBC0 transparent transparent`}}/>
-                    <div className="absolute top-0 right-0 z-10" style={{width:0,height:0,borderStyle:"solid",borderWidth:"0 20px 20px 0",borderColor:`transparent #FFFDF7 transparent transparent`}}/>
+                    <div className="absolute top-0 right-0 z-20" style={{width:0,height:0,borderStyle:"solid",borderWidth:"0 18px 18px 0",borderColor:`transparent #D0CBC0 transparent transparent`}}/>
+                    <div className="absolute top-0 right-0 z-10" style={{width:0,height:0,borderStyle:"solid",borderWidth:"0 16px 16px 0",borderColor:`transparent #FFFDF7 transparent transparent`}}/>
 
                     {/* Masthead */}
-                    <div className="px-5 py-3 flex items-center justify-between" style={{background:N}}>
-                      <div>
-                        <p className="font-serif font-bold text-base leading-tight" style={{fontFamily:"'Fraunces',serif",color:"#fff"}}>{paper.name}</p>
-                        <p className="text-[10px] opacity-60" style={{color:"#E7ECF2",fontFamily:"'IBM Plex Mono',monospace"}}>{paper.sub}</p>
+                    <div className="px-3 py-2.5 flex items-center justify-between" style={{background:N}}>
+                      <div className="min-w-0 mr-2">
+                        <p className="font-serif font-bold text-sm leading-tight truncate" style={{fontFamily:"'Fraunces',serif",color:"#fff"}}>{paper.name}</p>
+                        <p className="text-[9px] opacity-55 truncate" style={{color:"#E7ECF2",fontFamily:"'IBM Plex Mono',monospace"}}>{paper.sub}</p>
                       </div>
-                      <span style={{fontFamily:"'IBM Plex Mono',monospace",fontSize:"9px",color:"rgba(231,236,242,0.55)",letterSpacing:"0.08em"}}>June 2026</span>
+                      <span className="shrink-0" style={{fontFamily:"'IBM Plex Mono',monospace",fontSize:"8px",color:"rgba(231,236,242,0.5)",letterSpacing:"0.05em"}}>Jun 2026</span>
                     </div>
 
-                    {/* Column texture */}
-                    <div className="px-5 py-4 relative" style={{borderBottom:"1px solid #E8E4DC"}}>
-                      <div className="flex gap-3 h-16">
-                        {[0,1,2].map(col=>(
-                          <div key={col} className="flex-1 flex flex-col gap-1" style={{borderRight:col<2?"1px solid #DDD":"none",paddingRight:col<2?"12px":"0"}}>
-                            {[90,65,80,45,70,55].map((w,j)=>(
-                              <div key={j} className="rounded-full" style={{height:"3px",width:`${w}%`,background:"rgba(100,80,60,0.12)"}}/>
-                            ))}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
+                    {/* Thin rule */}
+                    <div style={{height:"1px",background:"#E8E4DC"}}/>
 
-                    {/* Headline */}
-                    <div className="px-5 pt-4 pb-2">
-                      <p className="font-serif font-bold text-base leading-snug mb-2" style={{fontFamily:"'Fraunces',serif",color:INK}}>{paper.headline}</p>
-                      <p className="text-xs leading-relaxed" style={{color:"#7A6B5A"}}>{paper.body}</p>
+                    {/* Headline + body */}
+                    <div className="px-3 pt-3 pb-2">
+                      <p className="font-serif font-bold text-sm leading-snug mb-1.5 overflow-hidden" style={{fontFamily:"'Fraunces',serif",color:INK,display:"-webkit-box",WebkitLineClamp:1,WebkitBoxOrient:"vertical",overflow:"hidden"}}>{paper.headline}</p>
+                      <p className="text-[11px] leading-relaxed overflow-hidden" style={{color:"#7A6B5A",display:"-webkit-box",WebkitLineClamp:2,WebkitBoxOrient:"vertical",overflow:"hidden"}}>{paper.body}</p>
                     </div>
 
                     {/* Footer strip */}
-                    <div className="px-5 py-3 flex items-center justify-between" style={{borderTop:"1px solid #E8E4DC"}}>
-                      <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-semibold uppercase"
-                        style={{fontFamily:"'IBM Plex Mono',monospace",background:"rgba(204,41,41,0.1)",color:R,letterSpacing:"0.08em"}}>{paper.lang}</span>
-                      <a href="#" className="group flex items-center gap-1 text-xs font-semibold transition-all" style={{color:R}}>
-                        View Article <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform"/>
+                    <div className="px-3 py-2 flex items-center justify-between" style={{borderTop:"1px solid #E8E4DC"}}>
+                      <span className="px-1.5 py-0.5 rounded-full text-[9px] font-mono font-semibold uppercase"
+                        style={{fontFamily:"'IBM Plex Mono',monospace",background:"rgba(204,41,41,0.1)",color:R,letterSpacing:"0.06em"}}>{paper.lang}</span>
+                      <a href="#" className="group flex items-center gap-0.5 text-[11px] font-semibold transition-all" style={{color:R}}>
+                        View <ArrowRight className="w-2.5 h-2.5 group-hover:translate-x-0.5 transition-transform"/>
                       </a>
                     </div>
                   </div>
@@ -749,6 +743,97 @@ export default function Home() {
             </div>
           </div>
 
+          </div>{/* closes max-w-7xl TV gray zone */}
+        </div>{/* closes py-24 TV gray zone */}
+
+        {/* ── SOCIAL MEDIA — dark navy zone ── */}
+        <div className="py-24 relative overflow-hidden" style={{background:INK}}>
+          <div className="max-w-7xl mx-auto px-6">
+            {/* Header */}
+            <div className="text-center mb-10">
+              <p className="font-mono text-xs uppercase tracking-widest mb-4" style={{fontFamily:"'IBM Plex Mono',monospace",color:R,letterSpacing:"0.18em"}}>Social Media Coverage</p>
+              <h2 className="font-serif text-4xl lg:text-5xl font-bold mb-3" style={{fontFamily:"'Fraunces',serif",color:"#fff"}}>Voices From the Ground</h2>
+              <p className="text-base max-w-xl mx-auto" style={{color:M}}>Independent coverage from traffic safety advocates and community creators</p>
+            </div>
+
+            {/* Stat bar */}
+            <div className="flex items-center justify-center gap-3 mb-12 flex-wrap">
+              {["2.4M+ Combined Reach","8 Creators","Organic Coverage"].map((stat,i)=>(
+                <React.Fragment key={i}>
+                  {i>0 && <span style={{color:"rgba(143,163,184,0.4)"}}>·</span>}
+                  <span className="font-mono text-sm font-semibold" style={{fontFamily:"'IBM Plex Mono',monospace",color:L,letterSpacing:"0.06em"}}>{stat}</span>
+                </React.Fragment>
+              ))}
+            </div>
+
+            {/* Horizontal scroll reel row */}
+            <div className="flex gap-4 overflow-x-auto pb-4" style={{scrollSnapType:"x mandatory",WebkitOverflowScrolling:"touch",msOverflowStyle:"none",scrollbarWidth:"none"}}>
+              {[
+                {handle:"@kanyakumari_roads",  followers:"2.4M", likes:"48K", comments:"1.2K", fill:65},
+                {handle:"@tamilnadu_traffic",   followers:"1.1M", likes:"31K", comments:"892",  fill:55},
+                {handle:"@roadsafety_india",    followers:"890K", likes:"22K", comments:"634",  fill:72},
+                {handle:"@tn_junction_watch",   followers:"456K", likes:"18K", comments:"411",  fill:48},
+                {handle:"@kk_district_news",    followers:"312K", likes:"14K", comments:"280",  fill:60},
+              ].map((reel,i)=>(
+                <div key={i} className="shrink-0 relative flex flex-col" style={{width:"180px",scrollSnapAlign:"start"}}>
+                  {/* Reel card — 9:16 portrait */}
+                  <div className="relative rounded-2xl overflow-hidden flex flex-col"
+                    style={{aspectRatio:"9/16",background:`linear-gradient(160deg,#0A0A0A 0%,${N} 100%)`,border:"1px solid rgba(255,255,255,0.08)",boxShadow:"0 8px 32px rgba(0,0,0,0.5)"}}>
+
+                    {/* Progress bar */}
+                    <div className="absolute top-3 left-3 right-3 z-20 flex items-center gap-1.5">
+                      <div className="flex-1 h-[2.5px] rounded-full" style={{background:"rgba(255,255,255,0.2)"}}>
+                        <div className="h-full rounded-full" style={{width:`${reel.fill}%`,background:R}}/>
+                      </div>
+                      <span style={{color:"rgba(255,255,255,0.6)",fontSize:"11px"}}>•••</span>
+                    </div>
+
+                    {/* Junction scene — reuse command center line-art */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-25">
+                      <svg viewBox="0 0 120 160" className="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        {/* Road lines */}
+                        <line x1="60" y1="0" x2="60" y2="160" stroke="#4A7FA8" strokeWidth="20" strokeOpacity="0.3"/>
+                        <line x1="0" y1="80" x2="120" y2="80" stroke="#4A7FA8" strokeWidth="20" strokeOpacity="0.3"/>
+                        {/* Dashes */}
+                        <line x1="60" y1="10" x2="60" y2="30" stroke="#7BB4D4" strokeWidth="1.5" strokeDasharray="4 4"/>
+                        <line x1="60" y1="130" x2="60" y2="155" stroke="#7BB4D4" strokeWidth="1.5" strokeDasharray="4 4"/>
+                        <line x1="10" y1="80" x2="30" y2="80" stroke="#7BB4D4" strokeWidth="1.5" strokeDasharray="4 4"/>
+                        <line x1="90" y1="80" x2="115" y2="80" stroke="#7BB4D4" strokeWidth="1.5" strokeDasharray="4 4"/>
+                        {/* Corner boxes */}
+                        <rect x="8"  y="8"  width="44" height="64" rx="2" stroke="#4A7FA8" strokeWidth="0.8" strokeOpacity="0.5"/>
+                        <rect x="68" y="8"  width="44" height="64" rx="2" stroke="#4A7FA8" strokeWidth="0.8" strokeOpacity="0.5"/>
+                        <rect x="8"  y="88" width="44" height="64" rx="2" stroke="#4A7FA8" strokeWidth="0.8" strokeOpacity="0.5"/>
+                        <rect x="68" y="88" width="44" height="64" rx="2" stroke="#4A7FA8" strokeWidth="0.8" strokeOpacity="0.5"/>
+                      </svg>
+                    </div>
+
+                    {/* Handle / follower pill — bottom */}
+                    <div className="absolute bottom-10 left-3 right-3 z-20 px-3 py-2 rounded-xl"
+                      style={{background:"rgba(255,255,255,0.13)",backdropFilter:"blur(8px)",border:"1px solid rgba(255,255,255,0.12)"}}>
+                      <p className="font-bold text-xs text-white leading-tight">{reel.handle}</p>
+                      <p className="text-[10px]" style={{color:"rgba(255,255,255,0.6)"}}>{reel.followers} followers</p>
+                    </div>
+
+                    {/* Engagement row */}
+                    <div className="absolute bottom-2 left-3 right-3 z-20 flex items-center gap-3">
+                      <span className="text-[10px] flex items-center gap-0.5" style={{color:"rgba(255,255,255,0.65)"}}>♥ {reel.likes}</span>
+                      <span className="text-[10px] flex items-center gap-0.5" style={{color:"rgba(255,255,255,0.65)"}}>💬 {reel.comments}</span>
+                      <span className="text-[10px] ml-auto" style={{color:"rgba(255,255,255,0.65)"}}>↗</span>
+                    </div>
+                  </div>
+
+                  {/* Watch Reel link below card */}
+                  <a href="#" className="mt-3 text-center text-xs font-semibold font-mono transition-opacity hover:opacity-80"
+                    style={{fontFamily:"'IBM Plex Mono',monospace",color:R,letterSpacing:"0.05em"}}>▶ Watch Reel</a>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* ── DIGITAL — light gray zone ── */}
+        <div className="py-24" style={{background:AL}}>
+          <div className="max-w-7xl mx-auto px-6">
           <div className="w-full h-px mb-12" style={{background:`linear-gradient(to right, transparent, ${LN} 20%, ${LN} 80%, transparent)`}}/>
 
           {/* ── Digital: editorial link list ── */}
