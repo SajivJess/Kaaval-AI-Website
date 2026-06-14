@@ -92,7 +92,7 @@ function CameraFeedTile({ label, roadType, scanClass, isActive, onClick }: { lab
       <div className="absolute inset-0 p-1 opacity-90"><RoadSVG type={roadType}/></div>
       <div className={`scan-line ${scanClass}`}/>
       <div className="absolute top-2 left-2 flex items-center gap-1 z-20">
-        <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{background:"#CC2929"}}/>
+        <div className="rec-blink w-1.5 h-1.5 rounded-full" style={{background:"#CC2929"}}/>
         <span style={{fontFamily:"'IBM Plex Mono',monospace",fontSize:"8px",color:"rgba(231,236,242,0.65)",letterSpacing:"0.08em"}}>REC</span>
       </div>
       <div className="absolute top-2 right-2 z-20">
@@ -139,7 +139,7 @@ export default function Home() {
   ];
 
   useEffect(() => { const iv = setInterval(() => setHeroIdx(p=>(p+1)%heroTexts.length), 3000); return ()=>clearInterval(iv); }, []);
-  useEffect(() => { const iv = setInterval(() => setActiveDetectionTile(p=>(p+1)%4), 5000); return ()=>clearInterval(iv); }, []);
+  useEffect(() => { const iv = setInterval(() => setActiveDetectionTile(p=>(p+1)%4), 3000); return ()=>clearInterval(iv); }, []);
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", fn, {passive:true}); return ()=>window.removeEventListener("scroll",fn);
@@ -241,9 +241,9 @@ export default function Home() {
       </nav>
 
       {/* ── Hero ── */}
-      <section className="relative min-h-screen flex items-center bg-grid-light bg-white pt-20">
+      <section className="relative min-h-screen flex items-center bg-grid-light bg-white" style={{paddingTop:"72px"}}>
         <div className="radar-sweep-line" style={{background:"linear-gradient(to right,transparent,rgba(27,58,107,0.05),transparent)"}}/>
-        <div className="max-w-7xl mx-auto w-full px-6 py-16 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="max-w-7xl mx-auto w-full px-6 py-8 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div ref={hFade.ref} style={hFade.style} className="flex flex-col items-start gap-7">
             <div className="flex items-center gap-2">
               <div className="w-5 h-0.5" style={{background:R}}/>
@@ -251,16 +251,16 @@ export default function Home() {
             </div>
 
             {/* Fixed rotating headline — one line at a time */}
-            <div className="relative overflow-hidden w-full" style={{height:"clamp(90px,13vw,160px)"}}>
+            <div className="relative overflow-hidden w-full" style={{height:"clamp(160px,22vw,310px)"}}>
               <AnimatePresence mode="wait">
                 <motion.h1
                   key={heroIdx}
-                  initial={{opacity:0,y:20}}
+                  initial={{opacity:0,y:24}}
                   animate={{opacity:1,y:0}}
-                  exit={{opacity:0,y:-20}}
-                  transition={{duration:0.5,ease:"easeInOut"}}
+                  exit={{opacity:0,y:-24}}
+                  transition={{duration:0.6,ease:"easeInOut"}}
                   className="absolute top-0 left-0 font-serif font-black leading-tight"
-                  style={{fontFamily:"'Fraunces',serif",fontSize:"clamp(2rem,3.5vw,3.25rem)",color:INK,maxWidth:"100%"}}
+                  style={{fontFamily:"'Fraunces',serif",fontSize:"clamp(2.75rem,5.5vw,4.5rem)",color:INK,maxWidth:"100%"}}
                 >
                   {heroTexts[heroIdx]}.
                 </motion.h1>
@@ -284,6 +284,14 @@ export default function Home() {
               <a href="#deployment" className="font-medium px-8 py-4 rounded-sm transition-all text-base border" style={{borderColor:LN,color:INK}}
                 onMouseEnter={e=>{e.currentTarget.style.borderColor=N;e.currentTarget.style.color=N;}}
                 onMouseLeave={e=>{e.currentTarget.style.borderColor=LN;e.currentTarget.style.color=INK;}}>View Deployment Models</a>
+            </div>
+
+            {/* 4th stat — live deployment indicator */}
+            <div className="flex items-center gap-2.5 mt-1">
+              <span className="w-2 h-2 rounded-full shrink-0 animate-pulse" style={{background:GR,boxShadow:`0 0 0 3px rgba(42,122,90,0.18)`}}/>
+              <span className="font-mono text-xs font-semibold" style={{fontFamily:"'IBM Plex Mono',monospace",color:GR,letterSpacing:"0.08em"}}>Pilot Operational</span>
+              <span style={{color:"rgba(74,94,120,0.4)"}}>·</span>
+              <span className="font-mono text-xs" style={{fontFamily:"'IBM Plex Mono',monospace",color:S,letterSpacing:"0.05em"}}>Nagercoil, TN</span>
             </div>
           </div>
 

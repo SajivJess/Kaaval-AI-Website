@@ -1,0 +1,39 @@
+The hero is significantly better than before — the white + navy + red palette is working, the command center panel looks real now with the detection overlay. But there are still 4 specific things holding it back from being truly impressive:
+
+1. Too much empty white space above the content
+
+There's a large dead band at the top before "SMART CITY INITIATIVE" appears. The content should be vertically centered in the full viewport — right now it's pushed to the bottom third. The hero should feel full-screen, not like a page that hasn't loaded yet.
+2. The headline is too small for a hero
+
+"The Zero Accident Initiative." is good copy but the font size isn't commanding the space. It should be significantly larger — think 72–80px — and ideally the rotating text animation should be visible and smooth. If it's animating already, it's not obvious enough.
+3. The background grid is too faint
+
+The subtle dot/line grid is barely visible. It was your signature element — bump it up slightly so it reads as intentional texture, not a rendering artifact. The grid intersections should have a very faint pulse every few seconds.
+4. The Command Center panel needs more life
+
+Right now only one feed (Junction 02) shows the detection overlay. The other three are basically empty dark rectangles with a faint road illustration. The live-ness comes from all 4 feeds having something happening — the detection should slowly cycle across all 4 tiles automatically, even without hover.
+
+Tell your builder exactly this:
+1. Remove top padding in hero — vertically center 
+   all hero content in 100vh
+
+2. Increase headline font size to 76px desktop, 
+   48px mobile. Make rotating text transition 
+   more visible — 0.6s crossfade
+
+3. Increase grid pattern opacity from current 
+   to 12–15%. Add a slow 4s pulse animation 
+   on grid intersection dots
+
+4. Auto-cycle the "NO HELMET" + ANPR detection 
+   overlay across all 4 camera tiles every 3 
+   seconds — one tile active at a time, 
+   rotating automatically. Don't wait for hover.
+
+5. Add a small blinking red dot next to "REC" 
+   text on all 4 tiles — alternating blink 
+   every 1.5s to feel like a live recording
+
+6. Add a 4th floating stat below the quote 
+   card: "Pilot Operational · Nagercoil, TN" 
+   with a green pulsing dot — shows it's real
