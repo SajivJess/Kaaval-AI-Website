@@ -270,8 +270,7 @@ export default function Home() {
       }}>
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Shield className="w-7 h-7" style={{color:N}}/>
-            <span className="font-serif font-bold text-xl tracking-tight" style={{color:N,fontFamily:"'Fraunces',serif"}}>KAAVAL AI</span>
+            <img src="/kaaval-logo.png" alt="Kaaval AI Logo" className="h-8 w-auto" />
           </div>
           <div className="flex items-center gap-6">
             {[["#platform","Platform"],["#deployment","Deployment"],["#our-impact","Impact"],["#media","Media"],["#contact","Contact"]].map(([href,label])=>(
@@ -376,7 +375,7 @@ export default function Home() {
       </section>
 
       {/* ── Why Kaaval AI ── */}
-      <section className="py-24 bg-white">
+      <section id="our-impact" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-14">
             <p className="font-mono text-xs uppercase tracking-widest mb-3" style={{fontFamily:"'IBM Plex Mono',monospace",color:R,letterSpacing:"0.18em"}}>Value Proposition</p>
@@ -826,7 +825,7 @@ export default function Home() {
             {/* Bottom attribution quote */}
             <div className="mt-10 max-w-2xl mx-auto text-center">
               <p className="italic text-sm leading-relaxed" style={{fontFamily:"'Fraunces',serif",color:S}}>
-                "Kaaval AI was conceived at the Kaaval Hackathon in January 2026, organized by Kanyakumari District Police and StartupTN. The pilot was officially inaugurated by Dr. R. Stalin IPS, Superintendent of Police, Kanyakumari, at the Nagercoil District Collectorate Roundabout on June 9, 2026."
+                "Kaaval AI was conceived at the Kaaval Hackathon in January 2026, organized by Kanyakumari District Police and StartupTN. From a prototype to an active policing tool inaugurated by the Superintendent of Police."
               </p>
             </div>
           </div>
@@ -1160,27 +1159,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── By the Numbers ── */}
-      <section id="our-impact" className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-14">
-            <p className="font-mono text-xs uppercase tracking-widest mb-3" style={{fontFamily:"'IBM Plex Mono',monospace",color:R,letterSpacing:"0.18em"}}>Road Safety Context</p>
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold" style={{fontFamily:"'Fraunces',serif",color:INK}}>The Challenge We're Solving.</h2>
-            <p className="mt-2 text-sm" style={{color:S}}>Contextual road-safety data — not Kaaval's own claimed results.</p>
-          </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            {[{end:56,suffix:"%",label:"Of road fatalities involve two-wheelers",src:"MoRTH 2022"},{end:470,suffix:"K+",label:"Road accident deaths in India over 5 years",src:"NCRB 2022"},{end:24,suffix:"/7",label:"Monitoring capability per deployed junction",src:"Platform"},{end:1,suffix:"",label:"Unified platform for detection, evidence & enforcement",src:"Kaaval"}].map((stat,i)=>(
-              <div key={i} className="flex flex-col items-center p-6 rounded-xl" style={{background:AL}}>
-                <div className="font-serif text-5xl lg:text-6xl font-black mb-3" style={{fontFamily:"'Fraunces',serif",color:R}}>
-                  <AnimatedCounter end={stat.end} suffix={stat.suffix}/>
-                </div>
-                <p className="font-mono text-xs uppercase tracking-wider font-bold mb-2 text-center" style={{fontFamily:"'IBM Plex Mono',monospace",color:INK,letterSpacing:"0.1em"}}>{stat.label}</p>
-                <span className="font-mono text-xs" style={{color:S,fontFamily:"'IBM Plex Mono',monospace"}}>— {stat.src}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+
 
       {/* ── Contact & Social ── */}
       <section id="contact" className="py-24" style={{background:AL}}>
@@ -1270,8 +1249,7 @@ export default function Home() {
             {/* Brand */}
             <div>
               <div className="flex items-center gap-2.5 mb-4">
-                <Shield className="w-6 h-6" style={{color:L}}/>
-                <span className="font-serif font-bold text-lg" style={{fontFamily:"'Fraunces',serif",color:L}}>KAAVAL AI</span>
+                <img src="/kaaval-logo.png" alt="Kaaval AI Logo" className="h-8 w-auto" />
               </div>
               <p className="text-sm leading-relaxed mb-4" style={{color:M}}>AI-powered traffic enforcement for police departments and smart city authorities across India.</p>
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded" style={{background:"rgba(42,122,90,0.12)",border:"1px solid rgba(42,122,90,0.25)"}}>
