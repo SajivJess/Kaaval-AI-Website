@@ -1,0 +1,80 @@
+too inta reel frame theme
+
+09:50
+Good — 4 per row for newspapers, and Instagram reel frames for influencers. Here's the exact prompt:
+
+Prompt: Update Print Media Grid + Add Influencer Section
+Part 1 — Newspaper Grid: 4 per row
+Change the 2×2 newspaper grid to 4 columns per row (2 rows = 8 cards total).
+
+Since cards are now narrower, make these adjustments:
+
+Reduce card padding slightly
+Masthead bar: keep navy + publication name, but make font slightly smaller
+Remove the 3-column decorative texture — replace with a single thin horizontal rule dividing masthead from content
+Headline text: reduce to 1 line max (truncate with ellipsis if needed), font size slightly smaller
+Body description: max 2 lines
+Bottom strip: TAMIL DAILY / ENGLISH DAILY pill left, View → right
+Cards should still have the warm 
+#FFFDF7 newsprint background and folded corner effect
+On mobile: 1 column. On tablet: 2 columns. On desktop: 4 columns.
+Part 2 — Instagram Influencer Section
+Add a new subsection directly below the TV tiles, with eyebrow label: SOCIAL MEDIA COVERAGE
+
+Title: "Voices From the Ground"
+
+Each influencer card = Instagram Reel frame:
+
+┌──────────────────────┐
+│ ● ───────────────    │  ← progress bar (red, 60% filled)
+│                      │
+│  [vertical 9:16      │
+│   frame ratio]       │
+│                      │
+│  Road footage or     │  ← placeholder: dark gradient bg
+│  junction scene      │    with subtle road line pattern
+│  illustration        │    (same junction line-art as
+│                      │     command center tiles)
+│                      │
+│ ┌──────────────────┐ │
+│ │ @handle          │ │  ← white pill overlay, bottom
+│ │ 2.4M followers   │ │    of reel
+│ └──────────────────┘ │
+│                      │
+│ ♥ 48K  💬 1.2K  ↗   │  ← like/comment/share counts
+│                      │
+│ [▶ Watch Reel]       │  ← red button
+└──────────────────────┘
+Specific styling:
+
+Card aspect ratio: 9:16 portrait (like a real phone screen showing a Reel)
+Card background: dark gradient (
+#0A0A0A → 
+#1B3A6B) — like a real phone screen
+Top: thin red progress bar at 55–70% fill — signature Reel UI element
+Three dots ••• top right in white (mute/options indicator)
+Center: junction line-art illustration in steel-blue (reuse the same SVG from command center tiles)
+Overlay at bottom: frosted glass pill (rgba(255,255,255,0.15) blur backdrop) showing @handle in white bold + follower count in light gray
+Below pill: heart icon + like count, comment icon + count, share arrow — all in white, small
+Below card: ▶ Watch Reel in red text link
+Layout: Horizontal scroll row — show 4–5 reel cards visible, scrollable. On mobile: 2 cards visible, scroll.
+
+Section background: 
+#0F1E36 dark navy — makes the phone-screen reel frames pop like they're being held up
+
+Section header on dark background:
+
+Eyebrow in red mono: SOCIAL MEDIA COVERAGE
+Title in white serif: "Voices From the Ground"
+Subtitle in muted: "Independent coverage from traffic safety advocates and community creators"
+Add above the reel row, a single stat bar:
+
+[ 2.4M+ Combined Reach ]  ·  [ 8 Creators ]  ·  [ Organic Coverage ]
+In white mono text, center-aligned, separated by ·
+
+Section Order (full media page from top to bottom):
+#F0EDE6 parchment — Print Media (4×2 newspaper cards)
+#F2F4F8 light gray — Television (2×2 navy TV tiles)
+#0F1E36 dark navy — Social Media (horizontal reel scroll)
+#F2F4F8 light — Digital / Online (editorial link list)
+This gives you four visually distinct subsections — parchment, light, dark, light — each with its own visual language matching its medium. The Instagram section going dark navy is the strongest contrast moment and will feel genuinely impressive.
