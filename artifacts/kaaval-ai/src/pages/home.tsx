@@ -169,20 +169,11 @@ const PilotModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
 
 /* ── main component ──────────────────────────────── */
 export default function Home() {
-  const [heroIdx, setHeroIdx]                         = useState(0);
   const [activeStep, setActiveStep]                   = useState(0);
   const [activeDetectionTile, setActiveDetectionTile] = useState(0);
   const [scrolled, setScrolled]                       = useState(false);
   const [isModalOpen, setIsModalOpen]                 = useState(false);
 
-  const heroTexts = [
-    "The Zero Accident Initiative",
-    "The Safe City Initiative",
-    "The Intelligent Enforcement Initiative",
-    "The Road Safety Initiative",
-  ];
-
-  useEffect(() => { const iv = setInterval(() => setHeroIdx(p=>(p+1)%heroTexts.length), 3000); return ()=>clearInterval(iv); }, []);
   useEffect(() => { const iv = setInterval(() => setActiveDetectionTile(p=>(p+1)%4), 3000); return ()=>clearInterval(iv); }, []);
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 40);
@@ -294,25 +285,13 @@ export default function Home() {
               <span className="font-mono text-xs font-medium uppercase tracking-widest" style={{fontFamily:"'IBM Plex Mono',monospace",color:N,letterSpacing:"0.18em"}}>Smart City Initiative</span>
             </div>
 
-            {/* Fixed rotating headline — one line at a time */}
-            <div className="relative overflow-hidden w-full min-h-[140px] md:min-h-[160px]">
-              <AnimatePresence mode="wait">
-                <motion.h1
-                  key={heroIdx}
-                  initial={{opacity:0,y:24}}
-                  animate={{opacity:1,y:0}}
-                  exit={{opacity:0,y:-24}}
-                  transition={{duration:0.6,ease:"easeInOut"}}
-                  className="absolute top-0 left-0 font-serif font-black leading-tight"
-                  style={{fontFamily:"'Fraunces',serif",fontSize:"clamp(2.75rem,5.5vw,4.5rem)",color:INK,maxWidth:"100%"}}
-                >
-                  {heroTexts[heroIdx]}.
-                </motion.h1>
-              </AnimatePresence>
-            </div>
+            {/* Fixed headline */}
+            <h1 className="font-serif font-black leading-tight mt-6 mb-4" style={{fontFamily:"'Fraunces',serif",fontSize:"clamp(2.75rem,4vw,3.5rem)",color:INK,maxWidth:"100%"}}>
+              Transforming Existing CCTV Cameras into AI-Powered Traffic Safety Systems.
+            </h1>
 
-            <p className="text-lg leading-relaxed max-w-lg" style={{color:S}}>
-              Transforming existing CCTV infrastructure into proactive safety networks — institutional-grade helmet detection and ANPR for police departments aiming for accident-free roads.
+            <p className="text-lg leading-relaxed max-w-lg mb-4" style={{color:S}}>
+              Institutional-grade helmet detection and ANPR for police departments aiming for zero-accident roads.
             </p>
 
             <div className="flex flex-wrap items-center gap-4">
@@ -354,7 +333,7 @@ export default function Home() {
               ))}
             </div>
             <div className="px-3 py-2 rounded flex items-center justify-between" style={{background:TILE,border:`1px solid ${DN}`}}>
-              {["AI PROCESSING: 4 FEEDS","DETECTION RATE: 99.2%","LAST ALERT: 2s AGO"].map((s,i)=>(
+              {["AI PROCESSING: 4 FEEDS","HIGH ACCURACY AI DETECTION","LAST ALERT: 2s AGO"].map((s,i)=>(
                 <React.Fragment key={i}>{i>0&&<span style={{color:DN}}>·</span>}
                   <span style={{fontFamily:"'IBM Plex Mono',monospace",fontSize:"9px",color:M,letterSpacing:"0.07em"}}>{s}</span>
                 </React.Fragment>
@@ -493,42 +472,125 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Comparison ── */}
+      {/* ── LED Awareness System ── */}
+      <section className="py-24 bg-white" style={{borderTop:`1px solid ${LN}`}}>
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <div>
+              <p className="font-mono text-xs uppercase tracking-widest mb-3" style={{fontFamily:"'IBM Plex Mono',monospace",color:R,letterSpacing:"0.18em"}}>Active Intervention</p>
+              <h2 className="font-serif text-4xl lg:text-5xl font-bold mb-6" style={{fontFamily:"'Fraunces',serif",color:INK}}>Public Awareness Display</h2>
+              <p className="text-lg leading-relaxed mb-8" style={{color:S}}>
+                KAAVAL AI not only detects violations but also improves road-user behavior through dynamic LED message boards deployed at key junctions.
+              </p>
+              <ul className="space-y-4">
+                {["Helmet awareness campaigns","Road safety alerts","Real-time traffic messages","Public education initiatives"].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3">
+                    <CheckCircle2 className="w-5 h-5 shrink-0" style={{color:R}}/>
+                    <span className="font-medium" style={{color:INK}}>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            
+            {/* LED Screen Graphic */}
+            <div className="rounded-xl overflow-hidden p-8 flex flex-col items-center justify-center" style={{background:"#111",boxShadow:"0 20px 40px rgba(0,0,0,0.4)"}}>
+              <div className="w-full border-4 rounded-lg p-6 relative overflow-hidden" style={{borderColor:"#333",background:"#0a0a0a"}}>
+                {/* dot matrix background */}
+                <div className="absolute inset-0 opacity-30" style={{backgroundSize:"8px 8px",backgroundImage:"radial-gradient(circle, #ff0000 1px, transparent 1px)"}}/>
+                
+                <div className="relative z-10 flex flex-col items-center justify-center space-y-4 py-4">
+                  <AlertTriangle className="w-16 h-16 animate-pulse" style={{color:"#ff3333", filter:"drop-shadow(0 0 10px rgba(255,51,51,0.8))"}}/>
+                  <div className="text-center">
+                    <p className="font-mono text-3xl md:text-4xl font-bold uppercase tracking-widest leading-tight" style={{color:"#ff3333", textShadow:"0 0 15px rgba(255,51,51,0.8)"}}>WEAR HELMET</p>
+                    <p className="font-mono text-xl md:text-2xl font-bold uppercase tracking-widest mt-2" style={{color:"#ffaa00", textShadow:"0 0 10px rgba(255,170,0,0.8)"}}>SAVE YOUR LIFE</p>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-4 flex gap-2">
+                <div className="w-2 h-2 rounded-full animate-pulse" style={{background:"#ff3333"}}/>
+                <span className="font-mono text-[10px]" style={{color:"#666",letterSpacing:"0.2em"}}>LIVE LED FEED</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Cost Comparison Table ── */}
       <section className="py-24 bg-grid-dark relative overflow-hidden" style={{background:INK}}>
         <div className="radar-sweep-line" style={{background:"linear-gradient(to right,transparent,rgba(204,41,41,0.05),transparent)"}}/>
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="max-w-5xl mx-auto px-6 relative z-10">
           <div className="text-center mb-14">
             <p className="font-mono text-xs uppercase tracking-widest mb-3" style={{fontFamily:"'IBM Plex Mono',monospace",color:R,letterSpacing:"0.18em"}}>Infrastructure Upgrade</p>
             <h2 className="font-serif text-4xl lg:text-5xl font-bold" style={{fontFamily:"'Fraunces',serif",color:L}}>A Smarter Path to Safer Roads.</h2>
           </div>
-          <div className="grid lg:grid-cols-[1fr_60px_1fr] gap-6 items-center">
-            <div className="rounded-lg p-8" style={{background:PNL,border:`1px solid ${DN}`}}>
-              <h3 className="font-serif text-2xl font-bold mb-7 pb-5" style={{fontFamily:"'Fraunces',serif",color:M,borderBottom:`1px solid ${DN}`}}>Traditional Approach</h3>
-              <ul className="space-y-5">
-                {[{t:"Replace All Cameras",d:"New hardware at every junction — major procurement"},{t:"₹15–25L Per Junction",d:"High capital expenditure before a single frame is processed"},{t:"6–12 Month Rollout",d:"Procurement, installation, and calibration delays"},{t:"Siloed Systems",d:"Each junction operates independently, no centralized view"}].map((r,i)=>(
-                  <li key={i} className="flex gap-4 items-start">
-                    <div className="mt-1 w-5 h-5 rounded-full flex items-center justify-center shrink-0 text-xs font-bold" style={{background:"#0C2148",color:M}}>×</div>
-                    <div><h4 className="font-medium mb-0.5" style={{color:L}}>{r.t}</h4><p className="text-sm" style={{color:M}}>{r.d}</p></div>
-                  </li>
-                ))}
-              </ul>
+          
+          <div className="rounded-xl overflow-hidden" style={{border:`1px solid ${DN}`, background:PNL, boxShadow:"0 20px 40px rgba(0,0,0,0.4)"}}>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse min-w-[600px]">
+                <thead>
+                  <tr>
+                    <th className="p-5 border-b" style={{borderColor:DN, width:"40%"}}></th>
+                    <th className="p-5 border-b font-mono text-xs tracking-wider uppercase text-center" style={{borderColor:DN, color:M, width:"30%", background:"rgba(12,33,72,0.4)"}}>Traditional ANPR</th>
+                    <th className="p-5 border-b font-mono text-sm tracking-wider uppercase text-center" style={{borderColor:DN, color:"#fff", width:"30%", background:"rgba(204,41,41,0.15)", borderTop:`3px solid ${R}`}}>KAAVAL AI</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y" style={{divideColor:DN}}>
+                  {[
+                    { f:"New AI Camera Required", t:"Yes", k:"No", kHighlight:true },
+                    { f:"Existing CCTV Support", t:"Limited", k:"Yes", kHighlight:true },
+                    { f:"Public Awareness Display", t:"No", k:"Yes", kHighlight:true },
+                    { f:"Edge AI Processing", t:"Optional", k:"Yes", kHighlight:true },
+                    { f:"Cost per Junction", t:"High", k:"Lower", kHighlight:true },
+                    { f:"Deployment Time", t:"Months", k:"Days", kHighlight:true },
+                  ].map((row, i) => (
+                    <tr key={i} className="transition-colors hover:bg-[rgba(255,255,255,0.02)]">
+                      <td className="p-5 font-medium" style={{color:L}}>{row.f}</td>
+                      <td className="p-5 text-center font-medium" style={{color:M, background:"rgba(12,33,72,0.2)"}}>{row.t}</td>
+                      <td className="p-5 text-center font-bold" style={{color:row.kHighlight?R:L, background:"rgba(204,41,41,0.05)"}}>
+                        {row.k==="Yes" || row.k==="No" ? (
+                          <div className="flex items-center justify-center gap-2">
+                            {row.k==="Yes" ? <CheckCircle2 className="w-4 h-4" style={{color:R}}/> : <span className="font-bold text-lg" style={{color:R}}>×</span>}
+                            <span>{row.k}</span>
+                          </div>
+                        ) : row.k}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
-            <div className="hidden lg:flex flex-col items-center justify-center gap-3 h-full">
-              <div className="flex-1 w-px" style={{background:DN}}/><span className="font-mono font-bold text-sm" style={{fontFamily:"'IBM Plex Mono',monospace",color:M}}>VS</span>
-              <div className="flex-1 w-px" style={{background:DN}}/>
-            </div>
-            <div className="rounded-lg p-8 relative" style={{background:PNL,border:`2px solid ${R}`}}>
-              <div className="absolute top-0 right-8 -translate-y-1/2 font-mono text-xs font-bold px-3 py-1 rounded-sm uppercase" style={{fontFamily:"'IBM Plex Mono',monospace",background:R,color:"#fff",letterSpacing:"0.1em"}}>Kaaval AI</div>
-              <h3 className="font-serif text-2xl font-bold mb-7 pb-5" style={{fontFamily:"'Fraunces',serif",color:L,borderBottom:`1px solid ${DN}`}}>The Modern Upgrade</h3>
-              <ul className="space-y-5">
-                {[{t:"Reuse Existing CCTV",d:"Connects to your current cameras via RTSP — no new hardware"},{t:"Fraction of Capital Cost",d:"SaaS model eliminates CapEx — pay per camera per month"},{t:"Weeks, Not Months",d:"Remote software deployment — operational in days"},{t:"Centralized Command",d:"All junctions visible in one unified dashboard"}].map((r,i)=>(
-                  <li key={i} className="flex gap-4 items-start">
-                    <CheckCircle2 className="mt-1 w-5 h-5 shrink-0" style={{color:R}}/>
-                    <div><h4 className="font-medium mb-0.5" style={{color:L}}>{r.t}</h4><p className="text-sm" style={{color:M}}>{r.d}</p></div>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Technology Stack ── */}
+      <section className="py-24" style={{background:AL}}>
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-14">
+            <p className="font-mono text-xs uppercase tracking-widest mb-3" style={{fontFamily:"'IBM Plex Mono',monospace",color:R,letterSpacing:"0.18em"}}>Architecture</p>
+            <h2 className="font-serif text-4xl lg:text-5xl font-bold mb-3" style={{fontFamily:"'Fraunces',serif",color:INK}}>Technology Stack</h2>
+            <p className="text-base max-w-2xl mx-auto" style={{color:S}}>Robust, scalable, and built for real-time edge processing.</p>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {[
+              "Edge AI Processing",
+              "Real-Time Video Analytics",
+              "Helmet Detection",
+              "Triple Riding Detection",
+              "Mobile Phone Usage Detection",
+              "Automatic Number Plate Recognition",
+              "RTSP CCTV Integration",
+              "Web-Based Police Dashboard",
+              "LED Awareness System"
+            ].map((tech, i) => (
+              <div key={i} className="bg-white p-5 rounded-lg flex items-center justify-center text-center transition-all duration-300"
+                style={{border:`1px solid ${LN}`, boxShadow:"0 4px 12px rgba(15,30,54,0.04)"}}
+                onMouseEnter={e=>{e.currentTarget.style.borderColor=R;e.currentTarget.style.transform="translateY(-2px)";e.currentTarget.style.boxShadow="0 8px 24px rgba(204,41,41,0.12)"}}
+                onMouseLeave={e=>{e.currentTarget.style.borderColor=LN;e.currentTarget.style.transform="none";e.currentTarget.style.boxShadow="0 4px 12px rgba(15,30,54,0.04)"}}>
+                <span className="font-medium text-sm leading-snug" style={{color:INK}}>{tech}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -963,7 +1025,7 @@ export default function Home() {
 
             {/* Stat bar */}
             <div className="flex items-center justify-center gap-3 mb-12 flex-wrap">
-              {["2.4M+ Combined Reach","8 Creators","Organic Coverage"].map((stat,i)=>(
+              {["Extensive Organic Reach","8 Creators","Organic Coverage"].map((stat,i)=>(
                 <React.Fragment key={i}>
                   {i>0 && <span style={{color:"rgba(143,163,184,0.4)"}}>·</span>}
                   <span className="font-mono text-sm font-semibold" style={{fontFamily:"'IBM Plex Mono',monospace",color:L,letterSpacing:"0.06em"}}>{stat}</span>
