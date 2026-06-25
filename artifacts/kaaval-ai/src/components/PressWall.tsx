@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -42,6 +42,9 @@ const CARDS: ClippingCard[] = [
 const LAYER_OPACITY: Record<number, number>  = { 0: 0.15, 1: 0.55, 2: 1 };
 const LAYER_BLUR:    Record<number, string>   = { 0: "blur(4px)", 1: "blur(1px)", 2: "blur(0)" };
 
+// All 13 images in order for carousel
+const ALL_IMAGES = Array.from({ length: 13 }, (_, i) => i + 1);
+
 interface PressWallProps {
   onOpen: (index: number) => void;
 }
@@ -49,54 +52,45 @@ interface PressWallProps {
 export default function PressWall({ onOpen }: PressWallProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [hovered, setHovered] = useState<number | null>(null);
+  const [carouselIdx, setCarouselIdx] = useState(0);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
   });
 
-  // Ghost text fade in when section enters
   const ghostOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
 
   return (
     <section
       ref={sectionRef}
       id="media"
-      className="relative overflow-hidden py-32"
+      className="relative overflow-hidden"
       style={{
         background: "#070D16",
-        minHeight: "90vh",
-        maxHeight: "110vh",
+        paddingTop: "var(--space-section)",
+        paddingBottom: "var(--space-section)",
       }}
     >
-      {/* Ghost text layer */}
+      {/* Ghost text layer — desktop only */}
       <motion.div
         style={{ opacity: ghostOpacity }}
-        className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none z-0"
+        className="absolute inset-0 hidden md:flex flex-col items-center justify-center pointer-events-none select-none z-0"
       >
-        <p
-          className="font-mono font-black text-white tracking-[0.3em] uppercase text-center leading-none"
-          style={{ fontSize: "clamp(3rem,10vw,9rem)", opacity: 0.03 }}
-        >
-          FEATURED
-          <br />
-          IN
+        <p className="font-mono font-black text-white tracking-[0.3em] uppercase text-center leading-none"
+          style={{ fontSize: "clamp(3rem,10vw,9rem)", opacity: 0.03 }}>
+          FEATURED<br />IN
         </p>
-        <p
-          className="font-serif text-white font-black text-center mt-4"
-          style={{ fontSize: "clamp(2rem,7vw,6rem)", opacity: 0.03 }}
-        >
+        <p className="font-serif text-white font-black text-center mt-4"
+          style={{ fontSize: "clamp(2rem,7vw,6rem)", opacity: 0.03 }}>
           12+ PUBLICATIONS
         </p>
       </motion.div>
 
       {/* Section header */}
-      <div className="relative z-10 text-center mb-8 pointer-events-none">
+      <div className="relative z-10 text-center mb-8 px-4 pointer-events-none">
         <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#CC2929] mb-2">Community & Media Recognition</p>
-        <h2
-          className="font-serif text-4xl lg:text-5xl font-bold text-white"
-          style={{ fontFamily: "'Fraunces',serif" }}
-        >
+        <h2 className="font-serif font-bold text-white" style={{ fontFamily: "'Fraunces',serif", fontSize: "var(--text-section)" }}>
           Media Coverage
         </h2>
         <p className="text-[#8FA3B8] text-sm mt-3 max-w-md mx-auto">
@@ -104,11 +98,8 @@ export default function PressWall({ onOpen }: PressWallProps) {
         </p>
       </div>
 
-      {/* Press Wall cards */}
-      <div
-        className="relative w-full"
-        style={{ height: "70vh" }}
-      >
+      {/* ── Desktop: Floating Press Wall ── */}
+      <div className="hidden md:block relative w-full" style={{ height: "70vh" }}>
         {CARDS.map((card) => (
           <PressCard
             key={card.index}
@@ -122,19 +113,48 @@ export default function PressWall({ onOpen }: PressWallProps) {
           />
         ))}
       </div>
+
+      {/* ── Mobile: Horizontal snap carousel ── */}
+      <div className="md:hidden">
+        <div className="snap-carousel py-4">
+          {ALL_IMAGES.map((imgIdx) => (
+            <div
+              key={imgIdx}
+              className="snap-carousel-item cursor-pointer rounded-xl overflow-hidden"
+              style={{ width: "78vw", height: "calc(78vw * 1.35)" }}
+              onClick={() => onOpen(imgIdx - 1)}
+            >
+              <img
+                src={`/press/clipping_${imgIdx}.jpeg`}
+                alt={`Press coverage ${imgIdx}`}
+                className="w-full h-full object-cover"
+                draggable={false}
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Dot indicators */}
+        <div className="flex justify-center gap-1.5 mt-4 px-4">
+          {ALL_IMAGES.map((_, i) => (
+            <div
+              key={i}
+              className="h-1 rounded-full transition-all duration-300"
+              style={{
+                width: i === carouselIdx ? "1.5rem" : "0.375rem",
+                background: i === carouselIdx ? "#CC2929" : "rgba(255,255,255,0.2)",
+              }}
+            />
+          ))}
+        </div>
+      </div>
     </section>
   );
 }
 
-// ─── Individual Press Card ────────────────────────────────────────────────────
+// ─── Individual Press Card (desktop only) ────────────────────────────────────
 function PressCard({
-  card,
-  scrollYProgress,
-  isHovered,
-  anyHovered,
-  onHover,
-  onLeave,
-  onClick,
+  card, scrollYProgress, isHovered, anyHovered, onHover, onLeave, onClick,
 }: {
   card: ClippingCard;
   scrollYProgress: ReturnType<typeof useScroll>["scrollYProgress"];
@@ -147,17 +167,11 @@ function PressCard({
   const yRange = 60 * card.parallaxSpeed;
   const y = useTransform(scrollYProgress, [0, 1], [-yRange / 2, yRange / 2]);
 
-  const targetOpacity = isHovered
-    ? 1
-    : anyHovered
-    ? LAYER_OPACITY[card.layer] * 0.4
-    : LAYER_OPACITY[card.layer];
+  const targetOpacity = isHovered ? 1 : anyHovered ? LAYER_OPACITY[card.layer] * 0.4 : LAYER_OPACITY[card.layer];
+  const targetRotate  = isHovered ? 0 : card.rotate;
+  const targetScale   = isHovered ? (card.scale + 0.06) : card.scale;
+  const targetFilter  = isHovered ? "blur(0)" : LAYER_BLUR[card.layer];
 
-  const targetRotate = isHovered ? 0 : card.rotate;
-  const targetScale  = isHovered ? (card.scale + 0.06) : card.scale;
-  const targetFilter = isHovered ? "blur(0)" : LAYER_BLUR[card.layer];
-
-  // Card size based on layer
   const w = card.layer === 2 ? 180 : card.layer === 1 ? 148 : 120;
 
   return (
@@ -170,12 +184,7 @@ function PressCard({
         zIndex: 10 + card.layer * 10 + (isHovered ? 50 : 0),
         willChange: "transform",
       }}
-      animate={{
-        opacity: targetOpacity,
-        rotate:  targetRotate,
-        scale:   targetScale,
-        filter:  targetFilter,
-      }}
+      animate={{ opacity: targetOpacity, rotate: targetRotate, scale: targetScale, filter: targetFilter }}
       transition={{ duration: 0.45, ease: [0.23, 1, 0.32, 1] }}
       onMouseEnter={onHover}
       onMouseLeave={onLeave}
@@ -198,7 +207,6 @@ function PressCard({
           className="w-full h-full object-cover"
           draggable={false}
         />
-        {/* Hover overlay */}
         <div
           className="absolute inset-0 flex items-end justify-center pb-4 transition-opacity duration-300"
           style={{

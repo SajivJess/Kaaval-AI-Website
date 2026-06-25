@@ -3,7 +3,13 @@ import { useEffect, useRef } from "react";
 export default function SpotlightCursor() {
   const spotRef = useRef<HTMLDivElement>(null);
 
+  // Disable entirely on touch devices — no pointer to track
+  const isTouch =
+    typeof window !== "undefined" &&
+    ("ontouchstart" in window || navigator.maxTouchPoints > 0);
+
   useEffect(() => {
+    if (isTouch) return;
     const el = spotRef.current;
     if (!el) return;
 
@@ -29,7 +35,9 @@ export default function SpotlightCursor() {
       window.removeEventListener("mousemove", onMove);
       cancelAnimationFrame(raf);
     };
-  }, []);
+  }, [isTouch]);
+
+  if (isTouch) return null;
 
   return (
     <div

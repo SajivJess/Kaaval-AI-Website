@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 interface MagneticButtonProps {
   children: React.ReactNode;
@@ -11,11 +11,26 @@ interface MagneticButtonProps {
   "data-testid"?: string;
 }
 
-export default function MagneticButton({ children, className, style, onClick, onMouseEnter, onMouseLeave, type = "button", ...rest }: MagneticButtonProps) {
+export default function MagneticButton({
+  children,
+  className,
+  style,
+  onClick,
+  onMouseEnter,
+  onMouseLeave,
+  type = "button",
+  ...rest
+}: MagneticButtonProps) {
   const ref = useRef<HTMLButtonElement>(null);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
+  const [isTouch, setIsTouch] = useState(false);
+
+  useEffect(() => {
+    setIsTouch("ontouchstart" in window || navigator.maxTouchPoints > 0);
+  }, []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (isTouch) return;
     const rect = ref.current?.getBoundingClientRect();
     if (!rect) return;
     const cx = rect.left + rect.width / 2;
@@ -41,9 +56,9 @@ export default function MagneticButton({ children, className, style, onClick, on
       className={className}
       style={{
         ...style,
-        transform: `translate(${offset.x}px, ${offset.y}px)`,
-        transition: "transform 0.25s cubic-bezier(0.23, 1, 0.32, 1)",
-        willChange: "transform",
+        transform: isTouch ? undefined : `translate(${offset.x}px, ${offset.y}px)`,
+        transition: isTouch ? undefined : "transform 0.25s cubic-bezier(0.23, 1, 0.32, 1)",
+        willChange: isTouch ? undefined : "transform",
       }}
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
