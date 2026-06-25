@@ -4,6 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
+import SpotlightCursor from "@/components/SpotlightCursor";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,10 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+          {/* Global floating grid — atmospheric depth */}
+          <div className="floating-grid" aria-hidden="true" />
+          {/* Global spotlight cursor for dark sections */}
+          <SpotlightCursor />
           <Router />
         </WouterRouter>
         <Toaster />
