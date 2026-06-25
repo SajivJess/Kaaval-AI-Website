@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { motion, useMotionValue, useSpring, AnimatePresence } from 'framer-motion';
+import { useIsMobile } from '../hooks/useIsMobile';
 
 const BG_TEXTS: Record<string, string> = {
   default: 'KAAVAL AI',
@@ -12,6 +13,7 @@ const BG_TEXTS: Record<string, string> = {
 export default function TeamStructure() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
+  const isMobile = useIsMobile();
   
   // Spotlight and Parallax tracking
   const mouseX = useMotionValue(0);
@@ -20,6 +22,7 @@ export default function TeamStructure() {
   const springY = useSpring(mouseY, { stiffness: 100, damping: 30 });
 
   const handleMouseMove = (e: React.MouseEvent) => {
+    if (isMobile) return;
     const rect = containerRef.current?.getBoundingClientRect();
     if (rect) {
       // For spotlight (absolute pixels)
@@ -228,12 +231,12 @@ export default function TeamStructure() {
         <motion.div 
           className="absolute left-[50%] top-[20%] w-[260px] h-[300px] pointer-events-auto z-30"
           style={{ marginLeft: -130 }}
-          animate={{ x: mouseX.get() * 12, y: mouseY.get() * 12, opacity: getOpacity('sajiv'), scale: getScale('sajiv') }}
+          animate={{ x: isMobile ? 0 : mouseX.get() * 12, y: isMobile ? 0 : mouseY.get() * 12, opacity: getOpacity('sajiv'), scale: getScale('sajiv') }}
           transition={{ opacity: { duration: 0.3 }, scale: { duration: 0.3 } }}
           onMouseEnter={() => setHoveredNode('sajiv')}
         >
           {/* Ambient Breathing Glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#f59e0b] rounded-full blur-[120px] opacity-[0.15] mix-blend-screen pointer-events-none animate-pulse" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#f59e0b] rounded-full blur-[120px] mix-blend-screen pointer-events-none animate-pulse" style={{ opacity: isMobile ? 0.05 : 0.15 }} />
 
           {/* Stacked Polaroid Deployments */}
           <div className="absolute inset-0 pointer-events-none -z-10">

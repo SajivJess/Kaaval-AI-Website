@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { useIsMobile } from '../hooks/useIsMobile';
 import { 
   CheckCircle2, XCircle, FileText, Download, Loader2, PlayCircle, ShieldAlert, Cpu
 } from 'lucide-react';
@@ -70,9 +71,11 @@ export default function CommandCenter() {
 
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
-  // Layered parallax depths
-  const bgTextY    = useTransform(scrollYProgress, [0, 1], [-20, 20]);  // ghost text: 20px
-  const mockupY    = useTransform(scrollYProgress, [0, 1], [-10, 10]);  // mockup: 10px
+  
+  const isMobile = useIsMobile();
+  // Layered parallax depths (scaled down on mobile for performance)
+  const bgTextY    = useTransform(scrollYProgress, [0, 1], isMobile ? [-8, 8] : [-20, 20]);
+  const mockupY    = useTransform(scrollYProgress, [0, 1], isMobile ? [-4, 4] : [-10, 10]);
   // content stays at 0
 
   return (
@@ -105,13 +108,13 @@ export default function CommandCenter() {
         {/* macOS Desktop Application Wrapper — parallax layer: 10px */}
         <motion.div style={{ y: mockupY }} className="vel-glow">
         <div 
-          className="rounded-2xl overflow-hidden shadow-2xl border border-[#1e293b] flex flex-col bg-[#08111f] w-full max-w-[1000px] aspect-video mx-auto transition-all duration-500 relative"
+          className="rounded-2xl overflow-hidden shadow-2xl border border-[#1e293b] flex flex-col bg-[#08111f] w-full max-w-[1000px] md:aspect-video mx-auto transition-all duration-500 relative"
           style={{ boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 1), inset 0 1px 0 rgba(255,255,255,0.1)' }}
         >
 
           
           {/* Window Title Bar */}
-          <div className="flex items-center justify-between px-4 py-3 bg-[#0f1729]/90 backdrop-blur-md border-b border-[#1e293b] relative z-20">
+          <div className="hidden md:flex items-center justify-between px-4 py-3 bg-[#0f1729]/90 backdrop-blur-md border-b border-[#1e293b] relative z-20">
             {/* macOS Dots */}
             <div className="flex items-center gap-2 w-1/3">
               <div className="w-3 h-3 rounded-full bg-[#FF5F56] border border-[#E0443E]" />
@@ -139,7 +142,7 @@ export default function CommandCenter() {
           <div className="flex flex-col md:flex-row flex-1 overflow-hidden">
             
             {/* Sidebar Navigation (The Lifecycle) */}
-            <div className="md:w-64 bg-[#0B1220] border-r border-[#1e293b] flex md:flex-col overflow-x-auto md:overflow-x-visible relative">
+            <div className="md:w-64 bg-[#0B1220] border-b md:border-b-0 md:border-r border-[#1e293b] flex md:flex-col overflow-x-auto md:overflow-visible relative snap-x snap-mandatory scrollbar-hide">
                {TABS.map((tab, idx) => {
                  const isActive = activeTab === tab;
                  const isPassed = TABS.indexOf(activeTab) > idx;
@@ -148,23 +151,23 @@ export default function CommandCenter() {
                    <button 
                      key={tab} 
                      onClick={() => setActiveTab(tab)}
-                     className={`relative flex items-center gap-3 px-6 py-4 md:py-6 transition-all duration-300 min-w-[140px] md:min-w-0 text-left group`}
+                     className={`relative flex items-center justify-center md:justify-start gap-3 px-5 py-3.5 md:px-6 md:py-6 transition-all duration-300 min-w-max md:min-w-0 text-center md:text-left group snap-center`}
                    >
                      {isActive && (
                        <motion.div
                          layoutId="activeTabIndicator"
-                         className="absolute inset-0 bg-[#0f1729] border-b-4 md:border-b-0 md:border-l-4 border-[#3b82f6]"
+                         className="absolute inset-0 bg-[#0f1729] md:bg-white/5 border-b-2 md:border-b-0 md:border-l-4 border-[#3b82f6] rounded-lg md:rounded-none m-2 md:m-0"
                          initial={false}
                          transition={{ type: "spring", stiffness: 300, damping: 30 }}
                        />
                      )}
-                     <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity z-0" />
-                     {/* Lifecycle Dot & Line logic */}
+                     <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity z-0 hidden md:block" />
+                     {/* Lifecycle Dot & Line logic (desktop only) */}
                      <div className="relative flex flex-col items-center justify-center w-4 h-4 shrink-0 hidden md:flex z-10">
                         {idx !== 4 && <div className="absolute top-4 w-px h-12 bg-[#1e293b] -z-10" />}
                         <div className={`w-2 h-2 rounded-full transition-colors duration-500 ${isActive ? 'bg-[#3b82f6] shadow-[0_0_8px_#3b82f6]' : isPassed ? 'bg-[#22c55e]' : 'bg-[#1e293b]'}`} />
                      </div>
-                     <span className={`relative z-10 font-mono text-xs font-bold uppercase tracking-widest transition-colors ${isActive ? 'text-white' : 'text-[#8FA3B8] group-hover:text-white'}`}>
+                     <span className={`relative z-10 font-mono text-[10px] sm:text-xs font-bold uppercase tracking-widest transition-colors ${isActive ? 'text-white' : 'text-[#8FA3B8] group-hover:text-white'}`}>
                        {tab}
                      </span>
                    </button>
@@ -173,7 +176,7 @@ export default function CommandCenter() {
             </div>
 
             {/* Main Content Panel */}
-            <div className="flex-1 relative p-6 sm:p-10 bg-[#08111f] overflow-y-auto">
+            <div className="flex-1 relative p-5 sm:p-10 bg-[#08111f] overflow-y-auto min-h-[450px] md:min-h-0">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeTab}

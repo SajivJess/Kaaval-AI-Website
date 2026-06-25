@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Shield, CheckCircle2, MapPin, Activity, Eye, FileVideo,
   ShieldAlert, Cpu, Building2, Landmark, Newspaper, Tv2, Globe,
@@ -12,6 +12,7 @@ import CommandCenter from "../components/CommandCenter";
 import TeamStructure from "../components/TeamStructure";
 import MagneticButton from "../components/MagneticButton";
 import PressWall from "../components/PressWall";
+import MobileNav from "../components/MobileNav";
 /* â”€â”€ helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function useOnScreen(ref: React.RefObject<Element>, rootMargin = "0px") {
   const [v, setV] = useState(false);
@@ -217,92 +218,76 @@ const EcosystemShowcase = () => {
       <div className="max-w-[1400px] mx-auto px-6 relative z-10">
         
         {/* Header */}
-        <div className="text-center mb-32">
+        <div className="text-center mb-12 md:mb-24 lg:mb-32">
           <p className="font-mono text-xs uppercase tracking-widest mb-3" style={{color:"#CC2929",letterSpacing:"0.18em"}}>KAAVAL AI ECOSYSTEM</p>
-          <h2 className="font-serif text-4xl lg:text-5xl font-bold mb-6" style={{fontFamily:"'Fraunces',serif"}}>One Unified Platform.</h2>
+          <h2 className="font-serif font-bold mb-6" style={{fontFamily:"'Fraunces',serif",fontSize:"var(--text-section)"}}>One Unified Platform.</h2>
         </div>
 
-        {/* Horizontal Overlapping Deck */}
-        <div className="flex flex-col md:flex-row justify-center items-center w-full mx-auto" style={{perspective: '1200px'}}>
+        {/* ── Desktop: Horizontal Overlapping Deck ── */}
+        <div className="hidden md:flex flex-row justify-center items-center w-full mx-auto" style={{perspective: '1200px'}}>
           {ecosystemSteps.map((step, i) => {
              const isHovered = hoveredIndex === i;
              const isBefore = hoveredIndex !== null && i < hoveredIndex;
              const isAfter = hoveredIndex !== null && i > hoveredIndex;
              const isAnyHovered = hoveredIndex !== null;
-             
-             // Dynamic fanning math
-             const offset = i - 1.5; 
-             const baseRotate = offset * 4; 
-             const baseY = Math.abs(offset) * 15; 
-             
+             const offset = i - 1.5;
+             const baseRotate = offset * 4;
+             const baseY = Math.abs(offset) * 15;
              let transform = `translateY(${baseY}px) scale(1) translateX(0) rotate(${baseRotate}deg)`;
              let zIndex = 10 + i;
-             
-             if (isHovered) {
-                transform = `translateY(-50px) scale(1.08) translateX(0) rotate(0deg)`;
-                zIndex = 50;
-             } else if (isBefore) {
-                transform = `translateY(${baseY}px) scale(0.95) translateX(-80px) rotate(${baseRotate - 6}deg)`;
-             } else if (isAfter) {
-                transform = `translateY(${baseY}px) scale(0.95) translateX(80px) rotate(${baseRotate + 6}deg)`;
-             }
-
+             if (isHovered) { transform = `translateY(-50px) scale(1.08) translateX(0) rotate(0deg)`; zIndex = 50; }
+             else if (isBefore) { transform = `translateY(${baseY}px) scale(0.95) translateX(-80px) rotate(${baseRotate - 6}deg)`; }
+             else if (isAfter) { transform = `translateY(${baseY}px) scale(0.95) translateX(80px) rotate(${baseRotate + 6}deg)`; }
              return (
-               <div 
-                 key={i}
-                 onClick={() => setModalIndex(i)}
-                 className="relative transition-all duration-700 cursor-pointer group mt-8 md:mt-0 deck-card"
-                 style={{
-                    width: 'min(90vw, 550px)',
-                    transform,
-                    zIndex,
-                    transitionTimingFunction: 'cubic-bezier(0.25, 1, 0.5, 1)'
-                 }}
-                 onMouseEnter={() => setHoveredIndex(i)}
-                 onMouseLeave={() => setHoveredIndex(null)}
+               <div key={i} onClick={() => setModalIndex(i)}
+                 className="relative transition-all duration-700 cursor-pointer group deck-card"
+                 style={{ width: 'min(90vw, 550px)', transform, zIndex, transitionTimingFunction: 'cubic-bezier(0.25, 1, 0.5, 1)', marginLeft: i === 0 ? 0 : '-12%' }}
+                 onMouseEnter={() => setHoveredIndex(i)} onMouseLeave={() => setHoveredIndex(null)}
                >
-                  <style>{`
-                    @media (min-width: 768px) {
-                      #ecosystem .deck-card:nth-child(${i + 1}) {
-                        margin-left: ${i === 0 ? '0' : '-12%'};
-                      }
-                    }
-                    @media (max-width: 767px) {
-                      #ecosystem .deck-card:nth-child(${i + 1}) {
-                        margin-left: 0;
-                        margin-top: ${i === 0 ? '0' : '-80px'};
-                      }
-                    }
-                  `}</style>
-                  
-                  {/* Glow */}
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-[50px] -z-10 rounded-2xl" style={{background: step.color}} />
-                  
-                  {/* Card Image Wrapper */}
-                  <div className="w-full aspect-[4/3] sm:aspect-[16/9] bg-[#0C1520] rounded-2xl border transition-colors duration-500 overflow-hidden flex flex-col justify-center items-center p-2" 
-                       style={{ 
-                         borderColor: isHovered ? step.color : 'rgba(255,255,255,0.05)',
-                         boxShadow: isHovered ? `0 30px 60px ${step.glow}` : '0 15px 35px rgba(0,0,0,0.6)'
-                       }}>
+                  <div className="w-full aspect-[16/9] bg-[#0C1520] rounded-2xl border transition-colors duration-500 overflow-hidden flex flex-col justify-center items-center p-2"
+                       style={{ borderColor: isHovered ? step.color : 'rgba(255,255,255,0.05)', boxShadow: isHovered ? `0 30px 60px ${step.glow}` : '0 15px 35px rgba(0,0,0,0.6)' }}>
                     <img src={step.img} alt={step.title} className="w-full h-full object-contain rounded-xl" />
-                    
-                    {/* Dim inactive cards */}
                     <div className="absolute inset-0 bg-black transition-opacity duration-700 rounded-2xl pointer-events-none" style={{opacity: isAnyHovered && !isHovered ? 0.6 : 0}} />
                   </div>
-
-                  {/* Floating Action Hint */}
-                  <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30 hidden md:block">
+                  <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30">
                      <span className="font-mono text-[9px] font-bold text-white tracking-widest uppercase">Click to Expand</span>
                   </div>
-
-                  {/* Label (Below the card) */}
                   <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0 z-20 bg-black/90 backdrop-blur-md px-6 py-3 rounded-2xl border shadow-2xl flex flex-col items-center whitespace-nowrap min-w-max" style={{borderColor: `${step.color}40`}}>
                     <span className="font-mono text-[10px] font-bold tracking-widest uppercase mb-1" style={{color: step.color}}>{step.title}</span>
                     <span className="font-serif text-lg text-white" style={{fontFamily:"'Fraunces',serif"}}>{step.subtitle}</span>
                   </div>
                </div>
-             )
+             );
           })}
+        </div>
+
+        {/* ── Mobile: Vertical Staggered Stack ── */}
+        <div className="md:hidden flex flex-col items-center gap-6 px-4">
+          {ecosystemSteps.map((step, i) => (
+            <motion.div
+              key={i}
+              onClick={() => setModalIndex(i)}
+              initial={{ opacity: 0, y: 32 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.6, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+              className="cursor-pointer w-full max-w-[420px] relative"
+              style={{ alignSelf: i % 2 === 0 ? 'flex-start' : 'flex-end', marginLeft: i % 2 === 0 ? '0' : 'auto' }}
+            >
+              {/* Glow */}
+              <div className="absolute inset-0 rounded-2xl -z-10" style={{ background: step.color, filter: 'blur(30px)', opacity: 0.25 }} />
+              {/* Card */}
+              <div className="w-full aspect-[4/3] bg-[#0C1520] rounded-2xl border overflow-hidden" style={{ borderColor: `${step.color}50` }}>
+                <img src={step.img} alt={step.title} className="w-full h-full object-contain" />
+              </div>
+              {/* Label below */}
+              <div className="mt-3 flex flex-col">
+                <span className="font-mono text-[10px] font-bold tracking-widest uppercase" style={{color: step.color}}>{step.title}</span>
+                <span className="font-serif text-base text-white mt-0.5" style={{fontFamily:"'Fraunces',serif"}}>{step.subtitle}</span>
+              </div>
+            </motion.div>
+          ))}
         </div>
 
       </div>
@@ -538,6 +523,7 @@ export default function Home() {
   const [isModalOpen, setIsModalOpen]                 = useState(false);
   const [activeMedia, setActiveMedia]                 = useState<{name: string, link: string, image: string} | null>(null);
   const [pressModalIdx, setPressModalIdx]             = useState<number | null>(null);
+  const [mobileNavOpen, setMobileNavOpen]             = useState(false);
 
   useEffect(() => { const iv = setInterval(() => setMosaicSetIndex(p=>(p+1)%mosaicSets.length), 5000); return ()=>clearInterval(iv); }, []);
   useEffect(() => {
@@ -655,98 +641,137 @@ export default function Home() {
     <div className="min-h-screen bg-white text-[#0F1E36] font-sans overflow-x-hidden selection:bg-[#CC2929] selection:text-white">
 
       {/* â”€â”€ Navigation â”€â”€ */}
+      {/* Mobile Nav Overlay */}
+      <MobileNav isOpen={mobileNavOpen} onClose={() => setMobileNavOpen(false)} onRequestPilot={() => setIsModalOpen(true)} />
+
+      {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-300" style={{
         background: scrolled?"rgba(255,255,255,0.97)":"rgba(255,255,255,0.93)",
         backdropFilter:"blur(12px)",
         borderBottom: scrolled?`1px solid ${LN}`:"1px solid transparent",
         boxShadow: scrolled?"0 1px 14px rgba(15,30,54,0.07)":"none",
       }}>
-        <div className="max-w-[1400px] w-full mx-auto px-6 py-4 flex items-center justify-between">
-          <a href="#" className="flex items-center shrink-0 -ml-2 sm:-ml-4">
-            <img src="/kaaval-logo.png" alt="Kaaval AI Logo" className="h-12 md:h-14 w-auto object-contain mix-blend-multiply" />
+        <div className="max-w-[1400px] w-full mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
+          <a href="#" className="flex items-center shrink-0">
+            <img src="/kaaval-logo.png" alt="Kaaval AI Logo" className="h-10 sm:h-12 md:h-14 w-auto object-contain mix-blend-multiply" />
           </a>
-          <div className="flex items-center gap-4 lg:gap-6">
+          <div className="flex items-center gap-3 lg:gap-6">
             {[["#platform","Platform"],["#deployment","Deployment"],["#our-impact","Impact"],["#media","Media"],["#contact","Contact"]].map(([href,label])=>(
               <a key={label} href={href} className="text-sm font-medium transition-colors hidden md:block" style={{color:S}}
                 onMouseEnter={e=>(e.currentTarget.style.color=INK)} onMouseLeave={e=>(e.currentTarget.style.color=S)}>{label}</a>
             ))}
-            <MagneticButton onClick={() => setIsModalOpen(true)} className="font-semibold px-5 py-2.5 rounded-sm transition-all text-sm text-white" style={{background:R}}
+            <MagneticButton onClick={() => setIsModalOpen(true)} className="font-semibold px-5 py-2.5 rounded-sm transition-all text-sm text-white hidden md:block" style={{background:R}}
               onMouseEnter={e=>(e.currentTarget.style.background="#E03333")} onMouseLeave={e=>(e.currentTarget.style.background=R)}
               data-testid="button-nav-pilot">Request Pilot Deployment</MagneticButton>
+            {/* Mobile hamburger */}
+            <button
+              onClick={() => setMobileNavOpen(true)}
+              className="md:hidden flex flex-col items-center justify-center gap-1.5 w-10 h-10 rounded-lg"
+              aria-label="Open menu"
+            >
+              <span className="block w-5 h-0.5 rounded-full transition-all" style={{background:INK}} />
+              <span className="block w-3.5 h-0.5 rounded-full transition-all" style={{background:INK}} />
+              <span className="block w-5 h-0.5 rounded-full transition-all" style={{background:INK}} />
+            </button>
           </div>
         </div>
       </nav>
 
-      {/* â”€â”€ Hero â”€â”€ */}
-      <section className="relative min-h-screen flex items-center bg-grid-light bg-white" style={{paddingTop:"72px"}}>
-        <div className="max-w-7xl mx-auto w-full px-6 py-8 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <div ref={hFade.ref} style={hFade.style} className="flex flex-col items-start gap-7">
-            <div className="flex items-center gap-2">
-              <div className="w-5 h-0.5" style={{background:R}}/>
-              <span className="font-mono text-xs font-medium uppercase tracking-widest" style={{fontFamily:"'IBM Plex Mono',monospace",color:N,letterSpacing:"0.18em"}}>AI-Powered Traffic Safety Platform</span>
+      {/* ── Hero ── */}
+      <section id="hero" className="relative min-h-screen flex items-center bg-grid-light bg-white" style={{paddingTop:"64px"}}>
+        <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 py-8 lg:py-12">
+          <div className="flex flex-col lg:grid lg:grid-cols-2 lg:gap-20 items-center">
+
+            {/* Text block */}
+            <div ref={hFade.ref} style={hFade.style} className="flex flex-col items-center lg:items-start gap-5 text-center lg:text-left w-full">
+              <div className="flex items-center gap-2">
+                <div className="w-5 h-0.5" style={{background:R}}/>
+                <span className="font-mono text-xs font-medium uppercase tracking-widest" style={{fontFamily:"'IBM Plex Mono',monospace",color:N,letterSpacing:"0.18em"}}>AI-Powered Traffic Safety Platform</span>
+              </div>
+
+              <h1 className="font-serif font-black leading-tight relative z-10" style={{fontFamily:"'Fraunces',serif",fontSize:"var(--text-hero)",color:INK,maxWidth:"100%"}}>
+                Transforming Existing CCTV Cameras into AI-Powered Traffic Safety Systems.
+              </h1>
+
+              <p className="leading-relaxed max-w-lg" style={{color:S, fontSize:"var(--text-sub)"}}>
+                In India, over half of road fatalities involve two-wheelers. KAAVAL AI helps authorities detect violations, improve awareness, and promote safer roads using existing CCTV infrastructure.
+              </p>
+
+              {/* CTAs */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
+                <MagneticButton onClick={() => setIsModalOpen(true)}
+                  className="font-semibold px-6 py-3.5 rounded-sm transition-all text-sm text-white"
+                  style={{background:R}}
+                  onMouseEnter={e=>(e.currentTarget.style.background="#E03333")} onMouseLeave={e=>(e.currentTarget.style.background=R)}
+                  data-testid="button-hero-pilot">Request Pilot Deployment</MagneticButton>
+                <a href="#deployment" className="font-medium px-6 py-3.5 rounded-sm transition-all text-sm border text-center" style={{borderColor:LN,color:INK}}
+                  onMouseEnter={e=>{e.currentTarget.style.borderColor=N;e.currentTarget.style.color=N;}}
+                  onMouseLeave={e=>{e.currentTarget.style.borderColor=LN;e.currentTarget.style.color=INK;}}>View Deployment Models</a>
+              </div>
+
+              {/* Live status */}
+              <div className="flex items-center gap-2.5">
+                <span className="w-2 h-2 rounded-full shrink-0 animate-pulse" style={{background:GR,boxShadow:`0 0 0 3px rgba(42,122,90,0.18)`}}/>
+                <span className="font-mono text-xs font-semibold" style={{fontFamily:"'IBM Plex Mono',monospace",color:GR,letterSpacing:"0.08em"}}>Pilot Operational</span>
+                <span style={{color:"rgba(74,94,120,0.4)"}}>·</span>
+                <span className="font-mono text-xs" style={{fontFamily:"'IBM Plex Mono',monospace",color:S,letterSpacing:"0.05em"}}>Nagercoil, TN</span>
+              </div>
             </div>
 
-            {/* Fixed headline */}
-            <h1 className="font-serif font-black leading-tight mt-6 mb-4 relative z-10 break-words" style={{fontFamily:"'Fraunces',serif",fontSize:"clamp(2.25rem, 3.5vw, 3rem)",color:INK,maxWidth:"100%"}}>
-              Transforming Existing CCTV Cameras into AI-Powered Traffic Safety Systems.
-            </h1>
-
-            <p className="text-lg leading-relaxed max-w-lg mb-4" style={{color:S}}>
-              In India, over half of road fatalities involve two-wheelers. KAAVAL AI helps authorities detect violations, improve awareness, and promote safer roads using existing CCTV infrastructure.
-            </p>
-
-            <div className="flex flex-wrap items-center gap-3 lg:gap-4">
-              <MagneticButton onClick={() => setIsModalOpen(true)} className="font-semibold px-6 py-3 lg:px-8 lg:py-4 rounded-sm transition-all text-sm lg:text-base text-white whitespace-nowrap" style={{background:R}}
-                onMouseEnter={e=>(e.currentTarget.style.background="#E03333")} onMouseLeave={e=>(e.currentTarget.style.background=R)}
-                data-testid="button-hero-pilot">Request Pilot Deployment</MagneticButton>
-              <a href="#deployment" className="font-medium px-6 py-3 lg:px-8 lg:py-4 rounded-sm transition-all text-sm lg:text-base border whitespace-nowrap" style={{borderColor:LN,color:INK}}
-                onMouseEnter={e=>{e.currentTarget.style.borderColor=N;e.currentTarget.style.color=N;}}
-                onMouseLeave={e=>{e.currentTarget.style.borderColor=LN;e.currentTarget.style.color=INK;}}>View Deployment Models</a>
-            </div>
-
-            {/* 4th stat â€” live deployment indicator */}
-            <div className="flex items-center gap-2.5 mt-1">
-              <span className="w-2 h-2 rounded-full shrink-0 animate-pulse" style={{background:GR,boxShadow:`0 0 0 3px rgba(42,122,90,0.18)`}}/>
-              <span className="font-mono text-xs font-semibold" style={{fontFamily:"'IBM Plex Mono',monospace",color:GR,letterSpacing:"0.08em"}}>Pilot Operational</span>
-              <span style={{color:"rgba(74,94,120,0.4)"}}>Â·</span>
-              <span className="font-mono text-xs" style={{fontFamily:"'IBM Plex Mono',monospace",color:S,letterSpacing:"0.05em"}}>Nagercoil, TN</span>
-            </div>
-          </div>
-
-          {/* Interactive Deployment Mosaic */}
-          <div ref={cFade.ref} style={cFade.style} className="hidden sm:flex flex-col gap-4 relative">
-            <div className="grid grid-cols-2 gap-4 w-full">
-              {[0, 1, 2, 3].map((posIndex) => (
-                <div key={posIndex} className="relative group overflow-hidden rounded-xl aspect-[4/3] bg-black">
-                  {mosaicSets.map((set, setIdx) => (
-                    <img 
-                      key={setIdx}
-                      src={set[posIndex].src} 
-                      alt={set[posIndex].label} 
-                      className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ease-in-out ${mosaicSetIndex === setIdx ? 'opacity-100 group-hover:scale-110' : 'opacity-0 scale-100 pointer-events-none'}`} 
-                    />
-                  ))}
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-colors duration-300 flex items-center justify-center p-4 z-10">
-                    <span className="text-white font-serif font-bold text-lg text-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0" style={{fontFamily:"'Fraunces',serif"}}>
-                      {mosaicSets[mosaicSetIndex][posIndex].label}
-                    </span>
+            {/* Mosaic — right column on lg, stacked on mobile */}
+            <div ref={cFade.ref} style={cFade.style} className="flex flex-col gap-4 relative w-full mt-8 lg:mt-0">
+              {/* Desktop: 2x2 grid */}
+              <div className="hidden lg:grid grid-cols-2 gap-4 w-full">
+                {[0, 1, 2, 3].map((posIndex) => (
+                  <div key={posIndex} className="relative group overflow-hidden rounded-xl aspect-[4/3] bg-black">
+                    {mosaicSets.map((set, setIdx) => (
+                      <img
+                        key={setIdx}
+                        src={set[posIndex].src}
+                        alt={set[posIndex].label}
+                        className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ease-in-out ${mosaicSetIndex === setIdx ? "opacity-100 group-hover:scale-110" : "opacity-0 scale-100 pointer-events-none"}`}
+                      />
+                    ))}
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-colors duration-300 flex items-center justify-center p-4 z-10">
+                      <span className="text-white font-serif font-bold text-lg text-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0" style={{fontFamily:"'Fraunces',serif"}}>
+                        {mosaicSets[mosaicSetIndex][posIndex].label}
+                      </span>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
 
-            {/* Statistics Strip Below Mosaic */}
-            <div className="flex flex-wrap items-center justify-between gap-3 px-5 py-4 rounded-xl w-full" style={{background:AL, border:`1px solid ${LN}`}}>
-              {[
-                {icon:"🚦", label:"Live Deployment"},
-                {icon:"📢", label:"LED Awareness System"},
-                {icon:"⚡", label:"Edge AI Processing"}
-              ].map((stat, i) => (
-                <div key={i} className="flex items-center gap-2">
-                  <span className="text-base">{stat.icon}</span>
-                  <span className="font-mono text-[11px] uppercase font-bold" style={{fontFamily:"'IBM Plex Mono',monospace", color:N}}>{stat.label}</span>
+              {/* Mobile: single crossfading image */}
+              <div className="lg:hidden relative rounded-2xl overflow-hidden w-full aspect-video bg-black">
+                {mosaicSets.map((set, setIdx) => (
+                  <img
+                    key={setIdx}
+                    src={set[0].src}
+                    alt={set[0].label}
+                    className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ${mosaicSetIndex === setIdx ? "opacity-100" : "opacity-0"}`}
+                  />
+                ))}
+                {/* Slide indicator dots */}
+                <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5">
+                  {mosaicSets.map((_, i) => (
+                    <div key={i} className="w-1.5 h-1.5 rounded-full transition-all duration-300" style={{background: i === mosaicSetIndex ? "#CC2929" : "rgba(255,255,255,0.4)"}} />
+                  ))}
                 </div>
-              ))}
+              </div>
+
+              {/* Stats strip */}
+              <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-3 rounded-xl w-full" style={{background:AL, border:`1px solid ${LN}`}}>
+                {[
+                  {icon:"🚦", label:"Live Deployment"},
+                  {icon:"📢", label:"LED Awareness"},
+                  {icon:"⚡", label:"Edge AI"},
+                ].map((stat, i) => (
+                  <div key={i} className="flex items-center gap-2">
+                    <span className="text-base">{stat.icon}</span>
+                    <span className="font-mono text-[11px] uppercase font-bold" style={{fontFamily:"'IBM Plex Mono',monospace", color:N}}>{stat.label}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -776,7 +801,7 @@ export default function Home() {
               Traditional traffic enforcement solutions often require expensive hardware replacement and lengthy deployment cycles. KAAVAL AI transforms existing CCTV infrastructure into an intelligent traffic safety network, enabling rapid deployment with significantly lower costs.
             </p>
           </div>
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 place-items-center sm:place-items-stretch">
             {[
               {Icon:Eye,           title:"Works with Existing CCTV"},
               {Icon:Cpu,           title:"Real-Time Edge AI Processing"},
@@ -786,7 +811,7 @@ export default function Home() {
             ].map(({Icon,title},i)=>{
               const fade = useFadeUp(i*0.1);
               return (
-                <div key={i} ref={fade.ref} style={{...fade.style,background:"#fff",border:`1px solid ${LN}`,borderRadius:"8px",width:"220px"}} className="p-6 flex flex-col items-center text-center transition-all hover:-translate-y-1 hover:shadow-lg">
+                <div key={i} ref={fade.ref} style={{...fade.style,background:"#fff",border:`1px solid ${LN}`}} className="p-6 rounded-xl flex flex-col items-center text-center transition-all hover:-translate-y-1 hover:shadow-lg w-full max-w-[280px] sm:max-w-none">
                   <div className="w-12 h-12 rounded-full flex items-center justify-center mb-4" style={{background:"rgba(204,41,41,0.07)"}}>
                     <Icon className="w-5 h-5" style={{color:R}}/>
                   </div>
@@ -884,83 +909,144 @@ export default function Home() {
               </div>
 
             </div>
-
           </div>
 
           {/* Bottom Numbers Strip */}
-          <div className="mt-12 pt-8 border-t border-white/10 grid grid-cols-2 md:grid-cols-4 gap-6 relative z-20">
-            <div className="flex flex-col items-center text-center">
-               <span className="font-serif text-5xl font-bold text-white mb-2"><AnimatedCounter end={4} /></span>
-               <span className="font-mono text-[11px] text-[#8FA3B8] tracking-widest uppercase">Active Camera Streams</span>
-            </div>
-            <div className="flex flex-col items-center text-center">
-               <span className="font-serif text-5xl font-bold text-white mb-2">24/7</span>
-               <span className="font-mono text-[11px] text-[#8FA3B8] tracking-widest uppercase">Monitoring</span>
-            </div>
-            <div className="flex flex-col items-center text-center">
-               <span className="font-serif text-5xl font-bold text-white mb-2"><AnimatedCounter end={100} suffix="%" /></span>
-               <span className="font-mono text-[11px] text-[#8FA3B8] tracking-widest uppercase">Edge AI Processing</span>
-            </div>
-            <div className="flex flex-col items-center text-center">
-               <span className="font-serif text-5xl font-bold text-white mb-2"><AnimatedCounter end={1} /></span>
-               <span className="font-mono text-[11px] text-[#8FA3B8] tracking-widest uppercase">Live Deployment Site</span>
+            <div className="mt-10 md:mt-12 pt-8 border-t border-white/10 grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 relative z-20">
+              <div className="flex flex-col items-center text-center">
+                 <span className="font-serif text-4xl sm:text-5xl font-bold text-white mb-2"><AnimatedCounter end={4} /></span>
+                 <span className="font-mono text-[10px] sm:text-[11px] text-[#8FA3B8] tracking-widest uppercase">Active Camera Streams</span>
+              </div>
+              <div className="flex flex-col items-center text-center">
+                 <span className="font-serif text-5xl font-bold text-white mb-2">24/7</span>
+                 <span className="font-mono text-[11px] text-[#8FA3B8] tracking-widest uppercase">Monitoring</span>
+              </div>
+              <div className="flex flex-col items-center text-center">
+                 <span className="font-serif text-5xl font-bold text-white mb-2"><AnimatedCounter end={100} suffix="%" /></span>
+                 <span className="font-mono text-[11px] text-[#8FA3B8] tracking-widest uppercase">Edge AI Processing</span>
+              </div>
+              <div className="flex flex-col items-center text-center">
+                 <span className="font-serif text-5xl font-bold text-white mb-2"><AnimatedCounter end={1} /></span>
+                 <span className="font-mono text-[11px] text-[#8FA3B8] tracking-widest uppercase">Live Deployment Site</span>
+              </div>
             </div>
           </div>
+        </section>
 
-        </div>
-      </section>
+        {/* ── Deployment Models ── */}
+        <section className="bg-white" style={{paddingTop:"var(--space-section)",paddingBottom:"var(--space-section)"}}>
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="text-center mb-10 md:mb-16">
+              <p className="font-mono text-xs uppercase tracking-widest mb-3" style={{fontFamily:"'IBM Plex Mono',monospace",color:R,letterSpacing:"0.18em"}}>Scale</p>
+              <h2 className="font-serif font-bold" style={{fontFamily:"'Fraunces',serif",color:INK,fontSize:"var(--text-section)"}}>Deployment Models</h2>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {deploymentModels.map((model, i) => (
+                <div key={i} className="p-6 rounded-xl transition-all hover:-translate-y-1 group hover:shadow-lg cursor-pointer" style={{background:AL,border:`1px solid ${LN}`}}>
+                  <p className="font-mono text-[10px] uppercase tracking-widest mb-2" style={{color:S}}>{model.scope}</p>
+                  <h3 className="font-serif text-xl font-bold mb-4" style={{color:INK}}>{model.name}</h3>
+                  <ul className="space-y-2">
+                    {model.bullets.map((b, j) => (
+                      <li key={j} className="flex items-start gap-2 text-sm leading-relaxed" style={{color:S}}>
+                        <span className="shrink-0 mt-0.5" style={{color:R}}>•</span>
+                        {b}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-      {/* â”€â”€ Project Journey â”€â”€ */}
-      <section className="py-16 bg-white">
-        <div className="max-w-5xl mx-auto px-6">
-          <motion.div className="text-center mb-16" variants={sectionVariants.left} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} transition={sectionTransition}>
-            <p className="font-mono text-xs uppercase tracking-widest mb-3" style={{fontFamily:"'IBM Plex Mono',monospace",color:R,letterSpacing:"0.18em"}}>Progress</p>
-            <h2 className="font-serif text-4xl lg:text-5xl font-bold" style={{fontFamily:"'Fraunces',serif",color:INK}}>The Project Journey</h2>
-          </motion.div>
-          <div className="relative w-full pb-4">
-            <div className="flex items-start justify-between pt-2 px-2">
+        {/* ── Project Journey ── */}
+        <section className="bg-white" style={{paddingTop:"var(--space-section)",paddingBottom:"var(--space-section)"}}>
+          <div className="max-w-5xl mx-auto px-4 sm:px-6">
+            <motion.div className="text-center mb-10 md:mb-16" variants={sectionVariants.left} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} transition={sectionTransition}>
+              <p className="font-mono text-xs uppercase tracking-widest mb-3" style={{fontFamily:"'IBM Plex Mono',monospace",color:R,letterSpacing:"0.18em"}}>Progress</p>
+              <h2 className="font-serif font-bold" style={{fontFamily:"'Fraunces',serif",color:INK,fontSize:"var(--text-section)"}}>The Project Journey</h2>
+            </motion.div>
+
+            {/* Desktop: horizontal timeline */}
+            <div className="hidden md:block relative w-full pb-4">
+              <div className="flex items-start justify-between pt-2 px-2">
+                {journeySteps.map((step, i) => {
+                  const isLive = step.label === "Live Operations";
+                  const isCurrent = step.label === "Pilot Deployment" || step.label === "Live Operations";
+                  const isFuture = step.label === "District Expansion";
+                  return (
+                    <div key={i} className="relative flex-1 px-1 flex flex-col items-center text-center">
+                      {i !== journeySteps.length - 1 && (
+                        <div className="absolute top-[11px] left-[50%] right-[-50%] h-0.5" style={{background:LN, zIndex:0}}/>
+                      )}
+                      <div className="relative z-10 w-[24px] h-[24px] rounded-full flex items-center justify-center border-2 mb-3"
+                        style={{
+                          background: isFuture?"#fff":isCurrent?R:N,
+                          borderColor: isFuture?LN:isCurrent?R:N,
+                          boxShadow: isCurrent?"0 0 0 4px rgba(204,41,41,0.15)":"none",
+                        }}>
+                        {isCurrent && <div className="w-1.5 h-1.5 rounded-full bg-white"/>}
+                        {isFuture && <div className="w-1.5 h-1.5 rounded-full" style={{background:LN}}/>}
+                      </div>
+                      <div className="flex flex-col items-center">
+                        <h3 className="font-semibold text-[12px] lg:text-[13px] mb-1" style={{color: isFuture?S:INK, lineHeight: 1.2}}>{step.label}</h3>
+                        {isLive && (
+                          <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-mono font-bold mb-1"
+                            style={{background:"rgba(42,122,90,0.1)",color:GR,border:"1px solid rgba(42,122,90,0.25)",fontFamily:"'IBM Plex Mono',monospace",letterSpacing:"0.05em"}}>
+                            <span className="w-1 h-1 rounded-full animate-pulse inline-block" style={{background:GR}}/> ACTIVE
+                          </span>
+                        )}
+                        {isFuture && (
+                          <span className="text-[9px] font-mono mb-1" style={{fontFamily:"'IBM Plex Mono',monospace",color:S,letterSpacing:"0.05em"}}>UPCOMING</span>
+                        )}
+                        <p className="text-[10px] lg:text-[11px] leading-tight" style={{color:S}}>{step.desc}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Mobile: vertical timeline */}
+            <div className="md:hidden timeline-vertical space-y-6 mt-8">
               {journeySteps.map((step, i) => {
                 const isLive = step.label === "Live Operations";
                 const isCurrent = step.label === "Pilot Deployment" || step.label === "Live Operations";
                 const isFuture = step.label === "District Expansion";
                 return (
-                  <div key={i} className="relative flex-1 px-1 flex flex-col items-center text-center">
-                    {/* horizontal spine */}
-                    {i !== journeySteps.length - 1 && (
-                      <div className="absolute top-[11px] left-[50%] right-[-50%] h-0.5" style={{background:LN, zIndex:0}}/>
-                    )}
-                    
-                    {/* dot */}
-                    <div className="relative z-10 w-[24px] h-[24px] rounded-full flex items-center justify-center border-2 mb-3"
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: -16 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: "-40px" }}
+                    transition={{ duration: 0.5, delay: i * 0.06, ease: "easeOut" }}
+                    className="relative pl-1"
+                  >
+                    <div
+                      className="timeline-vertical-dot"
                       style={{
-                        background: isFuture?"#fff":isCurrent?R:N,
-                        borderColor: isFuture?LN:isCurrent?R:N,
-                        boxShadow: isCurrent?"0 0 0 4px rgba(204,41,41,0.15)":"none",
-                      }}>
-                      {isCurrent && <div className="w-1.5 h-1.5 rounded-full bg-white"/>}
-                      {isFuture && <div className="w-1.5 h-1.5 rounded-full" style={{background:LN}}/>}
-                    </div>
-
-                    <div className="flex flex-col items-center">
-                      <h3 className="font-semibold text-[12px] lg:text-[13px] mb-1" style={{color: isFuture?S:INK, lineHeight: 1.2}}>{step.label}</h3>
-                      {isLive && (
-                        <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-mono font-bold mb-1"
-                          style={{background:"rgba(42,122,90,0.1)",color:GR,border:"1px solid rgba(42,122,90,0.25)",fontFamily:"'IBM Plex Mono',monospace",letterSpacing:"0.05em"}}>
-                          <span className="w-1 h-1 rounded-full animate-pulse inline-block" style={{background:GR}}/> ACTIVE
-                        </span>
-                      )}
-                      {isFuture && (
-                        <span className="text-[9px] font-mono mb-1" style={{fontFamily:"'IBM Plex Mono',monospace",color:S,letterSpacing:"0.05em"}}>UPCOMING</span>
-                      )}
-                      <p className="text-[10px] lg:text-[11px] leading-tight hidden md:block" style={{color:S}}>{step.desc}</p>
-                    </div>
-                  </div>
+                        background: isFuture ? "#fff" : isCurrent ? R : N,
+                        borderColor: isFuture ? LN : isCurrent ? R : N,
+                        boxShadow: isCurrent ? "0 0 0 4px rgba(204,41,41,0.15)" : "none",
+                      }}
+                    />
+                    <h3 className="font-semibold text-sm" style={{color: isFuture ? S : INK}}>{step.label}</h3>
+                    {isLive && (
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[9px] font-mono font-bold my-1"
+                        style={{background:"rgba(42,122,90,0.1)",color:GR,border:"1px solid rgba(42,122,90,0.25)"}}>
+                        <span className="w-1 h-1 rounded-full animate-pulse inline-block" style={{background:GR}}/> ACTIVE
+                      </span>
+                    )}
+                    {isFuture && (
+                      <span className="text-[9px] font-mono block mt-0.5" style={{color:S}}>UPCOMING</span>
+                    )}
+                    <p className="text-xs leading-relaxed mt-1" style={{color:S}}>{step.desc}</p>
+                  </motion.div>
                 );
               })}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
       {/* —— Interactive Command Center —— */}
       <CommandCenter />
@@ -1038,12 +1124,12 @@ export default function Home() {
             {/* Contact details */}
             <div className="lg:col-span-2 grid sm:grid-cols-2 gap-4">
               {[
-                {Icon:Phone,       label:"Mobile",   value:"+91 7200599700",    sub:"Call us directly"},
-                {Icon:MessageCircle,label:"WhatsApp", value:"+91 7200599700",   sub:"Chat on WhatsApp"},
-                {Icon:Mail,        label:"Email",    value:"kaaval.ai.kanyakumari@gmail.com",  sub:"Official correspondence"},
-                {Icon:MapPin,      label:"Address",  value:"Kanyakumari District",sub:"Tamil Nadu, India"},
-              ].map(({Icon,label,value,sub},i)=>(
-                <div key={i} className="rounded-lg p-5 flex items-start gap-4" style={{background:"#fff",border:`1px solid ${LN}`}}>
+                {Icon:Phone,       label:"Mobile",   value:"+91 7200599700",    sub:"Call us directly", href: "tel:+917200599700"},
+                {Icon:MessageCircle,label:"WhatsApp", value:"+91 7200599700",   sub:"Chat on WhatsApp", href: "https://wa.me/917200599700"},
+                {Icon:Mail,        label:"Email",    value:"kaaval.ai.kanyakumari@gmail.com",  sub:"Official correspondence", href: "mailto:kaaval.ai.kanyakumari@gmail.com"},
+                {Icon:MapPin,      label:"Address",  value:"Kanyakumari District",sub:"Tamil Nadu, India", href: "https://maps.google.com/?q=Kanyakumari+District"},
+              ].map(({Icon,label,value,sub,href},i)=>(
+                <a key={i} href={href} target={href.startsWith('http') ? "_blank" : undefined} rel="noreferrer" className="rounded-lg p-5 flex items-start gap-4 transition-transform hover:-translate-y-1 hover:shadow-md cursor-pointer block w-full min-h-[44px]" style={{background:"#fff",border:`1px solid ${LN}`}}>
                   <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{background:"rgba(27,58,107,0.08)"}}>
                     <Icon className="w-5 h-5" style={{color:N}}/>
                   </div>
@@ -1052,7 +1138,7 @@ export default function Home() {
                     <p className="font-semibold text-sm" style={{color:INK}}>{value}</p>
                     <p className="text-xs" style={{color:S}}>{sub}</p>
                   </div>
-                </div>
+                </a>
               ))}
             </div>
 
@@ -1094,7 +1180,7 @@ export default function Home() {
           <h2 className="font-serif font-black leading-tight" style={{fontFamily:"'Fraunces',serif",color:L,fontSize:"clamp(2rem,5vw,3.5rem)"}}>
             Imagine a District With Zero Preventable Road Fatalities.
           </h2>
-          <MagneticButton onClick={() => setIsModalOpen(true)} className="font-bold text-lg px-10 py-5 rounded-sm transition-all text-white" style={{background:R}}
+          <MagneticButton onClick={() => setIsModalOpen(true)} className="font-bold text-lg px-10 py-5 rounded-sm transition-all text-white w-full sm:w-auto text-center flex justify-center" style={{background:R}}
             onMouseEnter={e=>{e.currentTarget.style.background="#E03333";e.currentTarget.style.transform="scale(1.03)"}}
             onMouseLeave={e=>{e.currentTarget.style.background=R;e.currentTarget.style.transform="scale(1)"}}
             data-testid="button-footer-pilot">Request Pilot Deployment</MagneticButton>
